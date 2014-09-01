@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string-array name="classRooms">
+        <item name="1a">1°A</item>
+        <item name="1b">1°B</item>
+        <item name="1c">1°C</item>
+        <item name="1d">1°D</item>
+        <item name="2a">2°A</item>
+        <item name="2b">2°B</item>
+        <item name="2c">2°C</item>
+        <item name="3a">3°A</item>
+        <item name="3b">3°B</item>
+        <item name="3c">3°C</item>
+    </string-array>
+
+	<string-array name="classRoomsValues">
+        <item name="1a">1a</item>
+        <item name="1b">1b</item>
+        <item name="1c">1c</item>
+        <item name="1d">1d</item>
+        <item name="2a">2a</item>
+        <item name="2b">2b</item>
+        <item name="2c">2c</item>
+        <item name="3a">3a</item>
+        <item name="3b">3b</item>
+        <item name="3c">3c</item>
+    </string-array>
+</resources>

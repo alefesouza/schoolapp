@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+		<ListPreference
+            android:key="classRoom"
+            android:entries="@array/classRooms"
+            android:entryValues="@array/classRoomsValues"
+            android:title="@string/pref_classroom"
+            android:summary="@string/pref_classroom_summary" />
+		<CheckBoxPreference
+            android:defaultValue="false"
+            android:key="classRepresentant"
+            android:title="@string/pref_representant"
+            android:summary="@string/pref_representant_summary" />
+   <Preference
+            android:key="buttonok"
+            android:title="@string/pref_ok"
+            android:summary="@string/pref_ok_summary" />
+</PreferenceScreen>
