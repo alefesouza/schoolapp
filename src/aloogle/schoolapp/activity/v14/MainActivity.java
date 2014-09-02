@@ -61,7 +61,7 @@ public class MainActivity extends Activity {
 			return true;
 		case R.id.menu_about:
 			Intent about = new Intent(MainActivity.this, WebViewActivity.class);
-			about.putExtra(Other.WebViewValue, 3);
+			about.putExtra(Other.WebViewValue, 4);
 			startActivity(about);
 			return true;
 		default:

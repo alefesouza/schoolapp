@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/mainLayout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:gravity="center"
     android:orientation="vertical"
     android:paddingLeft="7dp"
     android:paddingRight="7dp">
-
+    
     <TextView
         android:id="@+id/classroom"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/schedules"
-        android:layout_centerHorizontal="true"
         android:gravity="center"
         android:textSize="32sp" />
 
@@ -20,8 +19,6 @@
         android:id="@+id/schedules"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/center"
-        android:layout_alignLeft="@+id/calendar"
         android:background="@drawable/card_background"
         android:layout_marginTop="7dp"
         android:gravity="center"
@@ -30,20 +27,9 @@
         android:textSize="25sp" />
 
     <TextView
-        android:id="@+id/center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:gravity="center"
-        android:textSize="12sp" />
-
-    <TextView
         android:id="@+id/calendar"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/addevent"
-        android:layout_below="@+id/center"
         android:layout_marginTop="7dp"
         android:background="@drawable/card_background"
         android:gravity="center"
@@ -55,7 +41,6 @@
         android:id="@+id/addevent"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/calendar"
         android:layout_marginTop="7dp"
         android:background="@drawable/card_background"
         android:gravity="center"
@@ -63,4 +48,15 @@
         android:text="@string/addevent"
         android:textSize="25sp" />
 
-</RelativeLayout>
+    <TextView
+        android:id="@+id/announcements"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:background="@drawable/card_background"
+        android:gravity="center"
+        android:padding="15dp"
+        android:text="@string/announcements"
+        android:textSize="25sp" />
+
+</LinearLayout>

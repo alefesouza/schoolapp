@@ -52,19 +52,23 @@ public class WebViewActivity extends Activity {
 		if (Build.VERSION.SDK_INT >= 11) {
 			web.getSettings().setDisplayZoomControls(false);
 		}
-		web.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
-		int ScheduleCalendarOrAdd = getIntent().getIntExtra(Other.WebViewValue, 0);
+		int webViewValue = getIntent().getIntExtra(Other.WebViewValue, 0);
 		String classRoom = PreferenceManager.getDefaultSharedPreferences(this).getString("classRoom", "none");
-		if (ScheduleCalendarOrAdd == 0) {
+		if (webViewValue == 0) {
 			setTitle(R.string.schedules);
-			web.loadUrl("http://aloogle.tumblr.com/schoolapp/action?action=0&classroom=" + classRoom);
-		} else if (ScheduleCalendarOrAdd == 1) {
+			web.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+			web.loadUrl("http://aloogle.tumblr.com/schoolapp/action?action=0&classroom=" + classRoom + "&apilevel=" + Build.VERSION.SDK_INT);
+		} else if (webViewValue == 1) {
 			setTitle(R.string.calendar);
-			web.loadUrl("http://aloogle.tumblr.com/schoolapp/action?action=1&classroom=" + classRoom);
-		} else if (ScheduleCalendarOrAdd == 2) {
+			web.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+			web.loadUrl("http://aloogle.tumblr.com/schoolapp/action?action=1&classroom=" + classRoom + "&apilevel=" + Build.VERSION.SDK_INT);
+		} else if (webViewValue == 2) {
 			setTitle(R.string.addevent);
-			web.loadUrl("http://aloogle.tumblr.com/schoolapp/action?action=2");
-		} else if (ScheduleCalendarOrAdd == 3) {
+			web.loadUrl("http://aloogle.tumblr.com/schoolapp/action?action=2&apilevel=" + Build.VERSION.SDK_INT);
+		} else if (webViewValue == 3) {
+			setTitle(R.string.announcements);
+			web.loadUrl("http://aloogle.tumblr.com/schoolapp/action?action=3&apilevel=" + Build.VERSION.SDK_INT);
+		} else if (webViewValue == 4) {
 			try {
 				String version = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
 				String about = "" +
@@ -89,7 +93,7 @@ public class WebViewActivity extends Activity {
 
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
-		if (getIntent().getIntExtra(Other.WebViewValue, 0) == 3) {
+		if (getIntent().getIntExtra(Other.WebViewValue, 0) == 4) {
 			menu.findItem(R.id.menu_refresh).setVisible(false);
 		}
 		return super.onPrepareOptionsMenu(menu);

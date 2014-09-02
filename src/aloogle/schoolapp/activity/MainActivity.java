@@ -13,7 +13,7 @@ import android.support.v7.app.ActionBarActivity;
 import aloogle.schoolapp.R;
 import aloogle.schoolapp.other.Other;
 
-public class MainActivity extends ActionBarActivity{
+public class MainActivity extends ActionBarActivity {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -29,6 +29,21 @@ public class MainActivity extends ActionBarActivity{
 				if (cm != null && cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnected()) {
 					Intent intent = new Intent(MainActivity.this, WebViewActivity.class);
 					intent.putExtra(Other.WebViewValue, 2);
+					startActivity(intent);
+				} else {
+					Toast toast = Toast.makeText(getApplicationContext(), getString(R.string.needinternet), Toast.LENGTH_LONG);
+					toast.show();
+				}
+			}
+		});
+
+		findViewById(R.id.announcements).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				ConnectivityManager cm = (ConnectivityManager)MainActivity.this.getSystemService(Activity.CONNECTIVITY_SERVICE);
+				if (cm != null && cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnected()) {
+					Intent intent = new Intent(MainActivity.this, WebViewActivity.class);
+					intent.putExtra(Other.WebViewValue, 4);
 					startActivity(intent);
 				} else {
 					Toast toast = Toast.makeText(getApplicationContext(), getString(R.string.needinternet), Toast.LENGTH_LONG);
@@ -62,7 +77,7 @@ public class MainActivity extends ActionBarActivity{
 			return true;
 		case R.id.menu_about:
 			Intent about = new Intent(MainActivity.this, WebViewActivity.class);
-			about.putExtra(Other.WebViewValue, 3);
+			about.putExtra(Other.WebViewValue, 4);
 			startActivity(about);
 			return true;
 		default:

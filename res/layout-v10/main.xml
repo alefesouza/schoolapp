@@ -5,7 +5,6 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-
 <LinearLayout
     android:id="@+id/linear"
     android:layout_width="fill_parent"
@@ -27,7 +26,6 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/card_background"
-        android:layout_below="@+id/classroom"
         android:layout_marginTop="7dp"
         android:gravity="center"
         android:padding="15dp"
@@ -38,8 +36,6 @@
         android:id="@+id/calendar"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/addevent"
-        android:layout_below="@+id/schedules"
         android:layout_marginTop="7dp"
         android:background="@drawable/card_background"
         android:gravity="center"
@@ -51,13 +47,22 @@
         android:id="@+id/addevent"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/calendar"
         android:layout_marginTop="7dp"
         android:background="@drawable/card_background"
         android:gravity="center"
         android:padding="15dp"
         android:text="@string/addevent"
         android:textSize="25sp" />
-</LinearLayout>
 
+    <TextView
+        android:id="@+id/announcements"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:background="@drawable/card_background"
+        android:gravity="center"
+        android:padding="15dp"
+        android:text="@string/announcements"
+        android:textSize="25sp" />
+</LinearLayout>
 </RelativeLayout>

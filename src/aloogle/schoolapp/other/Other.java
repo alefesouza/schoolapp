@@ -45,8 +45,10 @@ public class Other {
 		boolean classrepresentant = preferences.getBoolean("classRepresentant", false);
 		if (classrepresentant) {
 			activity.findViewById(R.id.addevent).setVisibility(View.VISIBLE);
+			activity.findViewById(R.id.announcements).setVisibility(View.VISIBLE);
 		} else {
 			activity.findViewById(R.id.addevent).setVisibility(View.GONE);
+			activity.findViewById(R.id.announcements).setVisibility(View.GONE);
 		}
 	}
 
@@ -57,58 +59,91 @@ public class Other {
 			activity.findViewById(R.id.schedules).setVisibility(View.GONE);
 			activity.findViewById(R.id.calendar).setVisibility(View.GONE);
 			activity.findViewById(R.id.addevent).setVisibility(View.GONE);
+			activity.findViewById(R.id.announcements).setVisibility(View.GONE);
 		} else {
 			activity.findViewById(R.id.schedules).setVisibility(View.VISIBLE);
 			activity.findViewById(R.id.calendar).setVisibility(View.VISIBLE);
 			activity.findViewById(R.id.addevent).setVisibility(View.VISIBLE);
+			activity.findViewById(R.id.announcements).setVisibility(View.VISIBLE);
 		}
 	}
 
 	public static void setClick(final Activity activity) {
 		final String classRoom = PreferenceManager.getDefaultSharedPreferences(activity).getString("classRoom", "none");
 		activity.findViewById(R.id.schedules).setOnClickListener(new View.OnClickListener() {
-			 @ Override
+			@Override
 			public void onClick(View v) {
-				Other.Click(activity, "schedulesCache" + classRoom, 0);
+				Other.ClickCache(activity, "schedulesCache" + classRoom, 1, 0);
 			}
 		});
 
 		activity.findViewById(R.id.calendar).setOnClickListener(new View.OnClickListener() {
-			 @ Override
+			@Override
 			public void onClick(View v) {
-				Other.Click(activity, "calendarCache" + classRoom, 1);
+				Other.ClickCache(activity, "calendarCache" + classRoom, 1, 1);
+			}
+		});
+
+		activity.findViewById(R.id.addevent).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Other.ClickCache(activity, "", 0, 2);
+			}
+		});
+
+		activity.findViewById(R.id.announcements).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Other.ClickCache(activity, "", 0, 3);
 			}
 		});
 	}
 
-	public static void Click(Activity activity, String cache, int number) {
-		final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(activity);
+	public static void ClickCache(Activity activity, String cache, int iscache, int value) {
 		ConnectivityManager cm = (ConnectivityManager)activity.getSystemService(Activity.CONNECTIVITY_SERVICE);
-		if (cm != null && cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnected()) {
-			if (Build.VERSION.SDK_INT < 14) {
-				Intent intent = new Intent(activity, aloogle.schoolapp.activity.WebViewActivity.class);
-				intent.putExtra(Other.WebViewValue, number);
-				activity.startActivity(intent);
-			} else {
-				Intent intent = new Intent(activity, aloogle.schoolapp.activity.v14.WebViewActivity.class);
-				intent.putExtra(Other.WebViewValue, number);
-				activity.startActivity(intent);
-			}
-		} else {
-			boolean pageCache = preferences.getBoolean(cache, false);
-			if (pageCache) {
+		if (iscache == 0) {
+			if (cm != null && cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnected()) {
 				if (Build.VERSION.SDK_INT < 14) {
 					Intent intent = new Intent(activity, aloogle.schoolapp.activity.WebViewActivity.class);
-					intent.putExtra(Other.WebViewValue, number);
+					intent.putExtra(Other.WebViewValue, value);
 					activity.startActivity(intent);
 				} else {
 					Intent intent = new Intent(activity, aloogle.schoolapp.activity.v14.WebViewActivity.class);
-					intent.putExtra(Other.WebViewValue, number);
+					intent.putExtra(Other.WebViewValue, value);
 					activity.startActivity(intent);
 				}
 			} else {
-				Toast toast = Toast.makeText(activity, activity.getString(R.string.needinternetft), Toast.LENGTH_LONG);
+				Toast toast = Toast.makeText(activity, activity.getString(R.string.needinternet), Toast.LENGTH_LONG);
 				toast.show();
+			}
+		} else {
+			final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(activity);
+			if (cm != null && cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnected()) {
+				if (Build.VERSION.SDK_INT < 14) {
+					Intent intent = new Intent(activity, aloogle.schoolapp.activity.WebViewActivity.class);
+					intent.putExtra(Other.WebViewValue, value);
+					activity.startActivity(intent);
+				} else {
+					Intent intent = new Intent(activity, aloogle.schoolapp.activity.v14.WebViewActivity.class);
+					intent.putExtra(Other.WebViewValue, value);
+					activity.startActivity(intent);
+				}
+			} else {
+				boolean pageCache = preferences.getBoolean(cache, false);
+				if (pageCache) {
+					if (Build.VERSION.SDK_INT < 14) {
+						Intent intent = new Intent(activity, aloogle.schoolapp.activity.WebViewActivity.class);
+						intent.putExtra(Other.WebViewValue, value);
+						activity.startActivity(intent);
+					} else {
+						Intent intent = new Intent(activity, aloogle.schoolapp.activity.v14.WebViewActivity.class);
+						intent.putExtra(Other.WebViewValue, value);
+						activity.startActivity(intent);
+					}
+				} else {
+					Toast toast = Toast.makeText(activity, activity.getString(R.string.needinternetft), Toast.LENGTH_LONG);
+					toast.show();
+				}
 			}
 		}
 	}
