@@ -15,8 +15,9 @@ public class Other {
 	public static final String WebViewValue = "WEB_VIEW_VALUE";
 
 	public static void setText(Activity activity) {
-		TextView classRoom = (TextView)activity.findViewById(R.id.classroom);
-		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(activity);
+		TextView classRoom = (TextView) activity.findViewById(R.id.classroom);
+		SharedPreferences preferences = PreferenceManager
+				.getDefaultSharedPreferences(activity);
 		String prefClassRoom = preferences.getString("classRoom", "none");
 		if (prefClassRoom.equals("none")) {
 			classRoom.setText("Escolha sua sala");
@@ -42,89 +43,111 @@ public class Other {
 			classRoom.setText("3°C");
 		}
 		Visible(activity);
-		boolean classrepresentant = preferences.getBoolean("classRepresentant", false);
+		boolean classrepresentant = preferences.getBoolean("classRepresentant",
+				false);
 		if (classrepresentant) {
-			activity.findViewById(R.id.addevent).setVisibility(View.VISIBLE);
-			activity.findViewById(R.id.announcements).setVisibility(View.VISIBLE);
+			activity.findViewById(R.id.updatecalendar).setVisibility(
+					View.VISIBLE);
 		} else {
-			activity.findViewById(R.id.addevent).setVisibility(View.GONE);
-			activity.findViewById(R.id.announcements).setVisibility(View.GONE);
+			activity.findViewById(R.id.updatecalendar).setVisibility(View.GONE);
 		}
 	}
 
 	public static void Visible(Activity activity) {
-		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(activity);
+		SharedPreferences preferences = PreferenceManager
+				.getDefaultSharedPreferences(activity);
 		String prefClassRoom = preferences.getString("classRoom", "none");
 		if (prefClassRoom.equals("none")) {
 			activity.findViewById(R.id.schedules).setVisibility(View.GONE);
 			activity.findViewById(R.id.calendar).setVisibility(View.GONE);
-			activity.findViewById(R.id.addevent).setVisibility(View.GONE);
+			activity.findViewById(R.id.updatecalendar).setVisibility(View.GONE);
 			activity.findViewById(R.id.announcements).setVisibility(View.GONE);
 		} else {
 			activity.findViewById(R.id.schedules).setVisibility(View.VISIBLE);
 			activity.findViewById(R.id.calendar).setVisibility(View.VISIBLE);
-			activity.findViewById(R.id.addevent).setVisibility(View.VISIBLE);
-			activity.findViewById(R.id.announcements).setVisibility(View.VISIBLE);
+			activity.findViewById(R.id.updatecalendar).setVisibility(
+					View.VISIBLE);
+			activity.findViewById(R.id.announcements).setVisibility(
+					View.VISIBLE);
 		}
 	}
 
 	public static void setClick(final Activity activity) {
-		final String classRoom = PreferenceManager.getDefaultSharedPreferences(activity).getString("classRoom", "none");
-		activity.findViewById(R.id.schedules).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Other.ClickCache(activity, "schedulesCache" + classRoom, 1, 0);
-			}
-		});
+		final String classRoom = PreferenceManager.getDefaultSharedPreferences(
+				activity).getString("classRoom", "none");
+		activity.findViewById(R.id.schedules).setOnClickListener(
+				new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						Other.Click(activity, "schedulesCache" + classRoom, 1,
+								0);
+					}
+				});
 
-		activity.findViewById(R.id.calendar).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Other.ClickCache(activity, "calendarCache" + classRoom, 1, 1);
-			}
-		});
+		activity.findViewById(R.id.calendar).setOnClickListener(
+				new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						Other.Click(activity, "calendarCache" + classRoom, 1, 1);
+					}
+				});
 
-		activity.findViewById(R.id.addevent).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Other.ClickCache(activity, "", 0, 2);
-			}
-		});
+		activity.findViewById(R.id.updatecalendar).setOnClickListener(
+				new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						Other.Click(activity, "", 0, 2);
+					}
+				});
 
-		activity.findViewById(R.id.announcements).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Other.ClickCache(activity, "", 0, 3);
-			}
-		});
+		activity.findViewById(R.id.announcements).setOnClickListener(
+				new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						Other.Click(activity, "announcementsCache", 1, 3);
+					}
+				});
 	}
 
-	public static void ClickCache(Activity activity, String cache, int iscache, int value) {
-		ConnectivityManager cm = (ConnectivityManager)activity.getSystemService(Activity.CONNECTIVITY_SERVICE);
+	public static void Click(Activity activity, String cache, int iscache,
+			int value) {
+		ConnectivityManager cm = (ConnectivityManager) activity
+				.getSystemService(Activity.CONNECTIVITY_SERVICE);
 		if (iscache == 0) {
-			if (cm != null && cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnected()) {
+			if (cm != null && cm.getActiveNetworkInfo() != null
+					&& cm.getActiveNetworkInfo().isConnected()) {
 				if (Build.VERSION.SDK_INT < 14) {
-					Intent intent = new Intent(activity, aloogle.schoolapp.activity.WebViewActivity.class);
+					Intent intent = new Intent(activity,
+							aloogle.schoolapp.activity.WebViewActivity.class);
 					intent.putExtra(Other.WebViewValue, value);
 					activity.startActivity(intent);
 				} else {
-					Intent intent = new Intent(activity, aloogle.schoolapp.activity.v14.WebViewActivity.class);
+					Intent intent = new Intent(
+							activity,
+							aloogle.schoolapp.activity.v14.WebViewActivity.class);
 					intent.putExtra(Other.WebViewValue, value);
 					activity.startActivity(intent);
 				}
 			} else {
-				Toast toast = Toast.makeText(activity, activity.getString(R.string.needinternet), Toast.LENGTH_LONG);
+				Toast toast = Toast.makeText(activity,
+						activity.getString(R.string.needinternet),
+						Toast.LENGTH_LONG);
 				toast.show();
 			}
 		} else {
-			final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(activity);
-			if (cm != null && cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnected()) {
+			final SharedPreferences preferences = PreferenceManager
+					.getDefaultSharedPreferences(activity);
+			if (cm != null && cm.getActiveNetworkInfo() != null
+					&& cm.getActiveNetworkInfo().isConnected()) {
 				if (Build.VERSION.SDK_INT < 14) {
-					Intent intent = new Intent(activity, aloogle.schoolapp.activity.WebViewActivity.class);
+					Intent intent = new Intent(activity,
+							aloogle.schoolapp.activity.WebViewActivity.class);
 					intent.putExtra(Other.WebViewValue, value);
 					activity.startActivity(intent);
 				} else {
-					Intent intent = new Intent(activity, aloogle.schoolapp.activity.v14.WebViewActivity.class);
+					Intent intent = new Intent(
+							activity,
+							aloogle.schoolapp.activity.v14.WebViewActivity.class);
 					intent.putExtra(Other.WebViewValue, value);
 					activity.startActivity(intent);
 				}
@@ -132,16 +155,22 @@ public class Other {
 				boolean pageCache = preferences.getBoolean(cache, false);
 				if (pageCache) {
 					if (Build.VERSION.SDK_INT < 14) {
-						Intent intent = new Intent(activity, aloogle.schoolapp.activity.WebViewActivity.class);
+						Intent intent = new Intent(
+								activity,
+								aloogle.schoolapp.activity.WebViewActivity.class);
 						intent.putExtra(Other.WebViewValue, value);
 						activity.startActivity(intent);
 					} else {
-						Intent intent = new Intent(activity, aloogle.schoolapp.activity.v14.WebViewActivity.class);
+						Intent intent = new Intent(
+								activity,
+								aloogle.schoolapp.activity.v14.WebViewActivity.class);
 						intent.putExtra(Other.WebViewValue, value);
 						activity.startActivity(intent);
 					}
 				} else {
-					Toast toast = Toast.makeText(activity, activity.getString(R.string.needinternetft), Toast.LENGTH_LONG);
+					Toast toast = Toast.makeText(activity,
+							activity.getString(R.string.needinternetft),
+							Toast.LENGTH_LONG);
 					toast.show();
 				}
 			}

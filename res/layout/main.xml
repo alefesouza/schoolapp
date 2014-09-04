@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/mainLayout"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:gravity="center"
-    android:orientation="vertical"
-    android:paddingLeft="7dp"
-    android:paddingRight="7dp">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:layout_centerHorizontal="true"
+		android:layout_centerVertical="true">
+		<LinearLayout
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical"
+			android:paddingLeft="7dp"
+			android:paddingRight="7dp">
     
     <TextView
         android:id="@+id/classroom"
@@ -38,14 +41,14 @@
         android:textSize="25sp" />
 
     <TextView
-        android:id="@+id/addevent"
+        android:id="@+id/updatecalendar"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="7dp"
         android:background="@drawable/card_background"
         android:gravity="center"
         android:padding="15dp"
-        android:text="@string/addevent"
+        android:text="@string/updatecalendar"
         android:textSize="25sp" />
 
     <TextView
@@ -60,3 +63,4 @@
         android:textSize="25sp" />
 
 </LinearLayout>
+</ScrollView>

@@ -3,15 +3,15 @@ Alefe Souza https://plus.google.com/101361157875821775334/about
 RebuApp
 =======
 
-RebuApp Ã© um aplicativo para Android que contÃ©m os horÃ¡rios e agendas de todas as salas de uma das minhas escolas, a E. E. ProfÂº Willian Rodrigues RebuÃ¡, comecei a criÃ¡-lo no meio da aula de FÃ­sica quando nÃ£o tinha nada pra fazer (sim, eu crio aplicativos durante a aula, heuhauhea) e estou lanÃ§ando agora em menos de uma semana de desenvolvimento.
+RebuApp é um aplicativo para Android que contém todos os horários e agendas de todas as salas de uma das minhas escolas, a E. E. Profº Willian Rodrigues Rebuá, comecei a criá-lo no meio da aula de Física quando não tinha nada pra fazer (sim, eu crio aplicativos durante a aula, heuhauhea) e estou lançando agora em menos de uma semana de desenvolvimento.
 
-VocÃª pode baixa-lo na [Google Play Store](http://play.google.com/store/apps/details?id=aloogle.schoolapp).
+Você pode baixa-lo na [Google Play Store](play.google.com/store/apps/details?id=aloogle.schoolapp).
 
-Esse Ã© o cÃ³digo da versÃ£o 1.0.1
+Esse é o código da versão 1.0.2
 
-LicenÃ§a
+Licença
 ----------
 
-Estou lanÃ§ando esse aplicativo sob [licenÃ§a GPLv3](http://choosealicense.com/licenses/gpl-v3/), dessa forma, todo mundo esta permitido a modificar e lanÃ§ar esse aplicativo em seu nome, mas vai ter que liberar o cÃ³digo fonte. E se vocÃª fizer, por favor me dÃª os devidos crÃ©ditos.
+Estou lançando esse aplicativo sob [licença GPLv3](http://choosealicense.com/licenses/gpl-v3/), dessa forma, todo mundo esta permitido a modificar e lançar esse aplicativo em seu nome, mas vai ter que liberar o código fonte. E se você fizer, por favor me dê os devidos créditos.
 
-Esse aplicativo na versÃ£o da Google Play Store contÃ©m anÃºncios, entÃ£o se vocÃª estiver pensando em fazer uma versÃ£o modificada (sei lÃ¡, ele tem um Ã³timo cÃ³digo para servir de base para aplicativos de outras escolas...) dele tambÃ©m contendo anÃºncios ou qualquer outra forma de lucro, por favor peÃ§a minha permissÃ£o entrando em contato comigo.
+Esse aplicativo na versão da Google Play Store contém anúncios, então se você estiver pensando em fazer uma versão modificada (sei lá, ele tem um ótimo código para servir de base para aplicativos de outras escolas...) dele também contendo anúncios ou qualquer outra forma de lucro, por favor peça minha permissão entrando em contato comigo.

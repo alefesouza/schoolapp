@@ -4,7 +4,7 @@
     
     <string name="schedules">Horários</string>
     <string name="calendar">Agenda</string>
-    <string name="addevent">Atualizar agenda</string>
+    <string name="updatecalendar">Atualizar agenda</string>
     <string name="announcements">Comunicados</string>
     <string name="needinternet">Você precisa estar conectado à internet</string>
     <string name="needinternetft">Você precisa estar conectado à internet na primeira vez</string>

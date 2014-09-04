@@ -14,16 +14,18 @@ import aloogle.schoolapp.R;
 
 public class Settings extends PreferenceActivity {
 
-	@SuppressLint("NewApi") @SuppressWarnings("deprecation")
+	@SuppressLint("NewApi")
+	@SuppressWarnings("deprecation")
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setTitle(R.string.settings);
-		final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+		final SharedPreferences preferences = PreferenceManager
+				.getDefaultSharedPreferences(this);
 		if (Build.VERSION.SDK_INT >= 14) {
 			boolean isFirst = preferences.getBoolean("isFirst", true);
-			if (isFirst) {}
-			else {
+			if (isFirst) {
+			} else {
 				getActionBar().setHomeButtonEnabled(true);
 				getActionBar().setDisplayHomeAsUpEnabled(true);
 			}
@@ -31,18 +33,19 @@ public class Settings extends PreferenceActivity {
 		addPreferencesFromResource(R.xml.settings);
 
 		Preference button = findPreference("buttonok");
-		button.setOnPreferenceClickListener(new Preference.
-			OnPreferenceClickListener() {
+		button.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 			@Override
-			public boolean
-			onPreferenceClick(Preference preference) {
+			public boolean onPreferenceClick(Preference preference) {
 				boolean isFirst = preferences.getBoolean("isFirst", true);
 				if (isFirst) {
 					if (Build.VERSION.SDK_INT < 14) {
-						Intent intent = new Intent(Settings.this, MainActivity.class);
+						Intent intent = new Intent(Settings.this,
+								MainActivity.class);
 						startActivity(intent);
 					} else {
-						Intent intent = new Intent(Settings.this, aloogle.schoolapp.activity.v14.MainActivity.class);
+						Intent intent = new Intent(
+								Settings.this,
+								aloogle.schoolapp.activity.v14.MainActivity.class);
 						startActivity(intent);
 					}
 
@@ -64,8 +67,7 @@ public class Settings extends PreferenceActivity {
 			Settings.this.finish();
 			return true;
 		default:
-			return
-			super.onOptionsItemSelected(item);
+			return super.onOptionsItemSelected(item);
 		}
 	}
 }
