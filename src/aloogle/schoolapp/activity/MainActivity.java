@@ -37,11 +37,9 @@ public class MainActivity extends ActionBarActivity {
 		case R.id.menu_share:
 			Intent shareIntent = new Intent();
 			shareIntent.setAction(Intent.ACTION_SEND);
-			shareIntent.putExtra(Intent.EXTRA_TEXT,
-					getString(R.string.sharecontent));
+			shareIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.sharecontent));
 			shareIntent.setType("text/plain");
-			startActivity(Intent.createChooser(shareIntent, getResources()
-					.getText(R.string.app_name)));
+			startActivity(Intent.createChooser(shareIntent, getResources().getText(R.string.app_name)));
 			return true;
 		case R.id.menu_about:
 			Intent about = new Intent(MainActivity.this, WebViewActivity.class);

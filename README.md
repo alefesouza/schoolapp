@@ -7,7 +7,7 @@ RebuApp é um aplicativo para Android que contém todos os horários e agendas de t
 
 Você pode baixa-lo na [Google Play Store](play.google.com/store/apps/details?id=aloogle.schoolapp).
 
-Esse é o código da versão 1.0.2
+Esse é o código da versão 1.0.3
 
 Licença
 ----------

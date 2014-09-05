@@ -9,7 +9,6 @@
     <string name="needinternet">Você precisa estar conectado à internet</string>
     <string name="needinternetft">Você precisa estar conectado à internet na primeira vez</string>
     <string name="erroroccured">Ops, houve um erro!</string>
-    <string name="connectionerroron">Verifique sua conexão com a internet.</string>
 
     <string name="yes">Sim</string>
     <string name="no">Não</string>
