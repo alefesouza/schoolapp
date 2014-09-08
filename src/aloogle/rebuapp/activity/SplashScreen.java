@@ -1,4 +1,4 @@
-package aloogle.schoolapp.activity;
+package aloogle.rebuapp.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import aloogle.schoolapp.R;
+import aloogle.rebuapp.R;
 
 public class SplashScreen extends Activity {
 
@@ -37,7 +37,7 @@ public class SplashScreen extends Activity {
 						Intent intent = new Intent(SplashScreen.this, MainActivity.class);
 						startActivity(intent);
 					} else {
-						Intent intent = new Intent(SplashScreen.this, aloogle.schoolapp.activity.v14.MainActivity.class);
+						Intent intent = new Intent(SplashScreen.this, aloogle.rebuapp.activity.v14.MainActivity.class);
 						startActivity(intent);
 					}
 					SplashScreen.this.finish();

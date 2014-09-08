@@ -1,4 +1,4 @@
-package aloogle.schoolapp.activity;
+package aloogle.rebuapp.activity.v14;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -21,13 +21,12 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-import android.support.v7.app.ActionBarActivity;
 import java.lang.reflect.InvocationTargetException;
-import aloogle.schoolapp.R;
-import aloogle.schoolapp.other.Other;
+import aloogle.rebuapp.R;
+import aloogle.rebuapp.other.Other;
 
 @SuppressLint("NewApi")
-public class WebViewActivity extends ActionBarActivity {
+public class WebViewActivity extends Activity {
 
 	WebView web;
 	ProgressBar progressBar;
@@ -37,13 +36,8 @@ public class WebViewActivity extends ActionBarActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.webview);
-		if (Build.VERSION.SDK_INT >= 11) {
-			getActionBar().setHomeButtonEnabled(true);
-			getActionBar().setDisplayHomeAsUpEnabled(true);
-		} else {
-			getSupportActionBar().setHomeButtonEnabled(true);
-			getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-		}
+		getActionBar().setHomeButtonEnabled(true);
+		getActionBar().setDisplayHomeAsUpEnabled(true);
 
 		progressBar = (ProgressBar)findViewById(R.id.progressBar1);
 
@@ -55,36 +49,25 @@ public class WebViewActivity extends ActionBarActivity {
 		if (Build.VERSION.SDK_INT >= 11) {
 			web.getSettings().setDisplayZoomControls(false);
 		}
+
 		int webViewValue = getIntent().getIntExtra(Other.WebViewValue, 0);
 		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
 		String classRoom = preferences.getString("classRoom", "none");
 		if (webViewValue == 0) {
-			getSupportActionBar().setTitle(R.string.schedules);
-			if (preferences.getBoolean("schedulesCache" + classRoom, false)) {
-				web.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ONLY);
-			} else {
-				web.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
-			}
+			setTitle(R.string.schedules);
+			web.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
 			web.loadUrl("http://aloogle.tumblr.com/schoolapp/action?action=0&classroom=" + classRoom + "&apilevel=" + Build.VERSION.SDK_INT);
 		} else if (webViewValue == 1) {
-			getSupportActionBar().setTitle(R.string.calendar);
-			if (preferences.getBoolean("calendarCache" + classRoom, false)) {
-				web.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ONLY);
-			} else {
-				web.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
-			}
+			setTitle(R.string.calendar);
+			web.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
 			web.loadUrl("http://aloogle.tumblr.com/schoolapp/action?action=1&classroom=" + classRoom + "&apilevel=" + Build.VERSION.SDK_INT);
 		} else if (webViewValue == 2) {
-			getSupportActionBar().setTitle(R.string.updatecalendar);
-			web.loadUrl("http://aloogle.tumblr.com/schoolapp/action?action=2" + "&apilevel=" + Build.VERSION.SDK_INT);
+			setTitle(R.string.updatecalendar);
+			web.loadUrl("http://aloogle.tumblr.com/schoolapp/action?action=2&apilevel=" + Build.VERSION.SDK_INT);
 		} else if (webViewValue == 3) {
-			getSupportActionBar().setTitle(R.string.announcements);
-			if (preferences.getBoolean("announcementsCache" + classRoom, false)) {
-				web.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ONLY);
-			} else {
-				web.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
-			}
-			web.loadUrl("http://aloogle.tumblr.com/schoolapp/action?action=3" + "&apilevel=" + Build.VERSION.SDK_INT);
+			setTitle(R.string.announcements);
+			web.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+			web.loadUrl("http://aloogle.tumblr.com/schoolapp/action?action=3&apilevel=" + Build.VERSION.SDK_INT);
 		} else if (webViewValue == 4) {
 			try {
 				String version = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
@@ -93,7 +76,7 @@ public class WebViewActivity extends ActionBarActivity {
 					"<p style=\"text-align: justify;\">RebuApp &eacute; um aplicativo para Android que cont&eacute;m todos os hor&aacute;rios e agendas da Escola Estadual Prof&ordm; Willian Rodrigues Rebu&aacute; em Carapicu&iacute;ba, S&atilde;o Paulo, Brasil.</p>\n" +
 					"<h3 style=\"text-align: justify;\">Licen&ccedil;a</h3>\n" +
 					"<p style=\"text-align: justify;\">Esse aplicativo foi lan&ccedil;ado sob <a href=\"http://choosealicense.com/licenses/gpl-v3?aloogleapp=openinbrowser\">licen&ccedil;a GPLv3</a> e o c&oacute;digo fonte dele est&aacute; dispon&iacute;vel no meu <a href=\"https://github.com/alefesouza/schoolapp?aloogleapp=openinbrowser\">GitHub</a>. Todo mundo esta permitido a modificar e lan&ccedil;ar esse aplicativo em seu nome, mas vai ter que liberar o c&oacute;digo fonte. E se voc&ecirc; fizer isso, por favor me d&ecirc; os devidos cr&eacute;ditos.</p>\n";
-				getSupportActionBar().setTitle(R.string.about);
+				setTitle(R.string.about);
 				web.loadData(about, "text/html; charset=utf-8", "UTF-8");
 			} catch (NameNotFoundException e) {}
 		}
@@ -109,7 +92,12 @@ public class WebViewActivity extends ActionBarActivity {
 
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
-		if (getIntent().getIntExtra(Other.WebViewValue, 0) == 4) {
+		int webViewValue = getIntent().getIntExtra(Other.WebViewValue, 0);
+		if (webViewValue == 2) {
+			menu.findItem(R.id.menu_back).setVisible(true);
+			menu.findItem(R.id.menu_forward).setVisible(true);
+			menu.findItem(R.id.menu_home).setVisible(true);
+		} else if (webViewValue == 4) {
 			menu.findItem(R.id.menu_refresh).setVisible(false);
 		}
 		return super.onPrepareOptionsMenu(menu);
@@ -125,10 +113,29 @@ public class WebViewActivity extends ActionBarActivity {
 			if (cm != null && cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnected()) {
 				progressBar.setVisibility(View.VISIBLE);
 				web.setVisibility(View.GONE);
-				web.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
+				web.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT);
 				web.reload();
 			} else {
 				Toast toast = Toast.makeText(getApplicationContext(), getString(R.string.needinternet), Toast.LENGTH_LONG);
+				toast.show();
+			}
+			return true;
+		case R.id.menu_back:
+			if (web.canGoBack()) {
+				web.goBack();
+			} else {
+				Toast toast = Toast.makeText(getApplicationContext(), getString(R.string.nopages), Toast.LENGTH_LONG);
+				toast.show();
+			}
+			return true;
+		case R.id.menu_home:
+			web.loadUrl("http://aloogle.tumblr.com/schoolapp/action?action=2&apilevel=" + Build.VERSION.SDK_INT);
+			return true;
+		case R.id.menu_forward:
+			if (web.canGoForward()) {
+				web.goForward();
+			} else {
+				Toast toast = Toast.makeText(getApplicationContext(), getString(R.string.nopages), Toast.LENGTH_LONG);
 				toast.show();
 			}
 			return true;
@@ -171,30 +178,30 @@ public class WebViewActivity extends ActionBarActivity {
 			} else if (webViewValue == 3) {
 				editor.putBoolean("announcementsCache", true);
 			}
-			progressBar.setVisibility(View.GONE);
-			if (Build.VERSION.SDK_INT >= 10) {
-				web.setVisibility(View.VISIBLE);
-			}
 			editor.commit();
+			progressBar.setVisibility(View.GONE);
+			web.setVisibility(View.VISIBLE);
 		}
 
 		@Override
 		public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
 			super.onReceivedError(view, errorCode, description, failingUrl);
+			web.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT);
 			String error = "" +
 				"<p style=\"text-align: justify;\"> " + getString(R.string.erroroccured) + "</p>\n" +
-				"<ul style=\"text-align: justify;\">\n" +
+				"<ul>\n" +
 				"<li>Tente novamente conectado &agrave; internet.</li>\n" +
-				"<li>Se voc&ecirc; viu esse aviso v&aacute;rias vezes e atualizou o aplicativo recentemente, ele corrigiu o bug de apagar outras p&aacute;ginas ao atualizar uma, talvez isso tenha causado esse erro, ent&atilde;o limpe os dados do aplicativo.</li>\n" +
+				"<li>Toque no bot&atilde;o de atualizar.</li>\n" +
+				"<li>Se nada funcionar, limpe os dados do aplicativo.</li>\n" +
 				"</ul>\n";
 			web.loadData(error, "text/html; charset=utf-8", "UTF-8");
 			int webViewValue = getIntent().getIntExtra(Other.WebViewValue, 0);
 			if (webViewValue == 0) {
-				editor.remove("schedulesCache" + classRoom);
+				editor.putBoolean("schedulesCache" + classRoom, false);
 			} else if (webViewValue == 1) {
-				editor.remove("calendarCache" + classRoom);
+				editor.putBoolean("calendarCache" + classRoom, false);
 			} else if (webViewValue == 3) {
-				editor.remove("announcementsCache");
+				editor.putBoolean("announcementsCache", false);
 			}
 			editor.commit();
 		}

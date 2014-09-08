@@ -1,4 +1,4 @@
-package aloogle.schoolapp.activity;
+package aloogle.rebuapp.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -10,7 +10,7 @@ import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.view.MenuItem;
-import aloogle.schoolapp.R;
+import aloogle.rebuapp.R;
 
 public class Settings extends PreferenceActivity {
 
@@ -43,7 +43,7 @@ public class Settings extends PreferenceActivity {
 						Intent intent = new Intent(Settings.this, MainActivity.class);
 						startActivity(intent);
 					} else {
-						Intent intent = new Intent(Settings.this, aloogle.schoolapp.activity.v14.MainActivity.class);
+						Intent intent = new Intent(Settings.this, aloogle.rebuapp.activity.v14.MainActivity.class);
 						startActivity(intent);
 					}
 

@@ -1,15 +1,15 @@
-package aloogle.schoolapp.activity;
+package aloogle.rebuapp.activity.v14;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.support.v7.app.ActionBarActivity;
-import aloogle.schoolapp.R;
-import aloogle.schoolapp.other.Other;
+import aloogle.rebuapp.R;
+import aloogle.rebuapp.other.Other;
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends Activity {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -31,7 +31,7 @@ public class MainActivity extends ActionBarActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.menu_settings:
-			Intent settings = new Intent(MainActivity.this, Settings.class);
+			Intent settings = new Intent(MainActivity.this, aloogle.rebuapp.activity.Settings.class);
 			startActivity(settings);
 			return true;
 		case R.id.menu_share:

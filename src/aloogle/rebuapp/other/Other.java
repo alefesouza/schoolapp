@@ -1,4 +1,4 @@
-package aloogle.schoolapp.other;
+package aloogle.rebuapp.other;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,7 +9,7 @@ import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-import aloogle.schoolapp.R;
+import aloogle.rebuapp.R;
 
 public class Other {
 	public static final String WebViewValue = "WEB_VIEW_VALUE";
@@ -57,12 +57,10 @@ public class Other {
 			activity.findViewById(R.id.schedules).setVisibility(View.GONE);
 			activity.findViewById(R.id.calendar).setVisibility(View.GONE);
 			activity.findViewById(R.id.updatecalendar).setVisibility(View.GONE);
-			activity.findViewById(R.id.announcements).setVisibility(View.GONE);
 		} else {
 			activity.findViewById(R.id.schedules).setVisibility(View.VISIBLE);
 			activity.findViewById(R.id.calendar).setVisibility(View.VISIBLE);
 			activity.findViewById(R.id.updatecalendar).setVisibility(View.VISIBLE);
-			activity.findViewById(R.id.announcements).setVisibility(View.VISIBLE);
 		}
 	}
 
@@ -102,11 +100,11 @@ public class Other {
 		if (iscache == 0) {
 			if (cm != null && cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnected()) {
 				if (Build.VERSION.SDK_INT < 14) {
-					Intent intent = new Intent(activity, aloogle.schoolapp.activity.WebViewActivity.class);
+					Intent intent = new Intent(activity, aloogle.rebuapp.activity.WebViewActivity.class);
 					intent.putExtra(Other.WebViewValue, value);
 					activity.startActivity(intent);
 				} else {
-					Intent intent = new Intent(activity, aloogle.schoolapp.activity.v14.WebViewActivity.class);
+					Intent intent = new Intent(activity, aloogle.rebuapp.activity.v14.WebViewActivity.class);
 					intent.putExtra(Other.WebViewValue, value);
 					activity.startActivity(intent);
 				}
@@ -118,11 +116,11 @@ public class Other {
 			final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(activity);
 			if (cm != null && cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnected()) {
 				if (Build.VERSION.SDK_INT < 14) {
-					Intent intent = new Intent(activity, aloogle.schoolapp.activity.WebViewActivity.class);
+					Intent intent = new Intent(activity, aloogle.rebuapp.activity.WebViewActivity.class);
 					intent.putExtra(Other.WebViewValue, value);
 					activity.startActivity(intent);
 				} else {
-					Intent intent = new Intent(activity, aloogle.schoolapp.activity.v14.WebViewActivity.class);
+					Intent intent = new Intent(activity, aloogle.rebuapp.activity.v14.WebViewActivity.class);
 					intent.putExtra(Other.WebViewValue, value);
 					activity.startActivity(intent);
 				}
@@ -130,11 +128,11 @@ public class Other {
 				boolean pageCache = preferences.getBoolean(cache, false);
 				if (pageCache) {
 					if (Build.VERSION.SDK_INT < 14) {
-						Intent intent = new Intent(activity, aloogle.schoolapp.activity.WebViewActivity.class);
+						Intent intent = new Intent(activity, aloogle.rebuapp.activity.WebViewActivity.class);
 						intent.putExtra(Other.WebViewValue, value);
 						activity.startActivity(intent);
 					} else {
-						Intent intent = new Intent(activity, aloogle.schoolapp.activity.v14.WebViewActivity.class);
+						Intent intent = new Intent(activity, aloogle.rebuapp.activity.v14.WebViewActivity.class);
 						intent.putExtra(Other.WebViewValue, value);
 						activity.startActivity(intent);
 					}

@@ -10,15 +10,15 @@
     <string name="needinternetft">Você precisa estar conectado à internet na primeira vez</string>
     <string name="erroroccured">Ops, houve um erro!</string>
 
-    <string name="yes">Sim</string>
-    <string name="no">Não</string>
-
     <string name="settings">Configurações</string>
     <string name="shareapp">Compartilhar app</string>
     <string name="sharecontent">Baixe o aplicativo do Rebuá com horário e agenda de todas as salas!! http://bit.ly/rebuapp</string>
     <string name="about">Sobre</string>
+    <string name="back">Voltar</string>
+    <string name="forward">Avançar</string>
+    <string name="nopages">Nenhuma página</string>
+    <string name="home">Início</string>
     <string name="refresh">Atualizar</string>
-    <string name="refreshwarning">Atualizar uma página fará com que as outras páginas salvas sejam perdidas, então você vai ter que carrega-las novamente caso queira ter acesso a elas sem internet, deseja continuar?</string>
 
     <string name="pref_classroom">Escolher sala</string>
     <string name="pref_classroom_summary">Toque aqui para escolher sua sala</string>
