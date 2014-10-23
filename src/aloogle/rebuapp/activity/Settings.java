@@ -6,11 +6,13 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.view.MenuItem;
 import aloogle.rebuapp.R;
+import aloogle.rebuapp.other.Other;
 
 public class Settings extends PreferenceActivity {
 
@@ -19,7 +21,7 @@ public class Settings extends PreferenceActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setTitle(R.string.settings);
+		Other.ActionBarColor(this, getString(R.string.settings));
 		final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
 		if (Build.VERSION.SDK_INT >= 14) {
 			boolean isFirst = preferences.getBoolean("isFirst", true);
@@ -30,6 +32,20 @@ public class Settings extends PreferenceActivity {
 			}
 		}
 		addPreferencesFromResource(R.xml.settings);
+
+		Preference prefAppColor = findPreference("prefAppColor");
+		prefAppColor.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+			@Override
+			public boolean onPreferenceChange(Preference preference, Object newValue) {
+				new Handler().postDelayed(new Runnable() {
+					@Override
+					public void run() {
+						Other.ActionBarColor(Settings.this, getString(R.string.settings));
+					}
+				}, 100);
+				return true;
+			}
+		});
 
 		Preference button = findPreference("buttonok");
 		button.setOnPreferenceClickListener(new Preference.

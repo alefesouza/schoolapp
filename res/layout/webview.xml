@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
+
    <ProgressBar
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
@@ -13,5 +14,6 @@
    <WebView
         android:id="@+id/webview01"
         android:layout_height="fill_parent"
-        android:layout_width="fill_parent" />
+        android:layout_width="fill_parent"
+        android:visibility="gone" />
 </RelativeLayout>

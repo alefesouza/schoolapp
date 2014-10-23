@@ -1,0 +1,45 @@
+﻿<html>
+<link rel="author" href="https://plus.google.com/101361157875821775334" />
+<link rel="me" href="https://plus.google.com/101361157875821775334" />
+<link rel="stylesheet" href="card.css" />
+<meta name="viewport" content="width=device-width, height=device-height,  initial-scale=1.0, user-scalable=no;user-scalable=0;"/>
+<script>
+function addEntry() {
+	if (!localStorage["lastNumber"]) {
+		localStorage["lastNumber"] = 0;
+	}
+
+	var existingEntries = JSON.parse(localStorage.getItem("annotations"));
+	if (existingEntries == null)
+		existingEntries = [];
+	var entryTitle = document.getElementById("title").value;
+	var entryText = document.getElementById("description").value;
+	x = parseInt(localStorage["lastNumber"]) + 1;
+	var entry = {
+		"id" : x,
+		"title" : entryTitle,
+		"description" : entryText
+	};
+	localStorage["lastNumber"] = x;
+	localStorage.setItem("entry", JSON.stringify(entry));
+	existingEntries.unshift(entry);
+	localStorage.setItem("annotations", JSON.stringify(existingEntries));
+	window.location.replace("anotacoes.html");
+};
+
+window.onload = function () {
+	document.getElementById("anotar").onclick = function () {
+		addEntry();
+	}
+}
+</script>
+<body>
+<section class="margin card">
+Título&nbsp;&nbsp;&nbsp;<input type="text" id="title" /><br><br>
+Descrição<br><textarea id="description" style="width:100%" rows="10"></textarea><br><br>
+<font class="explicacao">Escreva "&lt;br&gt;" para adicionar uma nova linha<br>
+Personalize a descrição com cores, imagens, links, tabelas, etc. fazendo um mini-curso de HTML <a href="http://aloogle.tumblr.com/schoolapp/action?action=cursohtml&aloogleapp=needinternet">clicando aqui</a></font><br><br>
+<button id="anotar">Anotar</button><button onclick="window.location.replace('anotacoes.html');">Cancelar</button>
+</section>
+</body>
+</html>

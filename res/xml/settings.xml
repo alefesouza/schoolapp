@@ -6,11 +6,29 @@
             android:entryValues="@array/classRoomsValues"
             android:title="@string/pref_classroom"
             android:summary="@string/pref_classroom_summary" />
+		<ListPreference
+            android:key="clubeRoom"
+            android:entries="@array/clubeRooms"
+            android:entryValues="@array/clubeRoomsValues"
+            android:title="@string/pref_cluberoom"
+            android:summary="@string/pref_cluberoom_summary" />
+		<ListPreference
+            android:key="eletivaRoom"
+            android:entries="@array/eletivaRooms"
+            android:entryValues="@array/eletivaRoomsValues"
+            android:title="@string/pref_eletivaroom"
+            android:summary="@string/pref_eletivaroom_summary" />
 		<CheckBoxPreference
             android:defaultValue="false"
             android:key="classRepresentant"
             android:title="@string/pref_representant"
             android:summary="@string/pref_representant_summary" />
+		<ListPreference
+            android:key="prefAppColor"
+            android:entries="@array/appColors"
+            android:entryValues="@array/appColorsValues"
+            android:title="@string/pref_app_color"
+            android:summary="@string/pref_app_color_summary" />
    <Preference
             android:key="buttonok"
             android:title="@string/pref_ok"

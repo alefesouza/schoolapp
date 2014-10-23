@@ -25,4 +25,58 @@
         <item name="3b">3b</item>
         <item name="3c">3c</item>
     </string-array>
+
+<string-array name="clubeRooms">
+        <item name="jogos">Jogos</item>
+        <item name="disable">Nenhum desses</item>
+        <item name="addnew">Adicionar novo</item>
+    </string-array>
+
+	<string-array name="clubeRoomsValues">
+        <item name="jogos">jogos</item>
+        <item name="disable">disable</item>
+        <item name="addnew">addnew</item>
+    </string-array>
+
+<string-array name="eletivaRooms">
+        <item name="anatomia">Anatomia</item>
+        <item name="comunicacao">Comunicação</item>
+        <item name="engenharia">Engenharia</item>
+        <item name="handbol">Handbol</item>
+        <item name="jornalismo">Jornalismo</item>
+        <item name="legislacao">Legislação</item>
+        <item name="medicina">Medicina</item>
+        <item name="quimica">Química</item>
+        <item name="teatro">Teatro</item>
+    </string-array>
+
+	<string-array name="eletivaRoomsValues">
+        <item name="anatomia">anatomia</item>
+        <item name="comunicacao">comunicacao</item>
+        <item name="engenharia">engenharia</item>
+        <item name="handbol">handbol</item>
+        <item name="jornalismo">jornalismo</item>
+        <item name="legislacao">legislacao</item>
+        <item name="medicina">medicina</item>
+        <item name="quimica">quimica</item>
+        <item name="teatro">teatro</item>
+    </string-array>
+
+<string-array name="appColors">
+        <item name="green1">Verde 1</item>
+        <item name="green2">Verde 2</item>
+        <item name="green3">Verde 3</item>
+        <item name="blue1">Azul 1</item>
+        <item name="blue2">Azul 2</item>
+        <item name="blue3">Azul 3</item>
+    </string-array>
+
+	<string-array name="appColorsValues">
+        <item name="green1">green1</item>
+        <item name="green2">green2</item>
+        <item name="green3">green3</item>
+        <item name="blue1">blue1</item>
+        <item name="blue2">blue2</item>
+        <item name="blue3">blue3</item>
+    </string-array>
 </resources>

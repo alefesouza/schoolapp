@@ -4,12 +4,16 @@
     
     <string name="schedules">Horários</string>
     <string name="calendar">Agenda</string>
-    <string name="updatecalendar">Atualizar agenda</string>
+    <string name="annotations">Anotações</string>
     <string name="announcements">Comunicados</string>
+    <string name="panel">Painel</string>
+    <string name="messages">Ver recados</string>
+    <string name="clubeaddnew">Adicionar novo clube</string>
     <string name="needinternet">Você precisa estar conectado à internet</string>
     <string name="needinternetft">Você precisa estar conectado à internet na primeira vez</string>
     <string name="erroroccured">Ops, houve um erro!</string>
 
+    <string name="readingroom">Sala de leitura</string>
     <string name="settings">Configurações</string>
     <string name="shareapp">Compartilhar app</string>
     <string name="sharecontent">Baixe o aplicativo do Rebuá com horário e agenda de todas as salas!! http://bit.ly/rebuapp</string>
@@ -22,8 +26,14 @@
 
     <string name="pref_classroom">Escolher sala</string>
     <string name="pref_classroom_summary">Toque aqui para escolher sua sala</string>
-    <string name="pref_representant">Sou representante</string>
-    <string name="pref_representant_summary">Ative essa opção para atualizar a agenda</string>
+    <string name="pref_cluberoom">Escolher clube</string>
+    <string name="pref_cluberoom_summary">Toque aqui para escolher seu clube, apenas clubes com interesse em participar do aplicativo aparecerão aqui</string>
+    <string name="pref_eletivaroom">Escolher eletiva</string>
+    <string name="pref_eletivaroom_summary">Toque aqui para escolher sua eletiva</string>
+    <string name="pref_representant">Habilitar painel</string>
+    <string name="pref_representant_summary">Ative essa opção caso você tenha uma conta no aplicativo</string>
+    <string name="pref_app_color">Cor do aplicativo</string>
+    <string name="pref_app_color_summary">Toque aqui para escolher a cor do aplicativo</string>
     <string name="pref_ok">OK</string>
     <string name="pref_ok_summary">Salvar alterações</string>
 </resources>
