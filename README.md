@@ -5,7 +5,7 @@ RebuApp
 
 RebuApp é um aplicativo para Android que contém todos os horários, agendas e comunicados de todas as salas, recados e comunicados de todos os clubes e eletiva de uma das minhas escolas, a E. E. Profº Willian Rodrigues Rebuá.
 
-Você pode baixa-lo na [Google Play Store](play.google.com/store/apps/details?id=aloogle.rebuapp).
+Você pode baixa-lo na [Google Play Store](http://play.google.com/store/apps/details?id=aloogle.rebuapp).
 
 Esse é o código da versão 1.5
 
