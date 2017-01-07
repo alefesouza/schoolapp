@@ -339,9 +339,6 @@ public class DictionaryFragment extends Fragment implements AbsListView.OnScroll
 							url = "http://apps.aloogle.net/schoolapp/rebua/json/dicionario.php?palavra=" + URLEncoder.encode(s, "UTF-8");
 							ClearAll();
 							new JSONParse().execute();
-							if (Build.VERSION.SDK_INT > 10) {
-								suggestionarray.clear();
-							}
 						} else {
 							Toast toast = Toast.makeText(getActivity(), getString(R.string.needinternet), Toast.LENGTH_SHORT);
 							toast.show();
@@ -359,9 +356,7 @@ public class DictionaryFragment extends Fragment implements AbsListView.OnScroll
 								@Override
 								public void run() {
 									if (s.equals(suggestion)) {
-										if (!MainActivity.isTouch) {
 											new JSONParseSearch().execute();
-										}
 									}
 								}
 							}, 1000);
@@ -385,7 +380,6 @@ public class DictionaryFragment extends Fragment implements AbsListView.OnScroll
 								url = "http://apps.aloogle.net/schoolapp/rebua/json/dicionario.php?palavra=" + URLEncoder.encode(suggestionarray.get(position).toString(), "UTF-8");
 								ClearAll();
 								new JSONParse().execute();
-								suggestionarray.clear();
 							} else {
 								Toast toast = Toast.makeText(getActivity(), getString(R.string.needinternet), Toast.LENGTH_SHORT);
 								toast.show();
@@ -405,7 +399,6 @@ public class DictionaryFragment extends Fragment implements AbsListView.OnScroll
 								url = "http://apps.aloogle.net/schoolapp/rebua/json/dicionario.php?palavra=" + URLEncoder.encode(suggestionarray.get(position).toString(), "UTF-8");
 								ClearAll();
 								new JSONParse().execute();
-								suggestionarray.clear();
 							} else {
 								Toast toast = Toast.makeText(getActivity(), getString(R.string.needinternet), Toast.LENGTH_SHORT);
 								toast.show();
@@ -487,7 +480,6 @@ public class DictionaryFragment extends Fragment implements AbsListView.OnScroll
 		protected void onPostExecute(JSONObject json) {
 			try {
 				try {
-					if (!MainActivity.isTouch) {
 						suggestionarray.clear();
 						sugestoes = json.getJSONArray("sugestoes");
 						for (int i = 0; i < sugestoes.length(); i++) {
@@ -497,25 +489,22 @@ public class DictionaryFragment extends Fragment implements AbsListView.OnScroll
 							suggestionarray.add(categoria);
 						}
 						populateAdapter();
-					}
 				} catch (JSONException e) {}
 			} catch (Exception e) {}
 		}
 	}
 
 	private void populateAdapter() {
-		if (!MainActivity.isTouch) {
 			final MatrixCursor c = new MatrixCursor(new String[]{
-					BaseColumns._ID, 				"categoryName"
+					BaseColumns._ID, "categoryName"
 				});
 			for (int i = 0; i < suggestionarray.size(); i++) {
 				if (!suggestionarray.get(i).toString().equals("")) {
 					c.addRow(new Object[]{
-						i, 					suggestionarray.get(i).toString()
+						i, suggestionarray.get(i).toString()
 					});
-					mAdapter.changeCursor(c);
 				}
 			}
+			mAdapter.changeCursor(c);
 		}
-	}
 }

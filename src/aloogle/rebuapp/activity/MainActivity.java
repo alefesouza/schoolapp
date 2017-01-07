@@ -204,6 +204,17 @@ public class MainActivity extends ActionBarActivity implements ObservableScrollV
 					}
 				}, 100);
 			}
+		} if(getIntent().hasExtra("fromwidget")) {
+			if (savedInstanceState != null) {
+				pos = savedInstanceState.getInt("position");
+			} else {
+				new Handler().postDelayed(new Runnable() {
+						@Override
+						public void run() {
+							selectItem(getIntent().getIntExtra("widgetpos", 0));
+						}
+					}, 100);
+			}
 		} else {
 			if (savedInstanceState != null) {
 				pos = savedInstanceState.getInt("position");

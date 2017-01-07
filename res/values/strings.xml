@@ -66,6 +66,15 @@ limitations under the License.
     <string name="pref_ok">OK</string>
     <string name="pref_ok_summary">Fechar janela</string>
 
+    <string name="addshortcutwidget">Atalho do RebuApp</string>
+    <string name="widgettitle">Título do atalho</string>
+    <string name="widgeticon">Ícone do atalho:</string>
+    <string name="black">Preto</string>
+    <string name="white">Branco</string>
+    <string name="grey">Cinza</string>
+    <string name="rebuappicon">Ícone do RebuApp</string>
+    <string name="createshortcut">Criar atalho</string>
+
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
 </resources>

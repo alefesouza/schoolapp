@@ -9,7 +9,7 @@ Esse aplicativo estava em licença GNU GPLv3 até a versão 1.5, até que decidi
 
 Como eu nunca tinha cursado Java ou orientação a objetos na época não espere ver muitas boas práticas, eu só me inspirava na estrutura código de outros programadores que via pelo GitHub.
 
-Esse é o código da versão 2.1 lançada em 28/03/2015
+Esse é o código da versão 2.1.5 lançada em 30/03/2015
 
 Você pode acessar o código do back-end em PHP [clicando aqui](https://github.com/alefesouza/schoolapp-backend), como na época eu não tinha conhecimento no desenvolvimento de aplicativos para outras plataformas, no back-end também há uma versão web do aplicativo feita em Material Design com Polymer, para quem usasse iOS ou Windows Phone pudesse acessar normalmente.
 

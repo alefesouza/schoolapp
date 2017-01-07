@@ -18,6 +18,7 @@ package aloogle.rebuapp.other;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
@@ -26,6 +27,7 @@ import android.os.Build;
 import android.preference.PreferenceManager;
 import java.util.Calendar;
 import java.util.Date;
+import aloogle.rebuapp.R;
 
 @SuppressLint("NewApi")
 public class Other {
@@ -311,5 +313,179 @@ public class Other {
 			painel.putExtra("url", "http://apps.aloogle.net/schoolapp/rebua/painel");
 			activity.startActivity(painel);
 		}
+	}
+	
+	public static int getShortcutDrawable(Context activity, int pos, int cor) {
+		int b;
+		switch(pos) {
+			case 1:
+				switch(cor) {
+					case 1:
+						b = R.drawable.widget_sala_preto;
+					break;
+					case 2:
+						b = R.drawable.widget_sala_branco;
+					break;
+					case 3:
+						b = R.drawable.widget_sala_cinza;
+						break;
+					default:
+						b = R.drawable.ic_launcher;
+				}
+				break;
+			case 2:
+				switch(cor) {
+					case 1:
+						b = R.drawable.widget_clube_preto;
+						break;
+					case 2:
+						b = R.drawable.widget_clube_branco;
+						break;
+					case 3:
+						b = R.drawable.widget_clube_cinza;
+						break;
+					default:
+						b = R.drawable.ic_launcher;
+				}
+				break;
+			case 3:
+				switch(cor) {
+					case 1:
+						b = R.drawable.widget_eletiva_preto;
+						break;
+					case 2:
+						b = R.drawable.widget_eletiva_branco;
+						break;
+					case 3:
+						b = R.drawable.widget_eletiva_cinza;
+						break;
+					default:
+						b = R.drawable.ic_launcher;
+				}
+				break;
+			case 4:
+				switch(cor) {
+					case 1:
+						b = R.drawable.widget_comunicados_preto;
+						break;
+					case 2:
+						b = R.drawable.widget_comunicados_branco;
+						break;
+					case 3:
+						b = R.drawable.widget_comunicados_cinza;
+						break;
+					default:
+						b = R.drawable.ic_launcher;
+				}
+				break;
+			case 5:
+				switch(cor) {
+					case 1:
+						b = R.drawable.widget_anotacoes_preto;
+						break;
+					case 2:
+						b = R.drawable.widget_anotacoes_branco;
+						break;
+					case 3:
+						b = R.drawable.widget_anotacoes_cinza;
+						break;
+					default:
+						b = R.drawable.ic_launcher;
+				}
+				break;
+			case 6:
+				switch(cor) {
+					case 1:
+						b = R.drawable.widget_notificacoes_preto;
+						break;
+					case 2:
+						b = R.drawable.widget_notificacoes_branco;
+						break;
+					case 3:
+						b = R.drawable.widget_notificacoes_cinza;
+						break;
+					default:
+						b = R.drawable.ic_launcher;
+				}
+				break;
+			case 7:
+				switch(cor) {
+					case 1:
+						b = R.drawable.widget_biblioteca_preto;
+						break;
+					case 2:
+						b = R.drawable.widget_biblioteca_branco;
+						break;
+					case 3:
+						b = R.drawable.widget_biblioteca_cinza;
+						break;
+					default:
+						b = R.drawable.ic_launcher;
+				}
+				break;
+			case 8:
+				switch(cor) {
+					case 1:
+						b = R.drawable.widget_dicionario_preto;
+						break;
+					case 2:
+						b = R.drawable.widget_dicionario_branco;
+						break;
+					case 3:
+						b = R.drawable.widget_dicionario_cinza;
+						break;
+					default:
+						b = R.drawable.ic_launcher;
+				}
+				break;
+			case 9:
+				switch(cor) {
+					case 1:
+						b = R.drawable.widget_cartazes_preto;
+						break;
+					case 2:
+						b = R.drawable.widget_cartazes_branco;
+						break;
+					case 3:
+						b = R.drawable.widget_cartazes_cinza;
+						break;
+					default:
+						b = R.drawable.ic_launcher;
+				}
+				break;
+			case 10:
+				switch(cor) {
+					case 1:
+						b = R.drawable.widget_blog_preto;
+						break;
+					case 2:
+						b = R.drawable.widget_blog_branco;
+						break;
+					case 3:
+						b = R.drawable.widget_blog_cinza;
+						break;
+					default:
+						b = R.drawable.ic_launcher;
+				}
+				break;
+			case 11:
+				switch(cor) {
+					case 1:
+						b = R.drawable.widget_blog_preto;
+						break;
+					case 2:
+						b = R.drawable.widget_blog_branco;
+						break;
+					case 3:
+						b = R.drawable.widget_blog_cinza;
+						break;
+					default:
+						b = R.drawable.ic_launcher;
+				}
+				break;
+			default:
+				b = R.drawable.ic_launcher;
+		}
+		return b;
 	}
 }

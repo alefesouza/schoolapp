@@ -79,7 +79,7 @@ public class ReadingActivity extends ActionBarActivity implements ObservableScro
 	private int mSlop;
 	private boolean mScrolled;
 	private ScrollState mLastScrollState;
-	
+
 	@SuppressWarnings("deprecation")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

@@ -54,11 +54,10 @@ public class SplashScreen extends Activity {
 				return;
 			}
 		} else {
-
 			boolean isFirst = preferences.getBoolean("isFirst", true);
 			if (isFirst) {
 				new Handler().postDelayed(new Runnable() {
-					@Override
+					 @ Override
 					public void run() {
 						Intent intent = new Intent(SplashScreen.this, FragmentActivity.class);
 						startActivity(intent);
@@ -66,17 +65,25 @@ public class SplashScreen extends Activity {
 					}
 				}, TIME);
 			} else {
-				new Handler().postDelayed(new Runnable() {
-					@Override
-					public void run() {
-						Intent intent = new Intent(SplashScreen.this, MainActivity.class);
-						if (getIntent().hasExtra("fromnotification")) {
-							intent.putExtra("fromnotification", true);
+				final Intent intent = new Intent(SplashScreen.this, MainActivity.class);
+				if (getIntent().hasExtra("fromnotification")) {
+					intent.putExtra("fromnotification", true);
+					startActivity(intent);
+					SplashScreen.this.finish();
+				} else if (getIntent().hasExtra("fromwidget")) {
+					intent.putExtra("fromwidget", true);
+					intent.putExtra("widgetpos", getIntent().getIntExtra("widgetpos", 0));
+					startActivity(intent);
+					SplashScreen.this.finish();
+				} else {
+					new Handler().postDelayed(new Runnable() {
+						@Override
+						public void run() {
+							startActivity(intent);
+							SplashScreen.this.finish();
 						}
-						startActivity(intent);
-						SplashScreen.this.finish();
-					}
-				}, TIME);
+					}, TIME);
+				}
 			}
 		}
 	}

@@ -317,9 +317,6 @@ public class ReadingFragment extends Fragment implements AbsListView.OnScrollLis
 						intent.putExtra("titulo", "Busca: " + s);
 						intent.putExtra("query", URLEncoder.encode(s, "UTF-8"));
 						startActivity(intent);
-						if (Build.VERSION.SDK_INT > 10) {
-							suggestionarray.clear();
-						}
 					} else {
 						Toast toast = Toast.makeText(getActivity(), getString(R.string.needinternet), Toast.LENGTH_SHORT);
 						toast.show();
@@ -359,7 +356,6 @@ public class ReadingFragment extends Fragment implements AbsListView.OnScrollLis
 							intent.putExtra("titulo", "Busca: " + suggestionarray.get(position));
 							intent.putExtra("query", URLEncoder.encode(suggestionarray.get(position), "UTF-8"));
 							startActivity(intent);
-							suggestionarray.clear();
 						} else {
 							Toast toast = Toast.makeText(getActivity(), getString(R.string.needinternet), Toast.LENGTH_SHORT);
 							toast.show();
@@ -376,7 +372,6 @@ public class ReadingFragment extends Fragment implements AbsListView.OnScrollLis
 							intent.putExtra("titulo", "Busca: " + suggestionarray.get(position));
 							intent.putExtra("query", URLEncoder.encode(suggestionarray.get(position), "UTF-8"));
 							startActivity(intent);
-							suggestionarray.clear();
 						} else {
 							Toast toast = Toast.makeText(getActivity(), getString(R.string.needinternet), Toast.LENGTH_SHORT);
 							toast.show();
@@ -475,15 +470,15 @@ public class ReadingFragment extends Fragment implements AbsListView.OnScrollLis
 
 	private void populateAdapter() {
 		final MatrixCursor c = new MatrixCursor(new String[]{
-				BaseColumns._ID, 			"categoryName"
+				BaseColumns._ID, "categoryName"
 			});
 		for (int i = 0; i < suggestionarray.size(); i++) {
 			if (!suggestionarray.get(i).toString().equals("")) {
 				c.addRow(new Object[]{
-					i, 				suggestionarray.get(i).toString()
+					i, suggestionarray.get(i).toString()
 				});
-				mAdapter.changeCursor(c);
 			}
 		}
+		mAdapter.changeCursor(c);
 	}
 }

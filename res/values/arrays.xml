@@ -40,8 +40,8 @@ limitations under the License.
         <item>@drawable/ic_biblioteca</item>
         <item>@drawable/ic_dicionario</item>
         <item>@drawable/ic_cartazes</item>
-        <item>@drawable/ic_jornal</item>
-        <item>@drawable/ic_jornal</item>
+        <item>@drawable/ic_blog</item>
+        <item>@drawable/ic_blog</item>
     </array>
 	
 	<string-array name="classRooms">
