@@ -60,7 +60,9 @@ import aloogle.rebuapp.fragment.ReadingFragment2Alfa;
 import aloogle.rebuapp.lib.SlidingTabLayout;
 import aloogle.rebuapp.other.Other;
 
-@SuppressLint({"DefaultLocale","CutPasteId"})
+@SuppressLint({
+	"DefaultLocale", "CutPasteId"
+})
 public class ReadingActivity extends ActionBarActivity implements ObservableScrollViewCallbacks {
 	final Context context = this;
 	public Toolbar mToolbar;
@@ -77,7 +79,7 @@ public class ReadingActivity extends ActionBarActivity implements ObservableScro
 	private int mSlop;
 	private boolean mScrolled;
 	private ScrollState mLastScrollState;
-
+	
 	@SuppressWarnings("deprecation")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -134,6 +136,8 @@ public class ReadingActivity extends ActionBarActivity implements ObservableScro
 				.setMessage(R.string.dialogreading)
 				.setPositiveButton("OK", null)
 				.create();
+
+			dialogreading.setCanceledOnTouchOutside(false);
 
 			dialogreading.setOnShowListener(new
 				DialogInterface.OnShowListener() {
@@ -347,7 +351,9 @@ public class ReadingActivity extends ActionBarActivity implements ObservableScro
 
 	private static class NavigationAdapter extends CacheFragmentStatePagerAdapter {
 
-		private static final String[]TITLES = new String[]{ "Recentes", "Alfabética" };
+		private static final String[]TITLES = new String[]{
+			"Recentes", 		"Alfabética"
+		};
 
 		public NavigationAdapter(FragmentManager fm) {
 			super(fm);

@@ -73,8 +73,7 @@ public class HorarioFragment extends Fragment {
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-		Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, 	Bundle savedInstanceState) {
 		view = inflater.inflate(R.layout.horario_main, container, false);
 
 		preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
@@ -117,9 +116,7 @@ public class HorarioFragment extends Fragment {
 		return view;
 	}
 
-	private class JSONParse extends AsyncTask < String,
-	String,
-	JSONObject > {
+	private class JSONParse extends AsyncTask < String, String, JSONObject > {
 		@Override
 		protected void onPreExecute() {
 			new Handler().postDelayed(new Runnable() {
@@ -229,12 +226,7 @@ public class HorarioFragment extends Fragment {
 
 				String[]horarios = getResources().getStringArray(R.array.horarios);
 				String[]dias = {
-					"",
-					"Segunda",
-					"Terça",
-					"Quarta",
-					"Quinta",
-					"Sexta"
+					"", 				"Segunda", 				"Terça", 				"Quarta", 				"Quinta", 				"Sexta"
 				};
 
 				JSONObject materias = new JSONObject(preferences.getString("horarios" + sala, ""));

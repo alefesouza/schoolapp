@@ -21,6 +21,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
+import android.net.Uri;
+import android.os.Build;
 import android.preference.PreferenceManager;
 import java.util.Calendar;
 import java.util.Date;
@@ -298,10 +300,16 @@ public class Other {
 	}
 
 	public static void openPanel(Activity activity) {
-		Intent painel = new Intent(activity, aloogle.rebuapp.activity.FragmentActivity.class);
-		painel.putExtra("fragment", 2);
-		painel.putExtra("titulo", "Painel");
-		painel.putExtra("url", "http://apps.aloogle.net/schoolapp/rebua/painel");
-		activity.startActivity(painel);
+		if (String.valueOf(Build.VERSION.SDK_INT).matches("10|16|17|18")) {
+			Intent intent = new Intent(Intent.ACTION_VIEW);
+			intent.setData(Uri.parse("http://apps.aloogle.net/schoolapp/rebua/painel"));
+			activity.startActivity(intent);
+		} else {
+			Intent painel = new Intent(activity, aloogle.rebuapp.activity.FragmentActivity.class);
+			painel.putExtra("fragment", 2);
+			painel.putExtra("titulo", "Painel");
+			painel.putExtra("url", "http://apps.aloogle.net/schoolapp/rebua/painel");
+			activity.startActivity(painel);
+		}
 	}
 }

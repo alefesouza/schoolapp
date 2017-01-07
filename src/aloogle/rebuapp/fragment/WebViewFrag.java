@@ -66,7 +66,9 @@ import aloogle.rebuapp.R;
 import aloogle.rebuapp.activity.FragmentActivity;
 import aloogle.rebuapp.other.Other;
 
-@SuppressLint({"NewApi","SetJavaScriptEnabled"})
+@SuppressLint({
+	"NewApi", "SetJavaScriptEnabled"
+})
 public class WebViewFrag extends Fragment implements ObservableScrollViewCallbacks {
 	View view;
 	Activity activity;
@@ -102,8 +104,7 @@ public class WebViewFrag extends Fragment implements ObservableScrollViewCallbac
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-		Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, 	Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
 		iconcolor = preferences.getString("prefIconColor", "branco");
@@ -134,7 +135,7 @@ public class WebViewFrag extends Fragment implements ObservableScrollViewCallbac
 					descricao = descricao.replace("\n", "<br>");
 				}
 
-				String style = "body { background: #fafafa; } table { border: #000000 solid 1px; } td { border: #000000 solid 1px; text-align: center; padding: 5px; }";
+				String style = "body { background: #fafafa; } table { border: #000000 solid 1px; } td { border: #000000 solid 1px; text-align: center; padding: 5px; } hr { background: #000000; height: 1px; } img { display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto; }";
 				if (Build.VERSION.SDK_INT == 10) {
 					webView.loadDataWithBaseURL(null, "<html><head><style>" + style + "</style></head><body><b>" + titulo + "</b><p>" + descricao + "</p></body></html>", "text/html", "utf-8", null);
 				} else {
@@ -239,8 +240,6 @@ public class WebViewFrag extends Fragment implements ObservableScrollViewCallbac
 
 		setColors();
 
-		webView.setScrollViewCallbacks(this);
-
 		webView.setOnKeyListener(new OnKeyListener() {
 			@SuppressWarnings("static-access")
 			public boolean onKey(View view, int keyCode, KeyEvent event) {
@@ -261,6 +260,8 @@ public class WebViewFrag extends Fragment implements ObservableScrollViewCallbac
 				return true;
 			}
 		});
+
+		webView.setScrollViewCallbacks(this);
 
 		return view;
 	}
@@ -352,7 +353,13 @@ public class WebViewFrag extends Fragment implements ObservableScrollViewCallbac
 		@Override
 		public boolean shouldOverrideUrlLoading(WebView view, String url) {
 			if (finished == false) {
-				if (url.contains("aloogle.net") || url.contains("facebook.com") || url.contains("willianrrebua.blogspot.com") || url.contains(".jpg") || url.contains(".png") || url.contains(".gif")) {
+				if (getActivity().getIntent().hasExtra("fromdictionary")) {
+					Intent intent = new Intent(getActivity(), aloogle.rebuapp.activity.FragmentActivity.class);
+					intent.putExtra("fragment", 5);
+					String[]palavra = url.split("=");
+					intent.putExtra("palavra", palavra[palavra.length - 1]);
+					startActivity(intent);
+				} else if (url.contains("aloogle.net") || url.contains("facebook.com") || url.contains("willianrrebua.blogspot.com") || url.contains(".jpg") || url.contains(".png") || url.contains(".gif")) {
 					view.loadUrl(url);
 				} else {
 					Intent i = new Intent(Intent.ACTION_VIEW);

@@ -95,8 +95,7 @@ public class NotificationsFragment extends Fragment implements AbsListView.OnScr
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-		Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, 	Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		view = inflater.inflate(R.layout.fragment_main, container, false);
 
@@ -118,7 +117,6 @@ public class NotificationsFragment extends Fragment implements AbsListView.OnScr
 
 		fromnonet = false;
 		topanel = false;
-		alreadyLoaded = false;
 		relative = (RelativeLayout)view.findViewById(R.id.fragment);
 
 		if (!MainActivity.home) {
@@ -134,9 +132,7 @@ public class NotificationsFragment extends Fragment implements AbsListView.OnScr
 
 		mSwipeLayout = (SwipeRefreshLayout)view.findViewById(R.id.swipe_container);
 		mSwipeLayout.setOnRefreshListener(this);
-		mSwipeLayout.setColorSchemeResources(R.color.primary_color,
-			R.color.primary_color_dark, R.color.primary_color,
-			R.color.primary_color_dark);
+		mSwipeLayout.setColorSchemeResources(R.color.primary_color, 		R.color.primary_color_dark, R.color.primary_color, 		R.color.primary_color_dark);
 
 		FloatingActionButton fabpanel = (FloatingActionButton)getActivity().findViewById(R.id.fabpanel);
 
@@ -171,7 +167,7 @@ public class NotificationsFragment extends Fragment implements AbsListView.OnScr
 		return view;
 	}
 
-	private class JSONParse extends AsyncTask <String, String, JSONObject> {
+	private class JSONParse extends AsyncTask < String, String, JSONObject > {
 		@Override
 		protected void onPreExecute() {
 			new Handler().postDelayed(new Runnable() {
@@ -340,8 +336,7 @@ public class NotificationsFragment extends Fragment implements AbsListView.OnScr
 	public void onScrollStateChanged(AbsListView view, int scrollState) {}
 
 	@Override
-	public void onScroll(AbsListView view, int firstVisibleItem,
-		int visibleItemCount, int totalItemCount) {
+	public void onScroll(AbsListView view, int firstVisibleItem, 	int visibleItemCount, int totalItemCount) {
 		if (list.getChildCount() > 0 && list.getChildAt(0).getTop() == 0 && list.getFirstVisiblePosition() == 0) {
 			mSwipeLayout.setEnabled(true);
 		} else {

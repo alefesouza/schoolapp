@@ -28,6 +28,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
@@ -100,20 +101,30 @@ public class AddAnnotationFragment extends Fragment {
 
 		add.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				String etitulo = titulo.getText().toString().replace("\\", "\\\\").replace("\"", "\\\"");
-				String edescricao = descricao.getText().toString().replace("\\", "\\\\").replace("\"", "\\\"");
-				if (getActivity().getIntent().hasExtra("editionmode")) {
-					String newjson = exjson.replace(extitulo.replace("\\", "\\\\").replace("\"", "\\\""), etitulo).replace(exdescricao.replace("\\", "\\\\").replace("\"", "\\\""), edescricao);
-					editor.putString("annotations", preferences.getString("annotations", "").replace(exjson, newjson));
-					editor.commit();
-					getActivity().finish();
+				if(titulo.getText().toString().equals("")) {
+					Toast toast = Toast.makeText(getActivity(), "Digite um título", Toast.LENGTH_SHORT);
+					toast.show();
 				} else {
-					int id = preferences.getInt("lastAnnotationId", 0) + 1;
-					editor.putString("annotations", "{ \"id\": \"" + String.valueOf(id) + "\", \"titulo\": \"" + etitulo + "\", \"descricao\": \"" + edescricao + "\" }$%#" + preferences.getString("annotations", ""));
-					editor.commit();
-					editor.putInt("lastAnnotationId", id);
-					editor.commit();
-					getActivity().finish();
+					if(descricao.getText().toString().equals("")) {
+						Toast toast = Toast.makeText(getActivity(), "Digite uma descrição", Toast.LENGTH_SHORT);
+						toast.show();
+					} else {
+						String etitulo = titulo.getText().toString().replace("\\", "\\\\").replace("\"", "\\\"");
+						String edescricao = descricao.getText().toString().replace("\\", "\\\\").replace("\"", "\\\"");
+						if (getActivity().getIntent().hasExtra("editionmode")) {
+							String newjson = exjson.replace(extitulo.replace("\\", "\\\\").replace("\"", "\\\""), etitulo).replace(exdescricao.replace("\\", "\\\\").replace("\"", "\\\""), edescricao);
+							editor.putString("annotations", preferences.getString("annotations", "").replace(exjson, newjson));
+							editor.commit();
+							getActivity().finish();
+						} else {
+							int id = preferences.getInt("lastAnnotationId", 0) + 1;
+							editor.putString("annotations", "{ \"id\": \"" + String.valueOf(id) + "\", \"titulo\": \"" + etitulo + "\", \"descricao\": \"" + edescricao + "\" }$%#" + preferences.getString("annotations", ""));
+							editor.commit();
+							editor.putInt("lastAnnotationId", id);
+							editor.commit();
+							getActivity().finish();
+						}
+					}
 				}
 			}
 		});

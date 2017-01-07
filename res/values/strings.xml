@@ -23,7 +23,7 @@ limitations under the License.
     <string name="erroroccured">Ops, houve um erro!</string>
 
     <string name="msemana">Mostrar semana</string>
-    <string name="mdia">Mostrar dia,</string>
+    <string name="mdia">Mostrar dia</string>
 
     <string name="refresh">Atualizar</string>
     <string name="solicitation">Solicitar edição</string>
@@ -33,6 +33,8 @@ limitations under the License.
     <string name="dialogpanel">Para acessar o painel, toque no botão circular com um lápis dentro, nele usando sua conta você pode adicionar eventos e enviar notificações para a sala/clube/eletiva que você administra.</string>
     <string name="dialogversion">Sua versão do Android é muito antiga, você pode usar o aplicativo normalmente, mas não há garantia de que ele funcione como nas versões mais novas.</string>
     <string name="dialogsolicitation">Você pode pedir uma conta para o Ediney na sala da coordenação, após isso vá nas configurações e marque \"Habilitar painel\".</string>
+    <string name="dialogannotation">As anotações ficam armazenadas no seu dispositivo e só você pode acessa-las, toque em \"Adicionar anotação\" para começar.</string>
+    <string name="dialogcartaz">Toque em um card para abrir o cartaz em tela cheia.</string>
 	
     <string name="settings">Configurações</string>
     <string name="shareapp">Compartilhar app</string>

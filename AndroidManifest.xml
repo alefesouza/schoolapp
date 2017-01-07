@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-Copyright (C) 2015 Alefe Souza <contato@alefesouza.com/>
+Copyright (C) 2015 Alefe Souza <contato@alefesouza.com>
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -16,8 +16,8 @@ limitations under the License.
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="aloogle.rebuapp"
-    android:versionCode="8"
-    android:versionName="2.0.1">
+    android:versionCode="10"
+    android:versionName="2.1">
 
     <uses-sdk
         android:minSdkVersion="10"

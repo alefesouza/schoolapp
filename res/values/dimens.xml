@@ -17,7 +17,7 @@ limitations under the License.
     <dimen name="size_to_ad">50dp</dimen>
     <dimen name="space_to_ad">76dp</dimen>
     <dimen name="card_padding">5dp</dimen>
-    <dimen name="card_bottom">10dp</dimen>
+    <dimen name="card_padding2">10dp</dimen>
     <dimen name="list_margin">5dp</dimen>
     <dimen name="fab_margin">66dp</dimen>
     <dimen name="horario_cel_padding">5dp</dimen>

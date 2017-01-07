@@ -41,6 +41,6 @@ limitations under the License.
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_centerInParent="true" />
-	</RelativeLayout>
 </RelativeLayout>
+	</RelativeLayout>
 </android.support.v4.widget.SwipeRefreshLayout>

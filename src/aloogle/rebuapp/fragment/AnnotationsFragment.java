@@ -46,6 +46,9 @@ import aloogle.rebuapp.activity.MainActivity;
 import aloogle.rebuapp.adapter.CardAdapterAnnotation;
 import aloogle.rebuapp.other.CustomTextView;
 import aloogle.rebuapp.other.Other;
+import android.app.*;
+import android.content.*;
+import android.widget.*;
 
 public class AnnotationsFragment extends Fragment implements AbsListView.OnScrollListener, SwipeRefreshLayout.OnRefreshListener {
 	Activity activity;
@@ -76,8 +79,7 @@ public class AnnotationsFragment extends Fragment implements AbsListView.OnScrol
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-		Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, 	Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
 		view = inflater.inflate(R.layout.fragment_main, container, false);
@@ -89,6 +91,36 @@ public class AnnotationsFragment extends Fragment implements AbsListView.OnScrol
 			((ActionBarActivity)getActivity()).getSupportActionBar().setTitle(MainActivity.titulo);
 			MainActivity.mDrawerList.setItemChecked(5, true);
 			MainActivity.pos = 5;
+		}
+
+		boolean warningAnnotation = preferences.getBoolean("warningAnnotation", false);
+		if (!warningAnnotation) {
+			final AlertDialog dialogannotation = new AlertDialog.Builder(getActivity())
+				.setTitle(R.string.app_name)
+				.setMessage(R.string.dialogannotation)
+				.setPositiveButton("OK", null)
+				.create();
+
+			dialogannotation.setCanceledOnTouchOutside(false);
+
+			dialogannotation.setOnShowListener(new
+				DialogInterface.OnShowListener() {
+				@Override
+				public void onShow(DialogInterface dialog) {
+					Button b = dialogannotation.getButton(AlertDialog.BUTTON_POSITIVE);
+					b.setOnClickListener(new
+						View.OnClickListener() {
+						@Override
+						public void onClick(View view) {
+							SharedPreferences.Editor editor = preferences.edit();
+							editor.putBoolean("warningAnnotation", true);
+							editor.commit();
+							dialogannotation.dismiss();
+						}
+					});
+				}
+			});
+			dialogannotation.show();
 		}
 
 		annotations = preferences.getString("annotations", "");
@@ -109,9 +141,7 @@ public class AnnotationsFragment extends Fragment implements AbsListView.OnScrol
 
 		mSwipeLayout = (SwipeRefreshLayout)view.findViewById(R.id.swipe_container);
 		mSwipeLayout.setOnRefreshListener(this);
-		mSwipeLayout.setColorSchemeResources(R.color.primary_color,
-			R.color.primary_color_dark, R.color.primary_color,
-			R.color.primary_color_dark);
+		mSwipeLayout.setColorSchemeResources(R.color.primary_color, 		R.color.primary_color_dark, R.color.primary_color, 		R.color.primary_color_dark);
 
 		list = (ObservableListView)view.findViewById(R.id.list);
 		if (Build.VERSION.SDK_INT > 10) {
@@ -196,8 +226,7 @@ public class AnnotationsFragment extends Fragment implements AbsListView.OnScrol
 	public void onScrollStateChanged(AbsListView view, int scrollState) {}
 
 	@Override
-	public void onScroll(AbsListView view, int firstVisibleItem,
-		int visibleItemCount, int totalItemCount) {
+	public void onScroll(AbsListView view, int firstVisibleItem, 	int visibleItemCount, int totalItemCount) {
 		if (list.getChildCount() > 0 && list.getChildAt(0).getTop() == 0 && list.getFirstVisiblePosition() == 0) {
 			mSwipeLayout.setEnabled(true);
 		} else {

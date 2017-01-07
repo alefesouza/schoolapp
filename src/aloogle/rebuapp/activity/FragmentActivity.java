@@ -41,6 +41,8 @@ public class FragmentActivity extends ActionBarActivity {
 	Fragment webview = new WebViewFrag();
 	Fragment licenses = new LicensesFragment();
 	Fragment addannotation = new AddAnnotationFragment();
+	Fragment dictionary = new DictionaryFragment();
+	Fragment staticfragment = new StaticFragment();
 	SharedPreferences preferences;
 
 	@SuppressLint("InlinedApi")
@@ -77,6 +79,12 @@ public class FragmentActivity extends ActionBarActivity {
 			break;
 		case 4:
 			ft.replace(R.id.content_frame, addannotation);
+			break;
+		case 5:
+			ft.replace(R.id.content_frame, dictionary);
+			break;
+		case 6:
+			ft.replace(R.id.content_frame, staticfragment);
 			break;
 		}
 		ft.commit();

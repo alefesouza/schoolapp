@@ -30,41 +30,29 @@ limitations under the License.
     android:layout_height="match_parent"
 	android:id="@+id/conteudo"
 	android:background="@drawable/card"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+	android:paddingLeft="@dimen/card_padding2"
+	android:paddingRight="@dimen/card_padding2"
+	android:paddingBottom="@dimen/card_padding2" >
 	
     <aloogle.rebuapp.other.CustomTextView
-        android:id="@+id/nome"
+        android:id="@+id/generoetermo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 		android:textColor="#000000"
-		android:layout_margin="10dp"
-        android:textSize="20sp"
-        app:fontName="Roboto-Medium.ttf"
-	/>
-	
-    <aloogle.rebuapp.other.CustomTextView
-        android:id="@+id/quantidade"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-		android:layout_below="@+id/nome"
-		android:textColor="#000000"
-		android:layout_marginLeft="10dp"
-		android:layout_marginRight="10dp"
-		android:layout_marginBottom="10dp"
-        android:textSize="14sp"
-        app:fontName="Roboto-Regular.ttf"
+		android:layout_marginTop="@dimen/card_padding2"
+        android:textSize="16sp"
+        app:fontName="Roboto-Italic.ttf"
 	/>
 
     <aloogle.rebuapp.other.CustomTextView
-        android:id="@+id/amostras"
+        android:id="@+id/significado"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-		android:layout_below="@+id/quantidade"
+		android:layout_below="@+id/generoetermo"
+		android:layout_marginTop="@dimen/card_padding2"
 		android:textColor="#000000"
-		android:layout_marginLeft="10dp"
-		android:layout_marginRight="10dp"
-		android:layout_marginBottom="10dp"
-        android:textSize="14sp"
+        android:textSize="16sp"
         app:fontName="Roboto-Regular.ttf"
 	/>
 </RelativeLayout>

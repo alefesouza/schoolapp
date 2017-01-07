@@ -114,7 +114,7 @@ public class CardAdapter extends BaseAdapter {
 				} else {
 					descricao.setVisibility(View.GONE);
 					descricaowebview.clearCache(true);
-					String style = "body { background: #fafafa; -webkit-user-select: none; user-select: none; word-wrap: break-word; } table { border: #000000 solid 1px; } td { border: #000000 solid 1px; text-align: center; padding: 5px; } hr { background: #000000; height: 1px; }";
+					String style = "body { background: #fafafa; -webkit-user-select: none; user-select: none; word-wrap: break-word; } table { border: #000000 solid 1px; } td { border: #000000 solid 1px; text-align: center; padding: 5px; } hr { background: #000000; height: 1px; } img { display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto; }";
 					if (Build.VERSION.SDK_INT == 10) {
 						descricaowebview.loadDataWithBaseURL(null, "<html><head><style>" + style + "</style></head><body>" + description.get(position) + "</body></html>", "text/html", "utf-8", null);
 					} else {

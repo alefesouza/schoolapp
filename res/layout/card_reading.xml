@@ -22,7 +22,8 @@ limitations under the License.
 	android:paddingRight="@dimen/card_padding">
 <android.support.v7.widget.CardView
 	android:layout_width="match_parent"
-	android:layout_height="wrap_content" >
+	android:layout_height="wrap_content"
+	app:cardUseCompatPadding="true" >
 
 <RelativeLayout
     android:layout_width="match_parent"
@@ -30,14 +31,16 @@ limitations under the License.
 	android:id="@+id/conteudo"
 	android:background="@drawable/card"
     android:orientation="vertical"
-	android:paddingBottom="@dimen/card_bottom">
+	android:paddingLeft="@dimen/card_padding2"
+	android:paddingRight="@dimen/card_padding2"
+	android:paddingBottom="@dimen/card_padding2" >
 	
     <aloogle.rebuapp.other.CustomTextView
         android:id="@+id/nome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 		android:textColor="#000000"
-		android:layout_margin="10dp"
+		android:layout_marginTop="@dimen/card_padding2"
         android:textSize="20sp"
         app:fontName="Roboto-Medium.ttf"
 	/>
@@ -48,9 +51,7 @@ limitations under the License.
         android:layout_height="wrap_content"
 		android:layout_below="@+id/nome"
 		android:textColor="#000000"
-		android:layout_marginLeft="10dp"
-		android:layout_marginRight="10dp"
-		android:layout_marginBottom="10dp"
+		android:layout_marginTop="@dimen/card_padding2"
         android:textSize="14sp"
         app:fontName="Roboto-Regular.ttf"
 	/>
@@ -61,9 +62,7 @@ limitations under the License.
         android:layout_height="wrap_content"
 		android:layout_below="@+id/quantidade"
 		android:textColor="#000000"
-		android:layout_marginLeft="10dp"
-		android:layout_marginRight="10dp"
-		android:layout_marginBottom="10dp"
+		android:layout_marginTop="@dimen/card_padding2"
         android:textSize="14sp"
         app:fontName="Roboto-Regular.ttf"
 	/>

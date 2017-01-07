@@ -24,6 +24,8 @@ limitations under the License.
         <item>Anotações</item>
         <item>Notificações</item>
         <item>Biblioteca</item>
+        <item>Dicionário</item>
+        <item>Cartazes</item>
         <item>Blog</item>
         <item>Jornal</item>
     </string-array>
@@ -36,6 +38,8 @@ limitations under the License.
         <item>@drawable/ic_anotacoes</item>
         <item>@drawable/ic_notificacoes</item>
         <item>@drawable/ic_biblioteca</item>
+        <item>@drawable/ic_dicionario</item>
+        <item>@drawable/ic_cartazes</item>
         <item>@drawable/ic_jornal</item>
         <item>@drawable/ic_jornal</item>
     </array>

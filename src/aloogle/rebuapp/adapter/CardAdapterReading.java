@@ -31,6 +31,8 @@ import java.util.ArrayList;
 import aloogle.rebuapp.R;
 import aloogle.rebuapp.activity.ReadingActivity;
 import aloogle.rebuapp.other.CustomTextView;
+import aloogle.rebuapp.other.*;
+import android.widget.*;
 
 public class CardAdapterReading extends BaseAdapter {
 
@@ -88,10 +90,15 @@ public class CardAdapterReading extends BaseAdapter {
 		RelativeLayout relative = (RelativeLayout)convertView.findViewById(R.id.conteudo);
 		relative.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				Intent intent = new Intent(context, ReadingActivity.class);
-				intent.putExtra("titulo", nome.get(position).toString());
-				intent.putExtra("categoria", categoria.get(position).toString());
-				context.startActivity(intent);
+				if (Other.isConnected((Activity)context)) {
+					Intent intent = new Intent(context, ReadingActivity.class);
+					intent.putExtra("titulo", nome.get(position).toString());
+					intent.putExtra("categoria", categoria.get(position).toString());
+					context.startActivity(intent);
+				} else {
+					Toast toast = Toast.makeText(context, context.getString(R.string.needinternet), Toast.LENGTH_SHORT);
+					toast.show();
+				}
 			}
 		});
 

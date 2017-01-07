@@ -50,8 +50,7 @@ public class LicensesFragment extends Fragment {
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-		Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, 	Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		view = inflater.inflate(R.layout.license, container, false);
 
@@ -66,45 +65,37 @@ public class LicensesFragment extends Fragment {
 			"<li>android-support-v7-cardview</li>" +
 			"<li>android-support-v7-recyclerview</li>" +
 			"<li>google-play-services</li>" +
-			"</ul>",
-			"<h4>Notice for file(s)</h4>" +
-			"<a href=\"http://apps.aloogle.net/blogapp/redirect.php?to=slidingtab\">Sliding Tab Layout</a>" +
+			"</ul>", 		"<h4>Notice for file(s)</h4>" +
+			"<a href=\"http://apps.aloogle.net/schoolapp/redirect.php?to=slidingtab\">Sliding Tab Layout</a>" +
 			"<br><ul>" +
 			"<li>SlidingTabStrip.java</li>" +
 			"<li>SlidingTabLayout.java</li>" +
-			"</ul>",
-			"<h4>Notice for file(s)</h4>" +
-			"<a href=\"http://apps.aloogle.net/blogapp/redirect.php?to=parse\">Parse</a>" +
+			"</ul>", 		"<h4>Notice for file(s)</h4>" +
+			"<a href=\"http://apps.aloogle.net/schoolapp/redirect.php?to=parse\">Parse</a>" +
 			"<br><ul>" +
 			"<li>Parse-1.4.3.jar</li>" +
-			"</ul>",
-			"<h4>Notice for file(s)</h4>" +
-			"<a href=\"http://apps.aloogle.net/blogapp/redirect.php?to=listviewanimations\">ListViewAnimations</a>" +
+			"</ul>", 		"<h4>Notice for file(s)</h4>" +
+			"<a href=\"http://apps.aloogle.net/schoolapp/redirect.php?to=listviewanimations\">ListViewAnimations</a>" +
 			"<br><ul>" +
 			"<li>albcore.jar</li>" +
-			"</ul>",
-			"<h4>Notice for file(s)</h4>" +
-			"<a href=\"http://apps.aloogle.net/blogapp/redirect.php?to=nineoldandroids\">NineOldAndroids</a>" +
+			"</ul>", 		"<h4>Notice for file(s)</h4>" +
+			"<a href=\"http://apps.aloogle.net/schoolapp/redirect.php?to=nineoldandroids\">NineOldAndroids</a>" +
 			"<br><ul>" +
 			"<li>nineoldandroids-2.4.0.jar</li>" +
-			"</ul>",
-			"<h4>Notice for file(s)</h4>" +
-			"<a href=\"http://apps.aloogle.net/blogapp/redirect.php?to=fab\">FloatingActionButton</a>" +
+			"</ul>", 		"<h4>Notice for file(s)</h4>" +
+			"<a href=\"http://apps.aloogle.net/schoolapp/redirect.php?to=fab\">FloatingActionButton</a>" +
 			"<br><ul>" +
 			"<li>FloatingActionButton</li>" +
-			"</ul>",
-			"<h4>Notice for file(s)</h4>" +
-			"<a href=\"http://apps.aloogle.net/blogapp/redirect.php?to=materialdesignlibrary\">MaterialDesignLibrary</a>" +
+			"</ul>", 		"<h4>Notice for file(s)</h4>" +
+			"<a href=\"http://apps.aloogle.net/schoolapp/redirect.php?to=materialdesignlibrary\">MaterialDesignLibrary</a>" +
 			"<br><ul>" +
 			"<li>MaterialDesignLibrary</li>" +
-			"</ul>",
-			"<h4>Notice for file(s)</h4>" +
-			"<a href=\"http://apps.aloogle.net/blogapp/redirect.php?to=supportv4pf\">Android Support v4 Preference Fragment</a>" +
+			"</ul>", 		"<h4>Notice for file(s)</h4>" +
+			"<a href=\"http://apps.aloogle.net/schoolapp/redirect.php?to=supportv4pf\">Android Support v4 Preference Fragment</a>" +
 			"<br><ul>" +
 			"<li>android-support-v4-preferencefragment</li>" +
-			"</ul>",
-			"<h4>Notice for file(s)</h4>" +
-			"<a href=\"http://apps.aloogle.net/blogapp/redirect.php?to=observablescrollview\">ObservableScrollView</a>" +
+			"</ul>", 		"<h4>Notice for file(s)</h4>" +
+			"<a href=\"http://apps.aloogle.net/schoolapp/redirect.php?to=observablescrollview\">ObservableScrollView</a>" +
 			"<br><ul>" +
 			"<li>ObservableScrollView</li>" +
 			"</ul>"
@@ -125,8 +116,7 @@ public class LicensesFragment extends Fragment {
 			"   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied." +
 			"   See the License for the specific language governing permissions and" +
 			"   limitations under the License." +
-			"  </code></pre>",
-			"<pre><code>" +
+			"  </code></pre>", 		"<pre><code>" +
 			"   Copyright 2014 Google Inc. All rights reserved." +
 			"<br><br>" +
 			"   Licensed under the Apache License, Version 2.0 (the \"License\");" +
@@ -140,13 +130,11 @@ public class LicensesFragment extends Fragment {
 			"   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied." +
 			"   See the License for the specific language governing permissions and" +
 			"   limitations under the License." +
-			"  </code></pre>",
-			"<pre><code>" +
+			"  </code></pre>", 		"<pre><code>" +
 			"   Parse grants you a revocable, personal, worldwide, royalty-free," +
 			"   non-assignable and non-exclusive license to use the software provided to you by Parse as part of the Parse Services as provided to you by Parse." +
 			"   This license is for the sole purpose of enabling you to use and enjoy the benefit of the Parse Services as provided by Parse, in the manner permitted by the Terms." +
-			"  </code></pre>",
-			"<pre><code>" +
+			"  </code></pre>", 		"<pre><code>" +
 			"Copyright 2014 Niek Haarman" +
 			"<br><br>" +
 			"   Licensed under the Apache License, Version 2.0 (the \"License\");" +
@@ -160,8 +148,7 @@ public class LicensesFragment extends Fragment {
 			"   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied." +
 			"   See the License for the specific language governing permissions and" +
 			"   limitations under the License." +
-			"</code></pre>",
-			"<pre><code>" +
+			"</code></pre>", 		"<pre><code>" +
 			"   Copyright 2012 Jake Wharton" +
 			"<br><br>" +
 			"   Licensed under the Apache License, Version 2.0 (the \"License\");" +
@@ -175,8 +162,7 @@ public class LicensesFragment extends Fragment {
 			"   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied." +
 			"   See the License for the specific language governing permissions and" +
 			"   limitations under the License." +
-			"</code></pre>",
-			"<pre><code>" +
+			"</code></pre>", 		"<pre><code>" +
 			"   The MIT License (MIT)" +
 			"<br><br>" +
 			"   Copyright (c) 2014 Oleksandr Melnykov" +
@@ -198,8 +184,7 @@ public class LicensesFragment extends Fragment {
 			"   LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM," +
 			"   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE" +
 			"   SOFTWARE." +
-			"  </code></pre>",
-			"<pre><code>" +
+			"  </code></pre>", 		"<pre><code>" +
 			"Copyright 2014 Ivan Navas" +
 			"<br><br>" +
 			"   Licensed under the Apache License, Version 2.0 (the \"License\");" +
@@ -213,8 +198,7 @@ public class LicensesFragment extends Fragment {
 			"   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied." +
 			"   See the License for the specific language governing permissions and" +
 			"   limitations under the License." +
-			"  </code></pre>",
-			"<pre><code>" +
+			"  </code></pre>", 		"<pre><code>" +
 			"   Copyright 2014 kolavar" +
 			"<br><br>" +
 			"   Licensed under the Apache License, Version 2.0 (the \"License\");" +
@@ -228,8 +212,7 @@ public class LicensesFragment extends Fragment {
 			"   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied." +
 			"   See the License for the specific language governing permissions and" +
 			"   limitations under the License." +
-			"  </code></pre>",
-			"<pre><code>" +
+			"  </code></pre>", 		"<pre><code>" +
 			"   Copyright 2014 Soichiro Kashima" +
 			"<br><br>" +
 			"   Licensed under the Apache License, Version 2.0 (the \"License\");" +

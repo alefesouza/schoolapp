@@ -64,12 +64,12 @@ import android.support.v4.widget.CursorAdapter;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.database.MatrixCursor;
 import android.provider.BaseColumns;
+import aloogle.rebuapp.activity.*;
 
 @SuppressLint("InflateParams")
 public class ReadingFragment extends Fragment implements AbsListView.OnScrollListener, SwipeRefreshLayout.OnRefreshListener {
 	Activity activity;
-	View view,
-	wnet;
+	View view, wnet;
 	ObservableListView list;
 	ArrayList <String> livrosarray = new ArrayList <String> ();
 	ArrayList <String> nomearray = new ArrayList <String> ();
@@ -77,7 +77,7 @@ public class ReadingFragment extends Fragment implements AbsListView.OnScrollLis
 	ArrayList <String> amostrasarray = new ArrayList <String> ();
 	String title, suggestion;
 	boolean alreadyLoaded;
-	ViewGroup header, space;
+	ViewGroup header, headerrecados, space;
 	boolean fromnonet;
 	ProgressBar progressBar;
 	ProgressBarCircularIndeterminate progressBarCompat;
@@ -112,8 +112,7 @@ public class ReadingFragment extends Fragment implements AbsListView.OnScrollLis
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-		Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, 	Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		view = inflater.inflate(R.layout.fragment_main, container, false);
 
@@ -122,7 +121,6 @@ public class ReadingFragment extends Fragment implements AbsListView.OnScrollLis
 		list = (ObservableListView)view.findViewById(R.id.list);
 
 		fromnonet = false;
-		alreadyLoaded = false;
 		relative = (RelativeLayout)view.findViewById(R.id.fragment);
 
 		if (Build.VERSION.SDK_INT > 10) {
@@ -147,15 +145,15 @@ public class ReadingFragment extends Fragment implements AbsListView.OnScrollLis
 				startActivity(intent);
 			}
 		});
+		headerrecados = (ViewGroup)inflatere.inflate(R.layout.header2, list, false);
 		space = (ViewGroup)inflatere.inflate(R.layout.space, list, false);
+		list.addHeaderView(headerrecados, null, false);
 		list.addHeaderView(header, null, false);
 		list.addFooterView(space, null, false);
 
 		mSwipeLayout = (SwipeRefreshLayout)view.findViewById(R.id.swipe_container);
 		mSwipeLayout.setOnRefreshListener(this);
-		mSwipeLayout.setColorSchemeResources(R.color.primary_color,
-			R.color.primary_color_dark, R.color.primary_color,
-			R.color.primary_color_dark);
+		mSwipeLayout.setColorSchemeResources(R.color.primary_color, 		R.color.primary_color_dark, R.color.primary_color, 		R.color.primary_color_dark);
 
 		if (Build.VERSION.SDK_INT >= 21) {
 			progressBar = (ProgressBar)view.findViewById(R.id.progressBar1);
@@ -186,12 +184,7 @@ public class ReadingFragment extends Fragment implements AbsListView.OnScrollLis
 			final int[]to = new int[]{
 				R.id.text1
 			};
-			mAdapter = new SimpleCursorAdapter(getActivity(),
-					R.layout.simple_list_item_1,
-					null,
-					from,
-					to,
-					CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
+			mAdapter = new SimpleCursorAdapter(getActivity(), 				R.layout.simple_list_item_1, 				null, 				from, 				to, 				CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
 		}
 
 		if (Other.isConnected(getActivity())) {
@@ -214,7 +207,7 @@ public class ReadingFragment extends Fragment implements AbsListView.OnScrollLis
 		return view;
 	}
 
-	private class JSONParse extends AsyncTask <String, String, JSONObject> {
+	private class JSONParse extends AsyncTask < String, String, JSONObject > {
 		@Override
 		protected void onPreExecute() {
 			new Handler().postDelayed(new Runnable() {
@@ -279,6 +272,26 @@ public class ReadingFragment extends Fragment implements AbsListView.OnScrollLis
 
 					TextView total = (TextView)header.findViewById(R.id.text);
 					total.setText(Html.fromHtml(json.getString("total")));
+
+					if (!json.getString("recadosbotao").equals("")) {
+						TextView recados = (TextView)headerrecados.findViewById(R.id.text);
+						recados.setText(Html.fromHtml(json.getString("recadosbotao")));
+						final String recadostitulo = json.getString("recadostitulo");
+						final String recadosurl = json.getString("recadosurl");
+						final String recadossettings = json.getString("recadossettings");
+						headerrecados.findViewById(R.id.header2).setOnClickListener(new View.OnClickListener() {
+							public void onClick(View v) {
+								Intent intent = new Intent(getActivity(), FragmentActivity.class);
+								intent.putExtra("fragment", 6);
+								intent.putExtra("titulo", recadostitulo);
+								intent.putExtra("url", recadosurl);
+								intent.putExtra("settings", recadossettings);
+								startActivity(intent);
+							}
+						});
+					} else {
+						list.removeHeaderView(headerrecados);
+					}
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
@@ -299,12 +312,17 @@ public class ReadingFragment extends Fragment implements AbsListView.OnScrollLis
 			@Override
 			public boolean onQueryTextSubmit(String s) {
 				try {
-					Intent intent = new Intent(getActivity(), ReadingActivity.class);
-					intent.putExtra("titulo", "Busca: " + s);
-					intent.putExtra("query", URLEncoder.encode(s, "UTF-8"));
-					startActivity(intent);
-					if (Build.VERSION.SDK_INT > 10) {
-						suggestionarray.clear();
+					if (Other.isConnected(getActivity())) {
+						Intent intent = new Intent(getActivity(), ReadingActivity.class);
+						intent.putExtra("titulo", "Busca: " + s);
+						intent.putExtra("query", URLEncoder.encode(s, "UTF-8"));
+						startActivity(intent);
+						if (Build.VERSION.SDK_INT > 10) {
+							suggestionarray.clear();
+						}
+					} else {
+						Toast toast = Toast.makeText(getActivity(), getString(R.string.needinternet), Toast.LENGTH_SHORT);
+						toast.show();
 					}
 				} catch (UnsupportedEncodingException e) {}
 				return false;
@@ -313,15 +331,17 @@ public class ReadingFragment extends Fragment implements AbsListView.OnScrollLis
 			@Override
 			public boolean onQueryTextChange(final String s) {
 				if (Build.VERSION.SDK_INT > 10) {
-					suggestion = s;
-					new Handler().postDelayed(new Runnable() {
-						@Override
-						public void run() {
-							if (s.equals(suggestion)) {
-								new JSONParseSearch().execute();
+					if (Other.isConnected(getActivity())) {
+						suggestion = s;
+						new Handler().postDelayed(new Runnable() {
+							@Override
+							public void run() {
+								if (s.equals(suggestion)) {
+									new JSONParseSearch().execute();
+								}
 							}
-						}
-					}, 1000);
+						}, 1000);
+					}
 				}
 				return false;
 			}
@@ -334,11 +354,16 @@ public class ReadingFragment extends Fragment implements AbsListView.OnScrollLis
 				@Override
 				public boolean onSuggestionClick(int position) {
 					try {
-						Intent intent = new Intent(getActivity(), ReadingActivity.class);
-						intent.putExtra("titulo", "Busca: " + suggestionarray.get(position));
-						intent.putExtra("query", URLEncoder.encode(suggestionarray.get(position), "UTF-8"));
-						startActivity(intent);
-						suggestionarray.clear();
+						if (Other.isConnected(getActivity())) {
+							Intent intent = new Intent(getActivity(), ReadingActivity.class);
+							intent.putExtra("titulo", "Busca: " + suggestionarray.get(position));
+							intent.putExtra("query", URLEncoder.encode(suggestionarray.get(position), "UTF-8"));
+							startActivity(intent);
+							suggestionarray.clear();
+						} else {
+							Toast toast = Toast.makeText(getActivity(), getString(R.string.needinternet), Toast.LENGTH_SHORT);
+							toast.show();
+						}
 					} catch (UnsupportedEncodingException e) {}
 					return true;
 				}
@@ -346,11 +371,16 @@ public class ReadingFragment extends Fragment implements AbsListView.OnScrollLis
 				@Override
 				public boolean onSuggestionSelect(int position) {
 					try {
-						Intent intent = new Intent(getActivity(), ReadingActivity.class);
-						intent.putExtra("titulo", "Busca: " + suggestionarray.get(position));
-						intent.putExtra("query", URLEncoder.encode(suggestionarray.get(position), "UTF-8"));
-						startActivity(intent);
-						suggestionarray.clear();
+						if (Other.isConnected(getActivity())) {
+							Intent intent = new Intent(getActivity(), ReadingActivity.class);
+							intent.putExtra("titulo", "Busca: " + suggestionarray.get(position));
+							intent.putExtra("query", URLEncoder.encode(suggestionarray.get(position), "UTF-8"));
+							startActivity(intent);
+							suggestionarray.clear();
+						} else {
+							Toast toast = Toast.makeText(getActivity(), getString(R.string.needinternet), Toast.LENGTH_SHORT);
+							toast.show();
+						}
 					} catch (UnsupportedEncodingException e) {}
 					return true;
 				}
@@ -384,8 +414,7 @@ public class ReadingFragment extends Fragment implements AbsListView.OnScrollLis
 	public void onScrollStateChanged(AbsListView view, int scrollState) {}
 
 	@Override
-	public void onScroll(AbsListView view, int firstVisibleItem,
-		int visibleItemCount, int totalItemCount) {
+	public void onScroll(AbsListView view, int firstVisibleItem, 	int visibleItemCount, int totalItemCount) {
 		if (list.getChildCount() > 0 && list.getChildAt(0).getTop() == 0 && list.getFirstVisiblePosition() == 0) {
 			mSwipeLayout.setEnabled(true);
 		} else {
@@ -413,7 +442,7 @@ public class ReadingFragment extends Fragment implements AbsListView.OnScrollLis
 		}
 	}
 
-	private class JSONParseSearch extends AsyncTask <String, String, JSONObject> {
+	private class JSONParseSearch extends AsyncTask < String, String, JSONObject > {
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
@@ -445,10 +474,14 @@ public class ReadingFragment extends Fragment implements AbsListView.OnScrollLis
 	}
 
 	private void populateAdapter() {
-		final MatrixCursor c = new MatrixCursor(new String[]{ BaseColumns._ID, "categoryName" });
+		final MatrixCursor c = new MatrixCursor(new String[]{
+				BaseColumns._ID, 			"categoryName"
+			});
 		for (int i = 0; i < suggestionarray.size(); i++) {
 			if (!suggestionarray.get(i).toString().equals("")) {
-				c.addRow(new Object[]{ i, suggestionarray.get(i).toString() });
+				c.addRow(new Object[]{
+					i, 				suggestionarray.get(i).toString()
+				});
 				mAdapter.changeCursor(c);
 			}
 		}

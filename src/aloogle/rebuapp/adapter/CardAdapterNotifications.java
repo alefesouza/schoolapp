@@ -75,12 +75,28 @@ public class CardAdapterNotifications extends BaseAdapter {
 
 		CustomTextView titulo = (CustomTextView)convertView.findViewById(R.id.titulo);
 		CustomTextView descricao = (CustomTextView)convertView.findViewById(R.id.descricao);
+		View sumarioline = convertView.findViewById(R.id.sumarioline);
 		CustomTextView sumario = (CustomTextView)convertView.findViewById(R.id.sumario);
 
-		titulo.setText(title.get(position));
-		descricao.setText(description.get(position));
-		sumario.setText(summary.get(position));
+		if(title.get(position).equals("")) {
+			titulo.setVisibility(View.GONE);
+		} else {
+			titulo.setText(title.get(position));
+		}
+	
+		if(description.get(position).equals("")) {
+			descricao.setVisibility(View.GONE);
+		} else {
+			descricao.setText(description.get(position));
+		}
 
+		if(description.get(position).equals("")) {
+			sumario.setVisibility(View.GONE);
+			sumarioline.setVisibility(View.GONE);
+		} else {
+			sumario.setText(summary.get(position));
+		}
+		
 		return convertView;
 	}
 }

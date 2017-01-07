@@ -78,7 +78,9 @@ import aloogle.rebuapp.fragment.*;
 import aloogle.rebuapp.lib.SlidingTabLayout;
 import aloogle.rebuapp.other.*;
 
-@SuppressLint({"DefaultLocale","CutPasteId","InflateParams"})
+@SuppressLint({
+	"DefaultLocale", "CutPasteId", "InflateParams"
+})
 @SuppressWarnings("deprecation")
 public class MainActivity extends ActionBarActivity implements ObservableScrollViewCallbacks {
 	final Context context = this;
@@ -88,7 +90,7 @@ public class MainActivity extends ActionBarActivity implements ObservableScrollV
 	private ActionBarDrawerToggle mDrawerToggle;
 	@SuppressWarnings("unused")
 	private CharSequence mDrawerTitle;
-	private ArrayList <Icons> icons;
+	private ArrayList < Icons > icons;
 	private DrawerAdapter adapter2;
 	private String[]categoryTitles;
 	private TypedArray categoryIcons;
@@ -102,7 +104,7 @@ public class MainActivity extends ActionBarActivity implements ObservableScrollV
 	private ViewPager mPager;
 	private int mSlop;
 	private boolean mScrolled, passed, start, panelw;
-	public static boolean home;
+	public static boolean home, isTouch;
 	private ScrollState mLastScrollState;
 
 	public static Menu optionsMenu;
@@ -207,11 +209,11 @@ public class MainActivity extends ActionBarActivity implements ObservableScrollV
 				pos = savedInstanceState.getInt("position");
 			}
 		}
-		
+
 		selectItem(pos);
 	}
 
-	public static void ActionBarColor(ActionBarActivity activity, String title) {
+	public static void ActionBarColor(final ActionBarActivity activity, String title) {
 		String userColor = Other.getColor(activity);
 		activity.getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#" + userColor)));
 		activity.findViewById(R.id.frame).setBackgroundDrawable(new ColorDrawable(Color.parseColor("#" + userColor)));
@@ -246,12 +248,9 @@ public class MainActivity extends ActionBarActivity implements ObservableScrollV
 		categoryIcons.recycle();
 
 		LayoutInflater inflater = getLayoutInflater();
-		final ViewGroup header = (ViewGroup)inflater.inflate(R.layout.header,
-			mDrawerList, false);
-		final ViewGroup footer = (ViewGroup)inflater.inflate(R.layout.footer,
-			mDrawerList, false);
-		final ViewGroup footer2 = (ViewGroup)inflater.inflate(R.layout.footer2,
-			mDrawerList, false);
+		final ViewGroup header = (ViewGroup)inflater.inflate(R.layout.header, 		mDrawerList, false);
+		final ViewGroup footer = (ViewGroup)inflater.inflate(R.layout.footer, 		mDrawerList, false);
+		final ViewGroup footer2 = (ViewGroup)inflater.inflate(R.layout.footer2, 		mDrawerList, false);
 
 		mDrawerList.addHeaderView(header, null, true);
 		mDrawerList.addFooterView(footer, null, true);
@@ -265,10 +264,7 @@ public class MainActivity extends ActionBarActivity implements ObservableScrollV
 		mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
 
 		mDrawerToggle = new ActionBarDrawerToggle(
-				this,
-				mDrawerLayout,
-				R.string.drawer_open,
-				R.string.drawer_close) {
+				this, 			mDrawerLayout, 			R.string.drawer_open, 			R.string.drawer_close) {
 
 			public void onDrawerClosed(View view) {
 				supportInvalidateOptionsMenu();
@@ -293,6 +289,8 @@ public class MainActivity extends ActionBarActivity implements ObservableScrollV
 				.setMessage(R.string.dialogversion)
 				.setPositiveButton("OK", null)
 				.create();
+
+			dialogversion.setCanceledOnTouchOutside(false);
 
 			dialogversion.setOnShowListener(new DialogInterface.OnShowListener() {
 				@Override
@@ -319,6 +317,8 @@ public class MainActivity extends ActionBarActivity implements ObservableScrollV
 				.setPositiveButton("OK", null)
 				.create();
 
+			dialogpanel.setCanceledOnTouchOutside(false);
+
 			dialogpanel.setOnShowListener(new
 				DialogInterface.OnShowListener() {
 				@Override
@@ -344,6 +344,8 @@ public class MainActivity extends ActionBarActivity implements ObservableScrollV
 				.setMessage(R.string.dialogcard)
 				.setPositiveButton("OK", null)
 				.create();
+
+			dialogcard.setCanceledOnTouchOutside(false);
 
 			dialogcard.setOnShowListener(new
 				DialogInterface.OnShowListener() {
@@ -379,7 +381,7 @@ public class MainActivity extends ActionBarActivity implements ObservableScrollV
 
 	private class DrawerItemClickListener implements ListView.OnItemClickListener {
 		@Override
-		public void onItemClick(AdapterView <?> parent, View view, int position, long id) {
+		public void onItemClick(AdapterView <  ?  > parent, View view, int position, long id) {
 			int posi;
 			if (position == 0) {
 				posi = 1;
@@ -470,32 +472,38 @@ public class MainActivity extends ActionBarActivity implements ObservableScrollV
 			ChangeFragment("Biblioteca", new ReadingFragment());
 			break;
 		case 8:
+			ChangeFragment("Dicionário", new DictionaryFragment());
+			break;
+		case 9:
+			ChangeFragment("Cartazes", new CartazFragment());
+			break;
+		case 10:
 			Intent blog = new Intent(MainActivity.this, FragmentActivity.class);
 			blog.putExtra("fragment", 2);
 			blog.putExtra("titulo", "Blog");
 			blog.putExtra("url", "http://willianrrebua.blogspot.com");
 			startActivity(blog);
 			break;
-		case 9:
+		case 11:
 			Intent jornal = new Intent(MainActivity.this, FragmentActivity.class);
 			jornal.putExtra("fragment", 2);
 			jornal.putExtra("titulo", "Jornal");
 			jornal.putExtra("url", "http://facebook.com/REVOLUCIONARIOSREBUA");
 			startActivity(jornal);
 			break;
-		case 10:
+		case 12:
 			Intent settings = new Intent(MainActivity.this, FragmentActivity.class);
 			settings.putExtra("fragment", 0);
 			startActivity(settings);
 			break;
-		case 11:
+		case 13:
 			Intent about = new Intent(MainActivity.this, FragmentActivity.class);
 			about.putExtra("fragment", 1);
 			startActivity(about);
 			break;
 		}
 
-		if (position < 8) {
+		if (position < 10) {
 			pos = position;
 			mDrawerList.setItemChecked(position, true);
 		} else {
@@ -730,14 +738,13 @@ public class MainActivity extends ActionBarActivity implements ObservableScrollV
 	}
 
 	/**
-	*This adapter provides two types of fragments as an example.
-	*{@linkplain #createItem(int)} should be modified if you use this example for your app.
+	 *This adapter provides two types of fragments as an example.
+	 *{@linkplain #createItem(int)} should be modified if you use this example for your app.
 	 */
 	private static class SalaAdapter extends CacheFragmentStatePagerAdapter {
 
 		private static final String[]TITLES = new String[]{
-			"Agenda",
-			"Horário"
+			"Agenda", 		"Horário"
 		};
 
 		public SalaAdapter(FragmentManager fm) {
@@ -794,6 +801,22 @@ public class MainActivity extends ActionBarActivity implements ObservableScrollV
 			}
 		}
 		return super.onKeyDown(keyCode, event);
+	}
+
+	@Override
+	public boolean dispatchTouchEvent(MotionEvent event) {
+		switch (event.getAction()) {
+		case MotionEvent.ACTION_DOWN:
+			isTouch = true;
+			break;
+		case MotionEvent.ACTION_MOVE:
+			isTouch = true;
+			break;
+		case MotionEvent.ACTION_UP:
+			isTouch = false;
+			break;
+		}
+		return super.dispatchTouchEvent(event);
 	}
 
 	public void onSaveInstanceState(Bundle savedInstanceState) {

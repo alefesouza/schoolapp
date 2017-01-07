@@ -78,8 +78,7 @@ public class ReadingFragment2 extends Fragment implements AbsListView.OnScrollLi
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-		Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, 	Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		view = inflater.inflate(R.layout.fragment_reading, container, false);
 
@@ -141,9 +140,7 @@ public class ReadingFragment2 extends Fragment implements AbsListView.OnScrollLi
 
 		mSwipeLayout = (SwipeRefreshLayout)view.findViewById(R.id.swipe_container);
 		mSwipeLayout.setOnRefreshListener(this);
-		mSwipeLayout.setColorSchemeResources(R.color.primary_color,
-			R.color.primary_color_dark, R.color.primary_color,
-			R.color.primary_color_dark);
+		mSwipeLayout.setColorSchemeResources(R.color.primary_color, 		R.color.primary_color_dark, R.color.primary_color, 		R.color.primary_color_dark);
 
 		if (Other.isConnected(getActivity())) {
 			new JSONParse().execute();
@@ -152,7 +149,7 @@ public class ReadingFragment2 extends Fragment implements AbsListView.OnScrollLi
 		return view;
 	}
 
-	private class JSONParse extends AsyncTask <String, String, JSONObject> {
+	private class JSONParse extends AsyncTask < String, String, JSONObject > {
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
