@@ -1,46 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (C) 2015 Alefe Souza <contato@alefesouza.com/>
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="aloogle.rebuapp"
-    android:versionCode="6"
-    android:versionName="1.5" >
-
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    android:versionCode="8"
+    android:versionName="2.0.1">
 
     <uses-sdk
-        android:minSdkVersion="7"
-        android:targetSdkVersion="19"
-        android:maxSdkVersion="19" />
+        android:minSdkVersion="10"
+        android:targetSdkVersion="19" />
+
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+	<uses-permission android:name="android.permission.VIBRATE" />
+	<uses-permission android:name="android.permission.WAKE_LOCK" />
+	<uses-permission android:name="android.permission.GET_ACCOUNTS" />
+	<uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+	<uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+
+	<permission android:name="aloogle.rebuapp.permission.C2D_MESSAGE"
+		android:protectionLevel="signature" />
+	<uses-permission android:name="aloogle.rebuapp.permission.C2D_MESSAGE" />
 
     <application
+        android:name=".Application"
+        android:allowBackup="true"
+		android:hardwareAccelerated="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:allowBackup="true"
-		android:theme="@style/AppTheme">
+        android:theme="@style/RebuApp.Theme">
+		<meta-data android:name="com.google.android.gms.version"
+               android:value="@integer/google_play_services_version"/>
         <activity
-            android:label="@string/app_name"
             android:name=".activity.SplashScreen"
-            android:configChanges="orientation|screenSize"
-			android:theme="@android:style/Theme.Light.NoTitleBar">
-            <intent-filter >
+            android:label="@string/app_name" >
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".activity.MainActivity"
+            android:windowSoftInputMode="adjustPan" />
 		
-        <activity android:name=".activity.MainActivity" />
+        <activity
+            android:name=".activity.ReadingActivity" />
 			
-        <activity android:name=".activity.Settings" />
-			
-        <activity android:name=".activity.WebViewActivity"
-            android:configChanges="orientation|screenSize" />
-		
-        <activity android:name=".activity.v14.MainActivity" />
-			
-        <activity android:name=".activity.v14.WebViewActivity"
-            android:configChanges="orientation|screenSize" />
+		<activity
+			android:label="@string/settings"
+			android:name=".activity.FragmentActivity"
+            android:configChanges="orientation|screenSize">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="android.intent.category.NOTIFICATION_PREFERENCES" />
+			</intent-filter>
+		</activity>
+
+   <service android:name="com.parse.PushService" />
+		<receiver android:name="com.parse.ParseBroadcastReceiver">
+			<intent-filter>
+				<action android:name="android.intent.action.BOOT_COMPLETED" />
+				<action android:name="android.intent.action.USER_PRESENT" />
+			</intent-filter>
+		</receiver>
+		<receiver android:name="aloogle.rebuapp.receiver.NotificationReceiver" >
+			<intent-filter>
+				<action android:name="android.intent.action.BOOT_COMPLETED" />
+				<action android:name="android.intent.action.USER_PRESENT" />
+				<action android:name="aloogle.rebuapp.UPDATE_STATUS" />
+			</intent-filter>
+		</receiver>
+		<receiver android:name="com.parse.GcmBroadcastReceiver"
+			android:permission="com.google.android.c2dm.permission.SEND">
+			<intent-filter>
+				<action android:name="com.google.android.c2dm.intent.RECEIVE" />
+				<action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+
+				<category android:name="aloogle.rebuapp" />
+			</intent-filter>
+		</receiver>
+		<receiver android:name=".receiver.CancelReceiver" android:exported="false">
+			<intent-filter>
+				<action android:name="notification_cancelled"/>
+			</intent-filter>
+		</receiver>
     </application>
 
 </manifest>

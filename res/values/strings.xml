@@ -1,39 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (C) 2015 Alefe Souza <contato@alefesouza.com>
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
 <resources>
     <string name="app_name">RebuApp</string>
     
-    <string name="schedules">Horários</string>
-    <string name="calendar">Agenda</string>
-    <string name="annotations">Anotações</string>
-    <string name="announcements">Comunicados</string>
     <string name="panel">Painel</string>
-    <string name="messages">Ver recados</string>
-    <string name="clubeaddnew">Adicionar novo clube</string>
     <string name="needinternet">Você precisa estar conectado à internet</string>
     <string name="needinternetft">Você precisa estar conectado à internet na primeira vez</string>
     <string name="erroroccured">Ops, houve um erro!</string>
 
-    <string name="readingroom">Sala de leitura</string>
+    <string name="msemana">Mostrar semana</string>
+    <string name="mdia">Mostrar dia,</string>
+
+    <string name="refresh">Atualizar</string>
+    <string name="solicitation">Solicitar edição</string>
+
+    <string name="dialogcard">Olá! Toque em um card para abri-lo em tela cheia, onde você pode copiar, pesquisar e compartilhar seu texto. Em algumas salas ao tocar no nome abre o grupo da mesma no Facebook.</string>
+    <string name="dialogreading">Toque em um card para pesquisar o livro no Google, onde você pode ver informações como capa e resenhas.</string>
+    <string name="dialogpanel">Para acessar o painel, toque no botão circular com um lápis dentro, nele usando sua conta você pode adicionar eventos e enviar notificações para a sala/clube/eletiva que você administra.</string>
+    <string name="dialogversion">Sua versão do Android é muito antiga, você pode usar o aplicativo normalmente, mas não há garantia de que ele funcione como nas versões mais novas.</string>
+    <string name="dialogsolicitation">Você pode pedir uma conta para o Ediney na sala da coordenação, após isso vá nas configurações e marque \"Habilitar painel\".</string>
+	
     <string name="settings">Configurações</string>
     <string name="shareapp">Compartilhar app</string>
-    <string name="sharecontent">Baixe o aplicativo do Rebuá com horário e agenda de todas as salas!! http://bit.ly/rebuapp</string>
+    <string name="sharecontent">Veja o aplicativo do Rebuá com horário, agenda de todas as salas e muito mais!! http://rebuapp.tk</string>
     <string name="about">Sobre</string>
+    <string name="search">Pesquisar livros</string>
+    <string name="nomore">Não há mais resultados</string>
+    <string name="loadmore">Carregar mais</string>
+    <string name="sourcecodelicenses">Licenças de código aberto</string>
     <string name="back">Voltar</string>
     <string name="forward">Avançar</string>
-    <string name="nopages">Nenhuma página</string>
     <string name="home">Início</string>
-    <string name="refresh">Atualizar</string>
+    <string name="reload">Recarregar</string>
+    <string name="cache">Limpar cache</string>
+    <string name="cache2">Cache limpo!</string>
 
     <string name="pref_classroom">Escolher sala</string>
     <string name="pref_classroom_summary">Toque aqui para escolher sua sala</string>
     <string name="pref_cluberoom">Escolher clube</string>
-    <string name="pref_cluberoom_summary">Toque aqui para escolher seu clube, apenas clubes com interesse em participar do aplicativo aparecerão aqui</string>
+    <string name="pref_cluberoom_summary">Toque aqui para escolher seu clube</string>
     <string name="pref_eletivaroom">Escolher eletiva</string>
     <string name="pref_eletivaroom_summary">Toque aqui para escolher sua eletiva</string>
-    <string name="pref_representant">Habilitar painel</string>
-    <string name="pref_representant_summary">Ative essa opção caso você tenha uma conta no aplicativo</string>
+    <string name="pref_haveaccount">Habilitar painel</string>
+    <string name="pref_haveaccount_summary">Ative essa opção caso você tenha uma conta no aplicativo</string>
+    <string name="pref_respon">Sou responsável</string>
+    <string name="pref_respon_summary">Ative essa opção para receber notificações direcionadas aos responsáveis dos alunos</string>
     <string name="pref_app_color">Cor do aplicativo</string>
     <string name="pref_app_color_summary">Toque aqui para escolher a cor do aplicativo</string>
     <string name="pref_ok">OK</string>
-    <string name="pref_ok_summary">Salvar alterações</string>
+    <string name="pref_ok_summary">Fechar janela</string>
+
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
 </resources>

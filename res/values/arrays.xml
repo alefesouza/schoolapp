@@ -1,13 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (C) 2015 Alefe Souza <contato@alefesouza.com>
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
 <resources>
-<string-array name="classRooms">
+
+    <string-array name="navigation_main_sections">
+        <item>Sala</item>
+        <item>Clube</item>
+        <item>Eletiva</item>
+        <item>Comunicados</item>
+        <item>Anotações</item>
+        <item>Notificações</item>
+        <item>Biblioteca</item>
+        <item>Blog</item>
+        <item>Jornal</item>
+    </string-array>
+
+    <array name="drawable_ids">
+        <item>@drawable/ic_sala</item>
+        <item>@drawable/ic_clube</item>
+        <item>@drawable/ic_eletiva</item>
+        <item>@drawable/ic_comunicados</item>
+        <item>@drawable/ic_anotacoes</item>
+        <item>@drawable/ic_notificacoes</item>
+        <item>@drawable/ic_biblioteca</item>
+        <item>@drawable/ic_jornal</item>
+        <item>@drawable/ic_jornal</item>
+    </array>
+	
+	<string-array name="classRooms">
         <item name="1a">1°A</item>
         <item name="1b">1°B</item>
         <item name="1c">1°C</item>
-        <item name="1d">1°D</item>
         <item name="2a">2°A</item>
         <item name="2b">2°B</item>
         <item name="2c">2°C</item>
+        <item name="2d">2°D</item>
         <item name="3a">3°A</item>
         <item name="3b">3°B</item>
         <item name="3c">3°C</item>
@@ -17,33 +57,54 @@
         <item name="1a">1a</item>
         <item name="1b">1b</item>
         <item name="1c">1c</item>
-        <item name="1d">1d</item>
         <item name="2a">2a</item>
         <item name="2b">2b</item>
         <item name="2c">2c</item>
+        <item name="2d">2d</item>
         <item name="3a">3a</item>
         <item name="3b">3b</item>
         <item name="3c">3c</item>
     </string-array>
-
-<string-array name="clubeRooms">
-        <item name="jogos">Jogos</item>
-        <item name="disable">Nenhum desses</item>
-        <item name="addnew">Adicionar novo</item>
+	
+	<string-array name="clubeRooms">
+        <item name="clubeacademia">Academia</item>
+        <item name="clubeartesanatohippie">Artesanato Hippie</item>
+        <item name="clubeboxe">Boxe</item>
+        <item name="clubedanca">Dança</item>
+        <item name="clubeestetica">Estética</item>
+        <item name="clubefotografia">Fotografia</item>
+        <item name="clubefutsal">Futsal</item>
+        <item name="clubejornal">Jornal</item>
+        <item name="clubemusica">Música</item>
+        <item name="clubeorganizacaofestas">Organização de Festas</item>
+        <item name="clubeorigame">Origame</item>
+        <item name="clubesaber">Saber</item>
+        <item name="clubeteatro">Teatro</item>
+        <item name="clubevolei">Vôlei</item>
     </string-array>
 
 	<string-array name="clubeRoomsValues">
-        <item name="jogos">jogos</item>
-        <item name="disable">disable</item>
-        <item name="addnew">addnew</item>
+        <item name="clubeacademia">clubeacademia</item>
+        <item name="clubeartesanatohippe">clubeartesanatohippe</item>
+        <item name="clubeboxe">clubeboxe</item>
+        <item name="clubedanca">clubedanca</item>
+        <item name="clubeestetica">clubeestetica</item>
+        <item name="clubefotografia">clubefotografia</item>
+        <item name="clubefutsal">clubefutsal</item>
+        <item name="clubejornal">clubejornal</item>
+        <item name="clubemusica">clubemusica</item>
+        <item name="clubeorganizacaofestas">clubeorganizacaofestas</item>
+        <item name="clubeorigame">clubeorigame</item>
+        <item name="clubesaber">clubesaber</item>
+        <item name="clubeteatro">clubeteatro</item>
+        <item name="clubevolei">clubevolei</item>
     </string-array>
-
-<string-array name="eletivaRooms">
-        <item name="anatomia">Anatomia</item>
-        <item name="comunicacao">Comunicação</item>
+	
+	<string-array name="eletivaRooms">
+        <item name="comunicacao">Comunicação Social</item>
         <item name="engenharia">Engenharia</item>
-        <item name="handbol">Handbol</item>
-        <item name="jornalismo">Jornalismo</item>
+        <item name="fisiologia">Fisiologia</item>
+        <item name="futsalfeminino">Futsal Feminino</item>
         <item name="legislacao">Legislação</item>
         <item name="medicina">Medicina</item>
         <item name="quimica">Química</item>
@@ -51,18 +112,17 @@
     </string-array>
 
 	<string-array name="eletivaRoomsValues">
-        <item name="anatomia">anatomia</item>
-        <item name="comunicacao">comunicacao</item>
-        <item name="engenharia">engenharia</item>
-        <item name="handbol">handbol</item>
-        <item name="jornalismo">jornalismo</item>
-        <item name="legislacao">legislacao</item>
-        <item name="medicina">medicina</item>
-        <item name="quimica">quimica</item>
-        <item name="teatro">teatro</item>
+        <item name="comunicacao">eletivacomunicacaosocial</item>
+        <item name="engenharia">eletivaengenharia</item>
+        <item name="fisiologia">eletivafisiologia</item>
+        <item name="futsalfeminino">eletivafutsalfeminino</item>
+        <item name="legislacao">eletivalegislacao</item>
+        <item name="medicina">eletivamedicina</item>
+        <item name="quimica">eletivaquimica</item>
+        <item name="teatro">eletivateatro</item>
     </string-array>
-
-<string-array name="appColors">
+	
+	<string-array name="appColors">
         <item name="green1">Verde 1</item>
         <item name="green2">Verde 2</item>
         <item name="green3">Verde 3</item>
@@ -72,11 +132,26 @@
     </string-array>
 
 	<string-array name="appColorsValues">
-        <item name="green1">green1</item>
-        <item name="green2">green2</item>
-        <item name="green3">green3</item>
-        <item name="blue1">blue1</item>
-        <item name="blue2">blue2</item>
-        <item name="blue3">blue3</item>
+        <item name="green1">005400</item>
+        <item name="green2">008002</item>
+        <item name="green3">00cc00</item>
+        <item name="blue1">003061</item>
+        <item name="blue2">0a4e91</item>
+        <item name="blue3">0000cc</item>
+    </string-array>
+	
+	<string-array name="horarios">
+        <item>07:30</item>
+        <item>08:20</item>
+        <item>09:10</item>
+        <item>09:25</item>
+        <item>10:15</item>
+        <item>11:05</item>
+        <item>11:55</item>
+        <item>12:55</item>
+        <item>13:45</item>
+        <item>14:35</item>
+        <item>14:50</item>
+        <item>15:40</item>
     </string-array>
 </resources>

@@ -1,324 +1,307 @@
+/*
+ * Copyright (C) 2015 Alefe Souza <contato@alefesouza.com>
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+ 
 package aloogle.rebuapp.other;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
-import android.os.Build;
 import android.preference.PreferenceManager;
-import android.support.v7.app.ActionBarActivity;
-import android.text.Html;
-import android.view.View;
-import android.widget.TextView;
-import android.widget.Toast;
-import aloogle.rebuapp.R;
+import java.util.Calendar;
+import java.util.Date;
 
 @SuppressLint("NewApi")
 public class Other {
-	public static final String WebViewValue = "WEB_VIEW_VALUE";
 
-	public static void setText(Activity activity, View view, int value) {
-		if (value == 0) {
-			TextView classRoom = (TextView)view.findViewById(R.id.classroom);
-			SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(activity);
-			String prefClassRoom = preferences.getString("classRoom", "none");
-			if (prefClassRoom.equals("none")) {
-				classRoom.setText("Escolha sua sala");
-			} else if (prefClassRoom.equals("1a")) {
-				classRoom.setText("1°A");
-			} else if (prefClassRoom.equals("1b")) {
-				classRoom.setText("1°B");
-			} else if (prefClassRoom.equals("1c")) {
-				classRoom.setText("1°C");
-			} else if (prefClassRoom.equals("1d")) {
-				classRoom.setText("1°D");
-			} else if (prefClassRoom.equals("2a")) {
-				classRoom.setText("2°A");
-			} else if (prefClassRoom.equals("2b")) {
-				classRoom.setText("2°B");
-			} else if (prefClassRoom.equals("2c")) {
-				classRoom.setText("2°C");
-			} else if (prefClassRoom.equals("3a")) {
-				classRoom.setText("3°A");
-			} else if (prefClassRoom.equals("3b")) {
-				classRoom.setText("3°B");
-			} else if (prefClassRoom.equals("3c")) {
-				classRoom.setText("3°C");
-			}
-			Visible(activity, view, 0);
-			boolean classrepresentant = preferences.getBoolean("classRepresentant", false);
-			if (classrepresentant) {
-				view.findViewById(R.id.panel).setVisibility(View.VISIBLE);
-			} else {
-				view.findViewById(R.id.panel).setVisibility(View.GONE);
-			}
-		} else if (value == 1) {
-			TextView clubeRoom = (TextView)view.findViewById(R.id.cluberoom);
-			SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(activity);
-			String prefClubeRoom = preferences.getString("clubeRoom", "none");
-			if (prefClubeRoom.equals("none")) {
-				clubeRoom.setText("Escolha seu clube");
-			} else if (prefClubeRoom.equals("jogos")) {
-				clubeRoom.setText("Jogos");
-			} else if (prefClubeRoom.equals("addnew")) {
-				clubeRoom.setText("Adicionar novo");
-			}
-			Visible(activity, view, 1);
-		} else if (value == 2) {
-			TextView eletivaRoom = (TextView)view.findViewById(R.id.eletivaroom);
-			SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(activity);
-			String prefEletivaRoom = preferences.getString("eletivaRoom", "none");
-			if (prefEletivaRoom.equals("none")) {
-				eletivaRoom.setText("Escolha sua eletiva");
-			} else if (prefEletivaRoom.equals("anatomia")) {
-				eletivaRoom.setText("Anatomia");
-			} else if (prefEletivaRoom.equals("comunicacao")) {
-				eletivaRoom.setText("Comunicação");
-			} else if (prefEletivaRoom.equals("engenharia")) {
-				eletivaRoom.setText("Engenharia");
-			} else if (prefEletivaRoom.equals("handbol")) {
-				eletivaRoom.setText("Handbol");
-			} else if (prefEletivaRoom.equals("medicina")) {
-				eletivaRoom.setText("Medicina");
-			} else if (prefEletivaRoom.equals("jornalismo")) {
-				eletivaRoom.setText("Jornalismo");
-			} else if (prefEletivaRoom.equals("legislacao")) {
-				eletivaRoom.setText("Legislação");
-			} else if (prefEletivaRoom.equals("teatro")) {
-				eletivaRoom.setText("Teatro");
-			}
-			Visible(activity, view, 2);
-		}
-	}
-
-	public static void Visible(Activity activity, View view, int value) {
+	public static String getSala(Activity activity) {
+		String sala = null;
 		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(activity);
-		if (value == 0) {
-			String prefClassRoom = preferences.getString("classRoom", "none");
-			if (prefClassRoom.equals("none")) {
-				view.findViewById(R.id.schedules).setVisibility(View.GONE);
-				view.findViewById(R.id.calendar).setVisibility(View.GONE);
-				view.findViewById(R.id.panel).setVisibility(View.GONE);
-			} else {
-				view.findViewById(R.id.schedules).setVisibility(View.VISIBLE);
-				view.findViewById(R.id.calendar).setVisibility(View.VISIBLE);
-				view.findViewById(R.id.panel).setVisibility(View.VISIBLE);
-			}
-		} else if (value == 1) {
-			String prefClubeRoom = preferences.getString("clubeRoom", "none");
-			if (prefClubeRoom.equals("none")) {
-				view.findViewById(R.id.clubemessages).setVisibility(View.GONE);
-				view.findViewById(R.id.clubeaddnew).setVisibility(View.GONE);
-			} else if (prefClubeRoom.equals("disable")) {
-				view.findViewById(R.id.cluberoom).setVisibility(View.GONE);
-				view.findViewById(R.id.clubemessages).setVisibility(View.GONE);
-				view.findViewById(R.id.clubeaddnew).setVisibility(View.GONE);
-			} else if (prefClubeRoom.equals("addnew")) {
-				view.findViewById(R.id.clubeaddnew).setVisibility(View.VISIBLE);
-				view.findViewById(R.id.cluberoom).setVisibility(View.GONE);
-				view.findViewById(R.id.clubemessages).setVisibility(View.GONE);
-			} else {
-				view.findViewById(R.id.cluberoom).setVisibility(View.VISIBLE);
-				view.findViewById(R.id.clubemessages).setVisibility(View.VISIBLE);
-				view.findViewById(R.id.clubeaddnew).setVisibility(View.GONE);
-			}
-		} else if (value == 2) {
-			String prefEletivaRoom = preferences.getString("eletivaRoom", "none");
-			if (prefEletivaRoom.equals("none")) {
-				view.findViewById(R.id.eletivamessages).setVisibility(View.GONE);
-			} else {
-				view.findViewById(R.id.eletivamessages).setVisibility(View.VISIBLE);
-			}
+		String prefClassRoom = preferences.getString("classRoom", "none");
+		switch (prefClassRoom) {
+		case "none":
+			sala = "Escolha sua sala";
+			break;
+		case "1a":
+			sala = "1°A";
+			break;
+		case "1b":
+			sala = "1°B";
+			break;
+		case "1c":
+			sala = "1°C";
+			break;
+		case "2a":
+			sala = "2°A";
+			break;
+		case "2b":
+			sala = "2°B";
+			break;
+		case "2c":
+			sala = "2°C";
+			break;
+		case "2d":
+			sala = "2°D";
+			break;
+		case "3a":
+			sala = "3°A";
+			break;
+		case "3b":
+			sala = "3°B";
+			break;
+		case "3c":
+			sala = "3°C";
+			break;
 		}
+		return sala;
 	}
 
-	public static void setClick(final Activity activity, View view, int value) {
+	public static String getClube(Activity activity) {
+		String clube = null;
 		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(activity);
-		if (value == 0) {
-			final String classRoom = preferences.getString("classRoom", "none");
-			view.findViewById(R.id.schedules).setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					Other.Click(activity, "schedulesCache" + classRoom, 1, 0);
-				}
-			});
+		String prefClubeRoom = preferences.getString("clubeRoom", "none");
+		switch (prefClubeRoom) {
+		case "none":
+			clube = "Escolha seu clube";
+			break;
+		case "clubeacademia":
+			clube = "Acadêmia";
+			break;
+		case "clubeartesanatohippie":
+			clube = "Artesanato Hippie";
+			break;
+		case "clubeboxe":
+			clube = "Boxe";
+			break;
+		case "clubedanca":
+			clube = "Dança";
+			break;
+		case "clubeestetica":
+			clube = "Estética";
+			break;
+		case "clubefotografia":
+			clube = "Fotografia";
+			break;
+		case "clubefutsal":
+			clube = "Futsal";
+			break;
+		case "clubejornal":
+			clube = "Jornal";
+			break;
+		case "clubemusica":
+			clube = "Música";
+			break;
+		case "clubeorganizacaofestas":
+			clube = "Organização de Festas";
+			break;
+		case "clubeorigame":
+			clube = "Origame";
+			break;
+		case "clubesaber":
+			clube = "Saber";
+			break;
+		case "clubeteatro":
+			clube = "Teatro";
+			break;
+		case "clubevolei":
+			clube = "Vôlei";
+			break;
+		}
+		return clube;
+	}
 
-			view.findViewById(R.id.calendar).setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					Other.Click(activity, "calendarCache" + classRoom, 1, 1);
-				}
-			});
+	public static String getEletiva(Activity activity) {
+		String eletiva = null;
+		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(activity);
+		String prefEletivaRoom = preferences.getString("eletivaRoom", "none");
+		switch (prefEletivaRoom) {
+		case "none":
+			eletiva = "Escolha sua eletiva";
+			break;
+		case "eletivacomunicacaosocial":
+			eletiva = "Comunicação Social";
+			break;
+		case "eletivaengenharia":
+			eletiva = "Engenharia";
+			break;
+		case "eletivafisiologia":
+			eletiva = "Fisiologia";
+			break;
+		case "eletivafutsalfeminino":
+			eletiva = "Futsal Feminino";
+			break;
+		case "eletivalegislacao":
+			eletiva = "Legislação";
+			break;
+		case "eletivamedicina":
+			eletiva = "Medicina";
+			break;
+		case "eletivaquimica":
+			eletiva = "Química";
+			break;
+		case "eletivateatro":
+			eletiva = "Teatro";
+			break;
+		}
+		return eletiva;
+	}
 
-			view.findViewById(R.id.panel).setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					Other.Click(activity, "", 0, 2);
-				}
-			});
+	public static String getWeekDay(boolean isvalue) {
+		String weekday = null;
+		String value = null;
 
-			view.findViewById(R.id.announcements).setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					Other.Click(activity, "announcementsCache", 1, 3);
-				}
-			});
-			view.findViewById(R.id.annotations).setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					Other.Click(activity, "", 2, 4);
-				}
-			});
-		} else if (value == 1) {
-			final String clubeRoom = preferences.getString("clubeRoom", "none");
-			view.findViewById(R.id.clubemessages).setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					Other.Click(activity, "messagesCacheClube" + clubeRoom, 1, 10);
-				}
-			});
-
-			view.findViewById(R.id.clubeannouncements).setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					Other.Click(activity, "announcementsCacheClube", 1, 11);
-				}
-			});
-
-			view.findViewById(R.id.clubeaddnew).setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					Other.Click(activity, "", 0, 12);
-				}
-			});
-		} else if (value == 2) {
-			final String eletivaRoom = preferences.getString("eletivaRoom", "none");
-			view.findViewById(R.id.eletivamessages).setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					Other.Click(activity, "messagesCacheEletiva" + eletivaRoom, 1, 20);
-				}
-			});
-
-			view.findViewById(R.id.eletivaannouncements).setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					Other.Click(activity, "announcementsCacheEletiva", 1, 21);
-				}
-			});
+		Calendar calendar = Calendar.getInstance();
+		int day = calendar.get(Calendar.DAY_OF_WEEK);
+		switch (day) {
+		case Calendar.SUNDAY:
+			weekday = "Domingo";
+			value = "domingo";
+			break;
+		case Calendar.MONDAY:
+			weekday = "Segunda";
+			value = "segunda";
+			break;
+		case Calendar.TUESDAY:
+			weekday = "Terça";
+			value = "terca";
+			break;
+		case Calendar.WEDNESDAY:
+			weekday = "Quarta";
+			value = "quarta";
+			break;
+		case Calendar.THURSDAY:
+			weekday = "Quinta";
+			value = "quinta";
+			break;
+		case Calendar.FRIDAY:
+			weekday = "Sexta";
+			value = "sexta";
+			break;
+		case Calendar.SATURDAY:
+			weekday = "Sábado";
+			value = "sabado";
+			break;
+		}
+		if (isvalue) {
+			return value;
+		} else {
+			return weekday;
 		}
 	}
 
-	public static void Click(Activity activity, String cache, int iscache, int value) {
-		ConnectivityManager cm = (ConnectivityManager)activity.getSystemService(Activity.CONNECTIVITY_SERVICE);
-		if (iscache == 0) {
-			if (cm != null && cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnected()) {
-				if (Build.VERSION.SDK_INT < 14) {
-					Intent intent = new Intent(activity, aloogle.rebuapp.activity.WebViewActivity.class);
-					intent.putExtra(Other.WebViewValue, value);
-					activity.startActivity(intent);
-				} else {
-					Intent intent = new Intent(activity, aloogle.rebuapp.activity.v14.WebViewActivity.class);
-					intent.putExtra(Other.WebViewValue, value);
-					activity.startActivity(intent);
-				}
+	public static String getColor(Activity activity) {
+		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(activity);
+		String userColor = preferences.getString("prefColor", "005400");
+		return userColor;
+	}
+
+	public static String getColor2(Activity activity, int qual) {
+		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(activity);
+		String userColor = preferences.getString("prefColor", "005400");
+		if (userColor.matches("005400|008002|00cc00")) {
+			if (qual == 0) {
+				return "008002";
 			} else {
-				Toast toast = Toast.makeText(activity, activity.getString(R.string.needinternet), Toast.LENGTH_LONG);
-				toast.show();
-			}
-		} else if (iscache == 1) {
-			final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(activity);
-			if (cm != null && cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnected()) {
-				if (Build.VERSION.SDK_INT < 14) {
-					Intent intent = new Intent(activity, aloogle.rebuapp.activity.WebViewActivity.class);
-					intent.putExtra(Other.WebViewValue, value);
-					activity.startActivity(intent);
-				} else {
-					Intent intent = new Intent(activity, aloogle.rebuapp.activity.v14.WebViewActivity.class);
-					intent.putExtra(Other.WebViewValue, value);
-					activity.startActivity(intent);
-				}
-			} else {
-				boolean pageCache = preferences.getBoolean(cache, false);
-				if (pageCache) {
-					if (Build.VERSION.SDK_INT < 14) {
-						Intent intent = new Intent(activity, aloogle.rebuapp.activity.WebViewActivity.class);
-						intent.putExtra(Other.WebViewValue, value);
-						activity.startActivity(intent);
-					} else {
-						Intent intent = new Intent(activity, aloogle.rebuapp.activity.v14.WebViewActivity.class);
-						intent.putExtra(Other.WebViewValue, value);
-						activity.startActivity(intent);
-					}
-				} else {
-					Toast toast = Toast.makeText(activity, activity.getString(R.string.needinternetft), Toast.LENGTH_LONG);
-					toast.show();
-				}
+				return "005400";
 			}
 		} else {
-			if (Build.VERSION.SDK_INT < 14) {
-				Intent intent = new Intent(activity, aloogle.rebuapp.activity.WebViewActivity.class);
-				intent.putExtra(Other.WebViewValue, value);
-				activity.startActivity(intent);
+			if (qual == 0) {
+				return "0a4e91";
 			} else {
-				Intent intent = new Intent(activity, aloogle.rebuapp.activity.v14.WebViewActivity.class);
-				intent.putExtra(Other.WebViewValue, value);
-				activity.startActivity(intent);
+				return "003061";
 			}
 		}
 	}
 
-	public static void ActionBarColor(Activity activity, String title) {
-		if (Build.VERSION.SDK_INT >= 14) {
-			SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(activity);
-			String userColor = preferences.getString("prefAppColor", "green1");
-			if (userColor.equals("green1")) {
-				activity.getActionBar().setBackgroundDrawable(new ColorDrawable(0xff005400));
-				activity.getActionBar().setTitle(Html.fromHtml("<font color=\"#fffffff\">" + title + "</font>"));
-			} else if (userColor.equals("green2")) {
-				activity.getActionBar().setBackgroundDrawable(new ColorDrawable(0xff008002));
-				activity.getActionBar().setTitle(Html.fromHtml("<font color=\"#fffffff\">" + title + "</font>"));
-			} else if (userColor.equals("green3")) {
-				activity.getActionBar().setBackgroundDrawable(new ColorDrawable(0xff00cc00));
-				activity.getActionBar().setTitle(Html.fromHtml("<font color=\"#fffffff\">" + title + "</font>"));
-			} else if (userColor.equals("blue1")) {
-				activity.getActionBar().setBackgroundDrawable(new ColorDrawable(0xff003061));
-				activity.getActionBar().setTitle(Html.fromHtml("<font color=\"#ffffff\">" + title + "</font>"));
-			} else if (userColor.equals("blue2")) {
-				activity.getActionBar().setBackgroundDrawable(new ColorDrawable(0xff0a4e91));
-				activity.getActionBar().setTitle(Html.fromHtml("<font color=\"#ffffff\">" + title + "</font>"));
-			} else if (userColor.equals("blue3")) {
-				activity.getActionBar().setBackgroundDrawable(new ColorDrawable(0xff0000cc));
-				activity.getActionBar().setTitle(Html.fromHtml("<font color=\"#ffffff\">" + title + "</font>"));
+	public static String compareDate(long toCompare) {
+		String what = "";
+		Date currentDate = new Date();
+
+		long diff = currentDate.getTime() - toCompare;
+		long seconds = diff / 1000;
+		long minutes = seconds / 60;
+		long hours = minutes / 60;
+		long days = hours / 24;
+		long months = days / 31;
+		long years = months / 12;
+
+		if (seconds < 60) {
+			String plural = null;
+			if (seconds <= 1) {
+				plural = "segundo";
+			} else {
+				plural = "segundos";
 			}
+			what = String.valueOf(seconds) + " " + plural;
+		} else if (minutes < 60) {
+			String plural = null;
+			if (seconds <= 1) {
+				plural = "minuto";
+			} else {
+				plural = "minutos";
+			}
+			what = String.valueOf(minutes) + " " + plural;
+		} else if (hours < 24) {
+			String plural = null;
+			if (hours <= 1) {
+				plural = "hora";
+			} else {
+				plural = "horas";
+			}
+			what = String.valueOf(hours) + " " + plural;
+		} else if (days < 31) {
+			String plural = null;
+			if (days <= 1) {
+				plural = "dia";
+			} else {
+				plural = "dias";
+			}
+			what = String.valueOf(days) + " " + plural;
+		} else if (months < 12) {
+			String plural = null;
+			if (months <= 1) {
+				plural = "mês";
+			} else {
+				plural = "meses";
+			}
+			what = String.valueOf(months) + " " + plural;
+		} else {
+			String plural = null;
+			if (years <= 1) {
+				plural = "ano";
+			} else {
+				plural = "anos";
+			}
+			what = String.valueOf(years) + " " + plural;
 		}
+		return what;
 	}
 
-	public static void SupportActionBarColor(ActionBarActivity activity, String title) {
-		if (Build.VERSION.SDK_INT <= 14) {
-			SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(activity);
-			String userColor = preferences.getString("prefAppColor", "green1");
-			if (userColor.equals("green1")) {
-				activity.getSupportActionBar().setBackgroundDrawable(new ColorDrawable(0xff005400));
-				activity.getSupportActionBar().setTitle(Html.fromHtml("<font color=\"#fffffff\">" + title + "</font>"));
-			} else if (userColor.equals("green2")) {
-				activity.getSupportActionBar().setBackgroundDrawable(new ColorDrawable(0xff008002));
-				activity.getSupportActionBar().setTitle(Html.fromHtml("<font color=\"#fffffff\">" + title + "</font>"));
-			} else if (userColor.equals("green3")) {
-				activity.getSupportActionBar().setBackgroundDrawable(new ColorDrawable(0xff00cc00));
-				activity.getSupportActionBar().setTitle(Html.fromHtml("<font color=\"#fffffff\">" + title + "</font>"));
-			} else if (userColor.equals("blue1")) {
-				activity.getSupportActionBar().setBackgroundDrawable(new ColorDrawable(0xff003061));
-				activity.getSupportActionBar().setTitle(Html.fromHtml("<font color=\"#ffffff\">" + title + "</font>"));
-			} else if (userColor.equals("blue2")) {
-				activity.getSupportActionBar().setBackgroundDrawable(new ColorDrawable(0xff0a4e91));
-				activity.getSupportActionBar().setTitle(Html.fromHtml("<font color=\"#ffffff\">" + title + "</font>"));
-			} else if (userColor.equals("blue3")) {
-				activity.getSupportActionBar().setBackgroundDrawable(new ColorDrawable(0xff0000cc));
-				activity.getSupportActionBar().setTitle(Html.fromHtml("<font color=\"#ffffff\">" + title + "</font>"));
-			}
-		}
+	public static boolean isConnected(Activity activity) {
+		ConnectivityManager cm = (ConnectivityManager)activity.getSystemService(Activity.CONNECTIVITY_SERVICE);
+		boolean isConnected = cm != null && cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnected();
+		return isConnected;
+	}
+
+	public static void openPanel(Activity activity) {
+		Intent painel = new Intent(activity, aloogle.rebuapp.activity.FragmentActivity.class);
+		painel.putExtra("fragment", 2);
+		painel.putExtra("titulo", "Painel");
+		painel.putExtra("url", "http://apps.aloogle.net/schoolapp/rebua/painel");
+		activity.startActivity(painel);
 	}
 }

@@ -1,19 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+<!--
+Copyright (C) 2015 Alefe Souza <contato@alefesouza.com>
 
-   <ProgressBar
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:layout_gravity="center"
-        android:id="@+id/progressBar1"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true" />
-   <WebView
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/frame">
+	
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#eeeeee"
+		android:id="@+id/linear">
+
+		<FrameLayout
+			android:id="@+id/main_content"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:background="#eeeeee" >
+<RelativeLayout
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+    android:orientation="vertical"
+	android:fitsSystemWindows="true" >
+	
+	<com.gc.materialdesign.views.ProgressBarCircularIndeterminate
+		android:id="@+id/progressBar1"
+		android:layout_width="32dp"
+		android:layout_height="32dp"
+		android:layout_centerInParent="true"
+		android:background="@color/primary_color_dark" />
+
+	<com.github.ksoichiro.android.observablescrollview.ObservableWebView
         android:id="@+id/webview01"
-        android:layout_height="fill_parent"
-        android:layout_width="fill_parent"
+	   android:layout_height="match_parent"
+	   android:layout_width="match_parent"
+	   android:layout_above="@+id/progressBar2"
         android:visibility="gone" />
+   
+	<com.gc.materialdesign.views.ProgressBarDeterminate
+        android:id="@+id/progressBar2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+		android:layout_alignParentTop="true"
+		android:visibility="gone"
+		android:background="@color/primary_color_dark"
+	/>
+
+	<com.melnykov.fab.FloatingActionButton
+		android:id = "@+id/fabdownload"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true"
+		android:layout_alignParentRight="true"
+		android:layout_marginRight="16dp"
+		android:layout_marginBottom="16dp"
+		android:src="@drawable/ic_download"
+		app:fab_colorNormal="@color/primary_color"
+		app:fab_colorPressed="@color/primary_color_dark"
+		android:visibility="gone" />
+
+	<com.melnykov.fab.FloatingActionButton
+		android:id = "@+id/fabopen"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true"
+		android:layout_alignParentRight="true"
+		android:layout_marginRight="16dp"
+		android:layout_marginBottom="16dp"
+		android:src="@drawable/ic_open"
+		app:fab_colorNormal="@color/primary_color"
+		app:fab_colorPressed="@color/primary_color_dark"
+		android:visibility="gone" />
 </RelativeLayout>
+</FrameLayout>
+
+		<FrameLayout 
+			android:id="@+id/target_view"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:visibility="gone">        
+		</FrameLayout>
+</LinearLayout>
+</FrameLayout>
