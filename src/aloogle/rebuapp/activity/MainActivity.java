@@ -79,7 +79,9 @@ import aloogle.rebuapp.lib.SlidingTabLayout;
 import aloogle.rebuapp.other.*;
 
 @SuppressLint({
-	"DefaultLocale", "CutPasteId", "InflateParams"
+	"DefaultLocale",
+	"CutPasteId",
+	"InflateParams"
 })
 @SuppressWarnings("deprecation")
 public class MainActivity extends ActionBarActivity implements ObservableScrollViewCallbacks {
@@ -103,8 +105,12 @@ public class MainActivity extends ActionBarActivity implements ObservableScrollV
 	private TouchInterceptionFrameLayout mInterceptionLayout;
 	private ViewPager mPager;
 	private int mSlop;
-	private boolean mScrolled, passed, start, panelw;
-	public static boolean home, isTouch;
+	private boolean mScrolled,
+	passed,
+	start,
+	panelw;
+	public static boolean home,
+	isTouch;
 	private ScrollState mLastScrollState;
 
 	public static Menu optionsMenu;
@@ -204,17 +210,6 @@ public class MainActivity extends ActionBarActivity implements ObservableScrollV
 					}
 				}, 100);
 			}
-		} if(getIntent().hasExtra("fromwidget")) {
-			if (savedInstanceState != null) {
-				pos = savedInstanceState.getInt("position");
-			} else {
-				new Handler().postDelayed(new Runnable() {
-						@Override
-						public void run() {
-							selectItem(getIntent().getIntExtra("widgetpos", 0));
-						}
-					}, 100);
-			}
 		} else {
 			if (savedInstanceState != null) {
 				pos = savedInstanceState.getInt("position");
@@ -228,8 +223,10 @@ public class MainActivity extends ActionBarActivity implements ObservableScrollV
 		String userColor = Other.getColor(activity);
 		activity.getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#" + userColor)));
 		activity.findViewById(R.id.frame).setBackgroundDrawable(new ColorDrawable(Color.parseColor("#" + userColor)));
-		activity.findViewById(R.id.header).setBackgroundDrawable(new ColorDrawable(Color.parseColor("#" + userColor)));
-		activity.findViewById(R.id.sliding_tabs).setBackgroundDrawable(new ColorDrawable(Color.parseColor("#" + userColor)));
+		if (Build.VERSION.SDK_INT >= 21) {
+			activity.findViewById(R.id.header).setBackgroundDrawable(new ColorDrawable(Color.parseColor("#" + userColor)));
+			activity.findViewById(R.id.sliding_tabs).setBackgroundDrawable(new ColorDrawable(Color.parseColor("#" + userColor)));
+		}
 		activity.getSupportActionBar().setTitle(title);
 	}
 
@@ -259,9 +256,9 @@ public class MainActivity extends ActionBarActivity implements ObservableScrollV
 		categoryIcons.recycle();
 
 		LayoutInflater inflater = getLayoutInflater();
-		final ViewGroup header = (ViewGroup)inflater.inflate(R.layout.header, 		mDrawerList, false);
-		final ViewGroup footer = (ViewGroup)inflater.inflate(R.layout.footer, 		mDrawerList, false);
-		final ViewGroup footer2 = (ViewGroup)inflater.inflate(R.layout.footer2, 		mDrawerList, false);
+		final ViewGroup header = (ViewGroup)inflater.inflate(R.layout.header, mDrawerList, false);
+		final ViewGroup footer = (ViewGroup)inflater.inflate(R.layout.footer, mDrawerList, false);
+		final ViewGroup footer2 = (ViewGroup)inflater.inflate(R.layout.footer2, mDrawerList, false);
 
 		mDrawerList.addHeaderView(header, null, true);
 		mDrawerList.addFooterView(footer, null, true);
@@ -275,7 +272,7 @@ public class MainActivity extends ActionBarActivity implements ObservableScrollV
 		mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
 
 		mDrawerToggle = new ActionBarDrawerToggle(
-				this, 			mDrawerLayout, 			R.string.drawer_open, 			R.string.drawer_close) {
+				this, mDrawerLayout, R.string.drawer_open, R.string.drawer_close) {
 
 			public void onDrawerClosed(View view) {
 				supportInvalidateOptionsMenu();
@@ -456,7 +453,7 @@ public class MainActivity extends ActionBarActivity implements ObservableScrollV
 		supportInvalidateOptionsMenu();
 	}
 
-	private void selectItem(int position) {
+	public void selectItem(int position) {
 		switch (position) {
 		case 0:
 			Home();
@@ -474,47 +471,50 @@ public class MainActivity extends ActionBarActivity implements ObservableScrollV
 			ChangeFragment("Comunicados", new ComunicadosFragment());
 			break;
 		case 5:
-			ChangeFragment("Anotações", new AnnotationsFragment());
-			break;
-		case 6:
 			ChangeFragment("Notificações", new NotificationsFragment());
 			break;
-		case 7:
+		case 6:
 			ChangeFragment("Biblioteca", new ReadingFragment());
 			break;
+		case 7:
+			ChangeFragment("Cantina", new CantinaFragment());
+			break;
 		case 8:
-			ChangeFragment("Dicionário", new DictionaryFragment());
+			ChangeFragment("Anotações", new AnnotationsFragment());
 			break;
 		case 9:
-			ChangeFragment("Cartazes", new CartazFragment());
+			ChangeFragment("Dicionário", new DictionaryFragment());
 			break;
 		case 10:
+			ChangeFragment("Cartazes", new CartazFragment());
+			break;
+		case 11:
 			Intent blog = new Intent(MainActivity.this, FragmentActivity.class);
 			blog.putExtra("fragment", 2);
 			blog.putExtra("titulo", "Blog");
 			blog.putExtra("url", "http://willianrrebua.blogspot.com");
 			startActivity(blog);
 			break;
-		case 11:
+		case 12:
 			Intent jornal = new Intent(MainActivity.this, FragmentActivity.class);
 			jornal.putExtra("fragment", 2);
 			jornal.putExtra("titulo", "Jornal");
 			jornal.putExtra("url", "http://facebook.com/REVOLUCIONARIOSREBUA");
 			startActivity(jornal);
 			break;
-		case 12:
+		case 13:
 			Intent settings = new Intent(MainActivity.this, FragmentActivity.class);
 			settings.putExtra("fragment", 0);
 			startActivity(settings);
 			break;
-		case 13:
+		case 14:
 			Intent about = new Intent(MainActivity.this, FragmentActivity.class);
 			about.putExtra("fragment", 1);
 			startActivity(about);
 			break;
 		}
 
-		if (position < 10) {
+		if (position < 11) {
 			pos = position;
 			mDrawerList.setItemChecked(position, true);
 		} else {
@@ -540,6 +540,11 @@ public class MainActivity extends ActionBarActivity implements ObservableScrollV
 		if (menu.findItem(R.id.menu_search) != null) {
 			if (findViewById(R.id.pager).getVisibility() == View.VISIBLE) {
 				menu.findItem(R.id.menu_search).setVisible(false);
+			}
+		}
+		if (menu.findItem(R.id.menu_notification) != null) {
+			if (findViewById(R.id.pager).getVisibility() == View.VISIBLE) {
+				menu.findItem(R.id.menu_notification).setVisible(false);
 			}
 		}
 		return super.onPrepareOptionsMenu(menu);
@@ -755,7 +760,8 @@ public class MainActivity extends ActionBarActivity implements ObservableScrollV
 	private static class SalaAdapter extends CacheFragmentStatePagerAdapter {
 
 		private static final String[]TITLES = new String[]{
-			"Agenda", 		"Horário"
+			"Agenda",
+			"Horário"
 		};
 
 		public SalaAdapter(FragmentManager fm) {

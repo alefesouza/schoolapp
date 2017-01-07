@@ -48,6 +48,7 @@ import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCal
 import com.melnykov.fab.FloatingActionButton;
 import com.nhaarman.listviewanimations.appearance.simple.SwingBottomInAnimationAdapter;
 import aloogle.rebuapp.R;
+import aloogle.rebuapp.activity.FragmentActivity;
 import aloogle.rebuapp.activity.MainActivity;
 import aloogle.rebuapp.adapter.CardAdapter;
 import aloogle.rebuapp.lib.JSONParser;
@@ -97,7 +98,7 @@ public class ComunicadosFragment extends Fragment implements AbsListView.OnScrol
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, 	Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		view = inflater.inflate(R.layout.fragment_main, container, false);
 
@@ -107,20 +108,33 @@ public class ComunicadosFragment extends Fragment implements AbsListView.OnScrol
 
 		list = (ObservableListView)view.findViewById(R.id.list);
 
-		if (Build.VERSION.SDK_INT > 10) {
-			list.setScrollViewCallbacks((ObservableScrollViewCallbacks)getActivity());
-			list.setTouchInterceptionViewGroup((ViewGroup)getActivity().findViewById(R.id.container));
-		}
-
 		fromnonet = false;
 		topanel = false;
 		relative = (RelativeLayout)view.findViewById(R.id.fragment);
 
-		if (!MainActivity.home) {
-			MainActivity.titulo = "Comunicados";
-			((ActionBarActivity)getActivity()).getSupportActionBar().setTitle(MainActivity.titulo);
-			MainActivity.mDrawerList.setItemChecked(4, true);
-			MainActivity.pos = 4;
+		if (!getActivity().getIntent().hasExtra("widgetpos")) {
+			if (Build.VERSION.SDK_INT > 10) {
+				list.setScrollViewCallbacks((ObservableScrollViewCallbacks)getActivity());
+				list.setTouchInterceptionViewGroup((ViewGroup)getActivity().findViewById(R.id.container));
+			}
+
+			if (!MainActivity.home) {
+				MainActivity.titulo = "Comunicados";
+				((ActionBarActivity)getActivity()).getSupportActionBar().setTitle(MainActivity.titulo);
+				MainActivity.mDrawerList.setItemChecked(4, true);
+				MainActivity.pos = 4;
+			}
+
+			FloatingActionButton fabpanel = (FloatingActionButton)getActivity().findViewById(R.id.fabpanel);
+			fabpanel.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					Other.openPanel(getActivity());
+					topanel = true;
+				}
+			});
+		} else {
+			FragmentActivity.ActionBarColor(((ActionBarActivity)getActivity()), "Comunicados");
 		}
 
 		LayoutInflater inflatere = getActivity().getLayoutInflater();
@@ -129,17 +143,7 @@ public class ComunicadosFragment extends Fragment implements AbsListView.OnScrol
 
 		mSwipeLayout = (SwipeRefreshLayout)view.findViewById(R.id.swipe_container);
 		mSwipeLayout.setOnRefreshListener(this);
-		mSwipeLayout.setColorSchemeResources(R.color.primary_color, 		R.color.primary_color_dark, R.color.primary_color, 		R.color.primary_color_dark);
-
-		FloatingActionButton fabpanel = (FloatingActionButton)getActivity().findViewById(R.id.fabpanel);
-
-		fabpanel.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Other.openPanel(getActivity());
-				topanel = true;
-			}
-		});
+		mSwipeLayout.setColorSchemeResources(R.color.primary_color, R.color.primary_color_dark, R.color.primary_color, R.color.primary_color_dark);
 
 		if (Build.VERSION.SDK_INT >= 21) {
 			progressBar = (ProgressBar)view.findViewById(R.id.progressBar1);
@@ -167,12 +171,14 @@ public class ComunicadosFragment extends Fragment implements AbsListView.OnScrol
 	private class JSONParse extends AsyncTask < String, String, JSONObject > {
 		@Override
 		protected void onPreExecute() {
-			new Handler().postDelayed(new Runnable() {
-				@Override
-				public void run() {
-					MainActivity.setRefreshActionButtonState(true, getActivity());
-				}
-			}, 100);
+			if (!getActivity().getIntent().hasExtra("widgetpos")) {
+				new Handler().postDelayed(new Runnable() {
+					@Override
+					public void run() {
+						MainActivity.setRefreshActionButtonState(true, getActivity());
+					}
+				}, 100);
+			}
 			super.onPreExecute();
 		}
 
@@ -191,7 +197,9 @@ public class ComunicadosFragment extends Fragment implements AbsListView.OnScrol
 				progressBarCompat.setVisibility(View.GONE);
 			}
 			mSwipeLayout.setRefreshing(false);
-			MainActivity.setRefreshActionButtonState(false, getActivity());
+			if (!getActivity().getIntent().hasExtra("widgetpos")) {
+				MainActivity.setRefreshActionButtonState(false, getActivity());
+			}
 
 			if (headertime != null) {
 				list.removeHeaderView(headertime);
@@ -338,7 +346,7 @@ public class ComunicadosFragment extends Fragment implements AbsListView.OnScrol
 	public void onScrollStateChanged(AbsListView view, int scrollState) {}
 
 	@Override
-	public void onScroll(AbsListView view, int firstVisibleItem, 	int visibleItemCount, int totalItemCount) {
+	public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
 		if (list.getChildCount() > 0 && list.getChildAt(0).getTop() == 0 && list.getFirstVisiblePosition() == 0) {
 			mSwipeLayout.setEnabled(true);
 		} else {

@@ -30,7 +30,8 @@ limitations under the License.
     android:layout_height="match_parent"
 	android:id="@+id/conteudo"
 	android:background="#fffafafa"
-    android:orientation="vertical">
+    android:orientation="vertical"
+	android:paddingBottom="@dimen/card_padding2">
 	
     <aloogle.rebuapp.other.CustomTextView
         android:id="@+id/titulo"

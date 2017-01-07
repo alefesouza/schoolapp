@@ -47,6 +47,8 @@ import com.github.ksoichiro.android.observablescrollview.ObservableListView;
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks;
 import com.melnykov.fab.FloatingActionButton;
 import com.nhaarman.listviewanimations.appearance.simple.SwingBottomInAnimationAdapter;
+
+import aloogle.rebuapp.activity.FragmentActivity;
 import aloogle.rebuapp.activity.MainActivity;
 import aloogle.rebuapp.adapter.CardAdapterNotifications;
 import aloogle.rebuapp.R;
@@ -63,7 +65,7 @@ public class NotificationsFragment extends Fragment implements AbsListView.OnScr
 	ArrayList <String> tituloarray = new ArrayList <String> ();
 	ArrayList <String> descricaoarray = new ArrayList <String> ();
 	ArrayList <String> sumarioarray = new ArrayList <String> ();
-	String title, sala, clube, eletiva, isrespon;
+	String title, sala, clube, eletiva, isrespon, cantina;
 	ViewGroup headertime, space;
 	boolean fromnonet, topanel, alreadyLoaded;
 	ProgressBar progressBar;
@@ -95,7 +97,7 @@ public class NotificationsFragment extends Fragment implements AbsListView.OnScr
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, 	Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		view = inflater.inflate(R.layout.fragment_main, container, false);
 
@@ -105,25 +107,39 @@ public class NotificationsFragment extends Fragment implements AbsListView.OnScr
 		clube = preferences.getString("clubeRoom", "none");
 		eletiva = preferences.getString("eletivaRoom", "none");
 		isrespon = String.valueOf(preferences.getBoolean("isRespon", false));
+		cantina = String.valueOf(preferences.getBoolean("notifCantina", false));
 
-		url = "http://apps.aloogle.net/schoolapp/rebua/json/notificacoes.php?sala=" + sala + "&clube=" + clube + "&eletiva=" + eletiva + "&isrespon=" + isrespon;
+		url = "http://apps.aloogle.net/schoolapp/rebua/json/notificacoes.php?sala=" + sala + "&clube=" + clube + "&eletiva=" + eletiva + "&isrespon=" + isrespon + "&cantina=" + cantina;
 
 		list = (ObservableListView)view.findViewById(R.id.list);
-
-		if (Build.VERSION.SDK_INT > 10) {
-			list.setScrollViewCallbacks((ObservableScrollViewCallbacks)getActivity());
-			list.setTouchInterceptionViewGroup((ViewGroup)getActivity().findViewById(R.id.container));
-		}
 
 		fromnonet = false;
 		topanel = false;
 		relative = (RelativeLayout)view.findViewById(R.id.fragment);
 
-		if (!MainActivity.home) {
-			MainActivity.titulo = "Notificações";
-			((ActionBarActivity)getActivity()).getSupportActionBar().setTitle(MainActivity.titulo);
-			MainActivity.mDrawerList.setItemChecked(6, true);
-			MainActivity.pos = 6;
+		if (!getActivity().getIntent().hasExtra("widgetpos")) {
+			if (Build.VERSION.SDK_INT > 10) {
+				list.setScrollViewCallbacks((ObservableScrollViewCallbacks)getActivity());
+				list.setTouchInterceptionViewGroup((ViewGroup)getActivity().findViewById(R.id.container));
+			}
+
+			if (!MainActivity.home) {
+				MainActivity.titulo = "Notificações";
+				((ActionBarActivity)getActivity()).getSupportActionBar().setTitle(MainActivity.titulo);
+				MainActivity.mDrawerList.setItemChecked(5, true);
+				MainActivity.pos = 5;
+			}
+			FloatingActionButton fabpanel = (FloatingActionButton)getActivity().findViewById(R.id.fabpanel);
+
+			fabpanel.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					Other.openPanel(getActivity());
+					topanel = true;
+				}
+			});
+		} else {
+			FragmentActivity.ActionBarColor(((ActionBarActivity)getActivity()), "Notificações");
 		}
 
 		LayoutInflater inflatere = getActivity().getLayoutInflater();
@@ -132,17 +148,7 @@ public class NotificationsFragment extends Fragment implements AbsListView.OnScr
 
 		mSwipeLayout = (SwipeRefreshLayout)view.findViewById(R.id.swipe_container);
 		mSwipeLayout.setOnRefreshListener(this);
-		mSwipeLayout.setColorSchemeResources(R.color.primary_color, 		R.color.primary_color_dark, R.color.primary_color, 		R.color.primary_color_dark);
-
-		FloatingActionButton fabpanel = (FloatingActionButton)getActivity().findViewById(R.id.fabpanel);
-
-		fabpanel.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Other.openPanel(getActivity());
-				topanel = true;
-			}
-		});
+		mSwipeLayout.setColorSchemeResources(R.color.primary_color, R.color.primary_color_dark, R.color.primary_color, R.color.primary_color_dark);
 
 		if (Build.VERSION.SDK_INT >= 21) {
 			progressBar = (ProgressBar)view.findViewById(R.id.progressBar1);
@@ -170,12 +176,14 @@ public class NotificationsFragment extends Fragment implements AbsListView.OnScr
 	private class JSONParse extends AsyncTask < String, String, JSONObject > {
 		@Override
 		protected void onPreExecute() {
-			new Handler().postDelayed(new Runnable() {
-				@Override
-				public void run() {
-					MainActivity.setRefreshActionButtonState(true, getActivity());
-				}
-			}, 100);
+			if (!getActivity().getIntent().hasExtra("widgetpos")) {
+				new Handler().postDelayed(new Runnable() {
+					@Override
+					public void run() {
+						MainActivity.setRefreshActionButtonState(true, getActivity());
+					}
+				}, 100);
+			}
 			super.onPreExecute();
 		}
 
@@ -194,7 +202,9 @@ public class NotificationsFragment extends Fragment implements AbsListView.OnScr
 				progressBarCompat.setVisibility(View.GONE);
 			}
 			mSwipeLayout.setRefreshing(false);
-			MainActivity.setRefreshActionButtonState(false, getActivity());
+			if (!getActivity().getIntent().hasExtra("widgetpos")) {
+				MainActivity.setRefreshActionButtonState(false, getActivity());
+			}
 
 			if (headertime != null) {
 				list.removeHeaderView(headertime);
@@ -336,7 +346,7 @@ public class NotificationsFragment extends Fragment implements AbsListView.OnScr
 	public void onScrollStateChanged(AbsListView view, int scrollState) {}
 
 	@Override
-	public void onScroll(AbsListView view, int firstVisibleItem, 	int visibleItemCount, int totalItemCount) {
+	public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
 		if (list.getChildCount() > 0 && list.getChildAt(0).getTop() == 0 && list.getFirstVisiblePosition() == 0) {
 			mSwipeLayout.setEnabled(true);
 		} else {
@@ -370,7 +380,8 @@ public class NotificationsFragment extends Fragment implements AbsListView.OnScr
 			clube = preferences.getString("clubeRoom", "none");
 			eletiva = preferences.getString("eletivaRoom", "none");
 			isrespon = String.valueOf(preferences.getBoolean("isRespon", false));
-			url = "http://apps.aloogle.net/schoolapp/rebua/json/notificacoes.php?sala=" + sala + "&clube=" + clube + "&eletiva=" + eletiva + "&isrespon=" + isrespon;
+			cantina = String.valueOf(preferences.getBoolean("notifCantina", false));
+			url = "http://apps.aloogle.net/schoolapp/rebua/json/notificacoes.php?sala=" + sala + "&clube=" + clube + "&eletiva=" + eletiva + "&isrespon=" + isrespon + "&cantina=" + cantina;
 			if (Build.VERSION.SDK_INT >= 21) {
 				progressBar.setVisibility(View.VISIBLE);
 			} else {

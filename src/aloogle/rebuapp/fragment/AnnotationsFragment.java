@@ -17,6 +17,8 @@
 package aloogle.rebuapp.fragment;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -32,6 +34,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.widget.AbsListView;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import java.util.ArrayList;
 import org.json.JSONException;
@@ -46,9 +49,6 @@ import aloogle.rebuapp.activity.MainActivity;
 import aloogle.rebuapp.adapter.CardAdapterAnnotation;
 import aloogle.rebuapp.other.CustomTextView;
 import aloogle.rebuapp.other.Other;
-import android.app.*;
-import android.content.*;
-import android.widget.*;
 
 public class AnnotationsFragment extends Fragment implements AbsListView.OnScrollListener, SwipeRefreshLayout.OnRefreshListener {
 	Activity activity;
@@ -79,18 +79,29 @@ public class AnnotationsFragment extends Fragment implements AbsListView.OnScrol
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, 	Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
 		view = inflater.inflate(R.layout.fragment_main, container, false);
 
 		alreadyLoaded = false;
 
-		if (!MainActivity.home) {
-			MainActivity.titulo = "Anotações";
-			((ActionBarActivity)getActivity()).getSupportActionBar().setTitle(MainActivity.titulo);
-			MainActivity.mDrawerList.setItemChecked(5, true);
-			MainActivity.pos = 5;
+		list = (ObservableListView)view.findViewById(R.id.list);
+
+		if (!getActivity().getIntent().hasExtra("widgetpos")) {
+			if (!MainActivity.home) {
+				MainActivity.titulo = "Anotações";
+				((ActionBarActivity)getActivity()).getSupportActionBar().setTitle(MainActivity.titulo);
+				MainActivity.mDrawerList.setItemChecked(8, true);
+				MainActivity.pos = 8;
+			}
+
+			if (Build.VERSION.SDK_INT > 10) {
+				list.setScrollViewCallbacks((ObservableScrollViewCallbacks)getActivity());
+				list.setTouchInterceptionViewGroup((ViewGroup)getActivity().findViewById(R.id.container));
+			}
+		} else {
+			FragmentActivity.ActionBarColor(((ActionBarActivity)getActivity()), "Anotações");
 		}
 
 		boolean warningAnnotation = preferences.getBoolean("warningAnnotation", false);
@@ -141,13 +152,7 @@ public class AnnotationsFragment extends Fragment implements AbsListView.OnScrol
 
 		mSwipeLayout = (SwipeRefreshLayout)view.findViewById(R.id.swipe_container);
 		mSwipeLayout.setOnRefreshListener(this);
-		mSwipeLayout.setColorSchemeResources(R.color.primary_color, 		R.color.primary_color_dark, R.color.primary_color, 		R.color.primary_color_dark);
-
-		list = (ObservableListView)view.findViewById(R.id.list);
-		if (Build.VERSION.SDK_INT > 10) {
-			list.setScrollViewCallbacks((ObservableScrollViewCallbacks)getActivity());
-			list.setTouchInterceptionViewGroup((ViewGroup)getActivity().findViewById(R.id.container));
-		}
+		mSwipeLayout.setColorSchemeResources(R.color.primary_color, R.color.primary_color_dark, R.color.primary_color, R.color.primary_color_dark);
 
 		LayoutInflater inflatere = getActivity().getLayoutInflater();
 		ViewGroup header = (ViewGroup)inflatere.inflate(R.layout.header2, list, false);
@@ -226,7 +231,7 @@ public class AnnotationsFragment extends Fragment implements AbsListView.OnScrol
 	public void onScrollStateChanged(AbsListView view, int scrollState) {}
 
 	@Override
-	public void onScroll(AbsListView view, int firstVisibleItem, 	int visibleItemCount, int totalItemCount) {
+	public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
 		if (list.getChildCount() > 0 && list.getChildAt(0).getTop() == 0 && list.getFirstVisiblePosition() == 0) {
 			mSwipeLayout.setEnabled(true);
 		} else {

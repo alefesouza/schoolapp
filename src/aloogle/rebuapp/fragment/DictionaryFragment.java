@@ -109,7 +109,7 @@ public class DictionaryFragment extends Fragment implements AbsListView.OnScroll
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, 	Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		view = inflater.inflate(R.layout.fragment_main, container, false);
 
@@ -117,19 +117,30 @@ public class DictionaryFragment extends Fragment implements AbsListView.OnScroll
 
 		fromnonet = false;
 		haveFooter = false;
+		url = "";
 		relative = (RelativeLayout)view.findViewById(R.id.fragment);
 
 		if (!getActivity().getIntent().hasExtra("palavra")) {
-			if (Build.VERSION.SDK_INT > 10) {
-				list.setScrollViewCallbacks((ObservableScrollViewCallbacks)getActivity());
-				list.setTouchInterceptionViewGroup((ViewGroup)getActivity().findViewById(R.id.container));
-			}
+			if (!getActivity().getIntent().hasExtra("widgetpos")) {
+				if (Build.VERSION.SDK_INT > 10) {
+					list.setScrollViewCallbacks((ObservableScrollViewCallbacks)getActivity());
+					list.setTouchInterceptionViewGroup((ViewGroup)getActivity().findViewById(R.id.container));
+				}
 
-			if (!MainActivity.home) {
-				MainActivity.titulo = "Dicionário";
-				((ActionBarActivity)getActivity()).getSupportActionBar().setTitle(MainActivity.titulo);
-				MainActivity.mDrawerList.setItemChecked(8, true);
-				MainActivity.pos = 8;
+				if (!MainActivity.home) {
+					MainActivity.titulo = "Dicionário";
+					((ActionBarActivity)getActivity()).getSupportActionBar().setTitle(MainActivity.titulo);
+					MainActivity.mDrawerList.setItemChecked(9, true);
+					MainActivity.pos = 9;
+				}
+
+				FloatingActionButton fabpanel = (FloatingActionButton)getActivity().findViewById(R.id.fabpanel);
+				fabpanel.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						Other.openPanel(getActivity());
+					}
+				});
 			}
 		}
 
@@ -141,7 +152,7 @@ public class DictionaryFragment extends Fragment implements AbsListView.OnScroll
 
 		mSwipeLayout = (SwipeRefreshLayout)view.findViewById(R.id.swipe_container);
 		mSwipeLayout.setOnRefreshListener(this);
-		mSwipeLayout.setColorSchemeResources(R.color.primary_color, 		R.color.primary_color_dark, R.color.primary_color, 		R.color.primary_color_dark);
+		mSwipeLayout.setColorSchemeResources(R.color.primary_color, R.color.primary_color_dark, R.color.primary_color, R.color.primary_color_dark);
 
 		if (Build.VERSION.SDK_INT >= 21) {
 			progressBar = (ProgressBar)view.findViewById(R.id.progressBar1);
@@ -157,16 +168,6 @@ public class DictionaryFragment extends Fragment implements AbsListView.OnScroll
 			progressBarCompat.setVisibility(View.VISIBLE);
 		}
 
-		if (!getActivity().getIntent().hasExtra("palavra")) {
-			FloatingActionButton fabpanel = (FloatingActionButton)getActivity().findViewById(R.id.fabpanel);
-			fabpanel.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					Other.openPanel(getActivity());
-				}
-			});
-		}
-
 		if (Build.VERSION.SDK_INT > 10) {
 			final String[]from = new String[]{
 				"categoryName"
@@ -175,7 +176,7 @@ public class DictionaryFragment extends Fragment implements AbsListView.OnScroll
 				R.id.text1
 			};
 
-			mAdapter = new SimpleCursorAdapter(getActivity(), 				R.layout.simple_list_item_1, 				null, 				from, 				to, 				CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
+			mAdapter = new SimpleCursorAdapter(getActivity(), R.layout.simple_list_item_1, null, from, to, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
 		}
 
 		if (!getActivity().getIntent().hasExtra("palavra")) {
@@ -192,6 +193,9 @@ public class DictionaryFragment extends Fragment implements AbsListView.OnScroll
 				relative.addView(wnet);
 				fromnonet = true;
 			}
+			if (getActivity().getIntent().hasExtra("widgetpos")) {
+				FragmentActivity.ActionBarColor(((ActionBarActivity)getActivity()), "Dicionário");
+			}
 		} else {
 			String palavra = getActivity().getIntent().getStringExtra("palavra");
 			FragmentActivity.ActionBarColor(((ActionBarActivity)getActivity()), "Dicionário: " + palavra);
@@ -205,12 +209,14 @@ public class DictionaryFragment extends Fragment implements AbsListView.OnScroll
 		@Override
 		protected void onPreExecute() {
 			if (!getActivity().getIntent().hasExtra("palavra")) {
-				new Handler().postDelayed(new Runnable() {
-					@Override
-					public void run() {
-						MainActivity.setRefreshActionButtonState(true, getActivity());
-					}
-				}, 100);
+				if (!getActivity().getIntent().hasExtra("widgetpos")) {
+					new Handler().postDelayed(new Runnable() {
+						@Override
+						public void run() {
+							MainActivity.setRefreshActionButtonState(true, getActivity());
+						}
+					}, 100);
+				}
 			}
 			super.onPreExecute();
 		}
@@ -232,7 +238,9 @@ public class DictionaryFragment extends Fragment implements AbsListView.OnScroll
 			mSwipeLayout.setRefreshing(false);
 
 			if (!getActivity().getIntent().hasExtra("palavra")) {
-				MainActivity.setRefreshActionButtonState(false, getActivity());
+				if (!getActivity().getIntent().hasExtra("widgetpos")) {
+					MainActivity.setRefreshActionButtonState(false, getActivity());
+				}
 			}
 			if (fromnonet) {
 				relative.removeView(wnet);
@@ -289,16 +297,12 @@ public class DictionaryFragment extends Fragment implements AbsListView.OnScroll
 					});
 
 					if (json.getString("orig").equals("")) {
+						list.removeFooterView(footer);
+						list.removeFooterView(credits);
+						list.removeFooterView(space);
 						if (!json.getString("nome").equals("")) {
-							list.removeFooterView(footer);
-							list.removeFooterView(credits);
-							list.removeFooterView(space);
 							list.addFooterView(credits);
 							list.addFooterView(space);
-						} else {
-							list.removeFooterView(footer);
-							list.removeFooterView(credits);
-							list.removeFooterView(space);
 						}
 					} else {
 						list.removeFooterView(footer);
@@ -320,8 +324,12 @@ public class DictionaryFragment extends Fragment implements AbsListView.OnScroll
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		if (!getActivity().getIntent().hasExtra("palavra")) {
-			inflater = getActivity().getMenuInflater();
-			inflater.inflate(R.menu.biblioteca_menu, menu);
+			if (menu.findItem(R.id.menu_search) == null) {
+				inflater = getActivity().getMenuInflater();
+				inflater.inflate(R.menu.biblioteca_menu, menu);
+			} else {
+				menu.findItem(R.id.menu_notification).setVisible(true);
+			}
 
 			MenuItem searchItem = menu.findItem(R.id.menu_search);
 			SearchView searchView = (SearchView)MenuItemCompat.getActionView(searchItem);
@@ -356,7 +364,7 @@ public class DictionaryFragment extends Fragment implements AbsListView.OnScroll
 								@Override
 								public void run() {
 									if (s.equals(suggestion)) {
-											new JSONParseSearch().execute();
+										new JSONParseSearch().execute();
 									}
 								}
 							}, 1000);
@@ -416,15 +424,17 @@ public class DictionaryFragment extends Fragment implements AbsListView.OnScroll
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.menu_refresh:
-			if (Other.isConnected(getActivity())) {
-				alreadyLoaded = false;
-				list.setVisibility(View.GONE);
-				ClearAll();
-				new JSONParse().execute();
-			} else {
-				mSwipeLayout.setRefreshing(false);
-				Toast toast = Toast.makeText(getActivity(), getString(R.string.needinternet), Toast.LENGTH_LONG);
-				toast.show();
+			if (!url.equals("")) {
+				if (Other.isConnected(getActivity())) {
+					alreadyLoaded = false;
+					list.setVisibility(View.GONE);
+					ClearAll();
+					new JSONParse().execute();
+				} else {
+					mSwipeLayout.setRefreshing(false);
+					Toast toast = Toast.makeText(getActivity(), getString(R.string.needinternet), Toast.LENGTH_LONG);
+					toast.show();
+				}
 			}
 			return true;
 		default:
@@ -436,7 +446,7 @@ public class DictionaryFragment extends Fragment implements AbsListView.OnScroll
 	public void onScrollStateChanged(AbsListView view, int scrollState) {}
 
 	@Override
-	public void onScroll(AbsListView view, int firstVisibleItem, 	int visibleItemCount, int totalItemCount) {
+	public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
 		if (list.getChildCount() > 0 && list.getChildAt(0).getTop() == 0 && list.getFirstVisiblePosition() == 0) {
 			mSwipeLayout.setEnabled(true);
 		} else {
@@ -451,15 +461,19 @@ public class DictionaryFragment extends Fragment implements AbsListView.OnScroll
 	}
 
 	public void onRefresh() {
-		if (Other.isConnected(getActivity())) {
-			alreadyLoaded = false;
-			list.setVisibility(View.GONE);
-			ClearAll();
-			new JSONParse().execute();
-		} else {
+		if (url.equals("")) {
 			mSwipeLayout.setRefreshing(false);
-			Toast toast = Toast.makeText(getActivity(), getString(R.string.needinternet), Toast.LENGTH_LONG);
-			toast.show();
+		} else {
+			if (Other.isConnected(getActivity())) {
+				alreadyLoaded = false;
+				list.setVisibility(View.GONE);
+				ClearAll();
+				new JSONParse().execute();
+			} else {
+				mSwipeLayout.setRefreshing(false);
+				Toast toast = Toast.makeText(getActivity(), getString(R.string.needinternet), Toast.LENGTH_LONG);
+				toast.show();
+			}
 		}
 	}
 
@@ -480,31 +494,31 @@ public class DictionaryFragment extends Fragment implements AbsListView.OnScroll
 		protected void onPostExecute(JSONObject json) {
 			try {
 				try {
-						suggestionarray.clear();
-						sugestoes = json.getJSONArray("sugestoes");
-						for (int i = 0; i < sugestoes.length(); i++) {
-							JSONObject c = sugestoes.getJSONObject(i);
+					suggestionarray.clear();
+					sugestoes = json.getJSONArray("sugestoes");
+					for (int i = 0; i < sugestoes.length(); i++) {
+						JSONObject c = sugestoes.getJSONObject(i);
 
-							String categoria = c.getString(TAG_SUGESTAO);
-							suggestionarray.add(categoria);
-						}
-						populateAdapter();
+						String categoria = c.getString(TAG_SUGESTAO);
+						suggestionarray.add(categoria);
+					}
+					populateAdapter();
 				} catch (JSONException e) {}
 			} catch (Exception e) {}
 		}
 	}
 
 	private void populateAdapter() {
-			final MatrixCursor c = new MatrixCursor(new String[]{
-					BaseColumns._ID, "categoryName"
+		final MatrixCursor c = new MatrixCursor(new String[]{
+				BaseColumns._ID, 			"categoryName"
+			});
+		for (int i = 0; i < suggestionarray.size(); i++) {
+			if (!suggestionarray.get(i).toString().equals("")) {
+				c.addRow(new Object[]{
+					i, 				suggestionarray.get(i).toString()
 				});
-			for (int i = 0; i < suggestionarray.size(); i++) {
-				if (!suggestionarray.get(i).toString().equals("")) {
-					c.addRow(new Object[]{
-						i, suggestionarray.get(i).toString()
-					});
-				}
 			}
-			mAdapter.changeCursor(c);
 		}
+		mAdapter.changeCursor(c);
+	}
 }

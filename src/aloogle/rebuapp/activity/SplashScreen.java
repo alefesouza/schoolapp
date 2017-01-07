@@ -25,6 +25,7 @@ import android.content.SharedPreferences.Editor;
 import android.preference.PreferenceManager;
 import com.parse.ParseAnalytics;
 import aloogle.rebuapp.R;
+import aloogle.rebuapp.other.Other;
 
 public class SplashScreen extends Activity {
 
@@ -38,53 +39,68 @@ public class SplashScreen extends Activity {
 
 		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
+		final Intent intent = new Intent(SplashScreen.this, MainActivity.class);
+
+		boolean isRoot = true;
+		if (!isTaskRoot()) {
+			final Intent intent2 = getIntent();
+			final String intentAction = intent2.getAction();
+			isRoot = intent2.hasCategory(Intent.CATEGORY_LAUNCHER) && intentAction != null && intentAction.equals(Intent.ACTION_MAIN);
+		}
+
+		Intent frag = new Intent(SplashScreen.this, FragmentActivity.class);
+		frag.putExtra("fragment", 7);
+		frag.putExtra("isRoot", isRoot);
+
 		if (getIntent().hasExtra("fromnotification")) {
 			Editor editor = preferences.edit();
 			editor.remove("count");
 			editor.commit();
 			editor.remove("receivedTitles");
 			editor.commit();
-		}
-
-		if (!isTaskRoot()) {
-			final Intent intent = getIntent();
-			final String intentAction = intent.getAction();
-			if (intent.hasCategory(Intent.CATEGORY_LAUNCHER) && intentAction != null && intentAction.equals(Intent.ACTION_MAIN)) {
-				finish();
-				return;
+			intent.putExtra("fromnotification", true);
+			startActivity(intent);
+			SplashScreen.this.finish();
+		} else if (getIntent().hasExtra("widgetpos")) {
+			switch (getIntent().getIntExtra("widgetpos", 0)) {
+			case 11:
+				Intent blog = new Intent(this, FragmentActivity.class);
+				blog.putExtra("fragment", 2);
+				blog.putExtra("titulo", "Blog");
+				blog.putExtra("url", "http://willianrrebua.blogspot.com");
+				startActivity(blog);
+				break;
+			case 12:
+				Intent jornal = new Intent(this, FragmentActivity.class);
+				jornal.putExtra("fragment", 2);
+				jornal.putExtra("titulo", "Jornal");
+				jornal.putExtra("url", "http://facebook.com/REVOLUCIONARIOSREBUA");
+				startActivity(jornal);
+				break;
+			case 15:
+				Other.openPanel(this);
+				break;
+			default:
+				frag.putExtra("widgetpos", getIntent().getIntExtra("widgetpos", 0));
+				startActivity(frag);
 			}
+			SplashScreen.this.finish();
+		} else if (!isRoot) {
+			finish();
 		} else {
-			boolean isFirst = preferences.getBoolean("isFirst", true);
-			if (isFirst) {
-				new Handler().postDelayed(new Runnable() {
-					 @ Override
-					public void run() {
-						Intent intent = new Intent(SplashScreen.this, FragmentActivity.class);
+			final boolean isFirst = preferences.getBoolean("isFirst", true);
+			new Handler().postDelayed(new Runnable() {
+				@Override
+				public void run() {
+					if (isFirst) {
+						Intent settings = new Intent(SplashScreen.this, FragmentActivity.class);
+						startActivity(settings);
+					} else {
 						startActivity(intent);
-						SplashScreen.this.finish();
 					}
-				}, TIME);
-			} else {
-				final Intent intent = new Intent(SplashScreen.this, MainActivity.class);
-				if (getIntent().hasExtra("fromnotification")) {
-					intent.putExtra("fromnotification", true);
-					startActivity(intent);
 					SplashScreen.this.finish();
-				} else if (getIntent().hasExtra("fromwidget")) {
-					intent.putExtra("fromwidget", true);
-					intent.putExtra("widgetpos", getIntent().getIntExtra("widgetpos", 0));
-					startActivity(intent);
-					SplashScreen.this.finish();
-				} else {
-					new Handler().postDelayed(new Runnable() {
-						@Override
-						public void run() {
-							startActivity(intent);
-							SplashScreen.this.finish();
-						}
-					}, TIME);
 				}
-			}
+			}, TIME);
 		}
 	}
 }

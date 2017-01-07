@@ -61,7 +61,8 @@ import aloogle.rebuapp.lib.SlidingTabLayout;
 import aloogle.rebuapp.other.Other;
 
 @SuppressLint({
-	"DefaultLocale", "CutPasteId"
+	"DefaultLocale",
+	"CutPasteId"
 })
 public class ReadingActivity extends ActionBarActivity implements ObservableScrollViewCallbacks {
 	final Context context = this;
@@ -69,7 +70,8 @@ public class ReadingActivity extends ActionBarActivity implements ObservableScro
 	SharedPreferences preferences;
 	Editor editor;
 	String titulo;
-	public static String categoria, query;
+	public static String categoria,
+	query;
 	FragmentStatePagerAdapter TabAdapter;
 
 	private NavigationAdapter mPagerAdapter;
@@ -93,8 +95,10 @@ public class ReadingActivity extends ActionBarActivity implements ObservableScro
 		titulo = getIntent().getStringExtra("titulo");
 
 		FragmentActivity.ActionBarColor(this, titulo);
-		findViewById(R.id.headert).setBackgroundDrawable(new ColorDrawable(Color.parseColor("#" + Other.getColor(this))));
-		findViewById(R.id.sliding_tabs).setBackgroundDrawable(new ColorDrawable(Color.parseColor("#" + Other.getColor(this))));
+		if (Build.VERSION.SDK_INT >= 21) {
+			findViewById(R.id.headert).setBackgroundDrawable(new ColorDrawable(Color.parseColor("#" + Other.getColor(this))));
+			findViewById(R.id.sliding_tabs).setBackgroundDrawable(new ColorDrawable(Color.parseColor("#" + Other.getColor(this))));
+		}
 
 		getSupportActionBar().setHomeButtonEnabled(true);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -108,12 +112,6 @@ public class ReadingActivity extends ActionBarActivity implements ObservableScro
 		}
 
 		initNotification();
-
-		ViewCompat.setElevation(findViewById(R.id.headert), getResources().getDimension(R.dimen.toolbar_elevation));
-		mToolbarView = findViewById(R.id.toolbar);
-		mPagerAdapter = new NavigationAdapter(getSupportFragmentManager());
-		mPager = (ViewPager)findViewById(R.id.pager);
-		mPager.setAdapter(mPagerAdapter);
 
 		final int tabHeight = getResources().getDimensionPixelSize(R.dimen.tab_height);
 		findViewById(R.id.pager_wrapper).setPadding(0, getActionBarSize() + tabHeight, 0, 0);
@@ -352,7 +350,8 @@ public class ReadingActivity extends ActionBarActivity implements ObservableScro
 	private static class NavigationAdapter extends CacheFragmentStatePagerAdapter {
 
 		private static final String[]TITLES = new String[]{
-			"Recentes", 		"Alfabética"
+			"Recentes",
+			"Alfabética"
 		};
 
 		public NavigationAdapter(FragmentManager fm) {

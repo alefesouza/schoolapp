@@ -42,6 +42,7 @@ limitations under the License.
 					android:layout_height="match_parent"
 					android:orientation="vertical">
 
+			
 			<FrameLayout
 				android:id="@+id/pager_wrapper"
 				android:layout_width="match_parent"
@@ -78,6 +79,12 @@ limitations under the License.
 					android:layout_width="match_parent"
 					android:layout_height="@dimen/tab_height" />
 			</LinearLayout>
+			
+			<View
+				android:layout_width="match_parent"
+				android:layout_height="4dp"
+				android:background="@drawable/toolbar_dropshadow"
+				android:layout_below="@+id/header" />
 		</RelativeLayout>
 		</com.github.ksoichiro.android.observablescrollview.TouchInterceptionFrameLayout>
 		</FrameLayout>
@@ -93,7 +100,6 @@ limitations under the License.
 			android:src="@drawable/ic_edit"
 			app:fab_colorRipple="@color/default_ripple"
 			android:visibility="gone" />
-		</RelativeLayout>
 		
 		<ListView
 			android:id="@+id/left_drawer"

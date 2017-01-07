@@ -47,7 +47,7 @@ limitations under the License.
 								android:layout_height="match_parent" />
 						</FrameLayout>
 
-						<RelativeLayout
+						<LinearLayout
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
 							android:id="@+id/headert"
@@ -63,9 +63,13 @@ limitations under the License.
 							<aloogle.rebuapp.lib.SlidingTabLayout
 								android:id="@+id/sliding_tabs"
 								android:layout_width="match_parent"
-								android:layout_height="@dimen/tab_height"
-								android:layout_below="@+id/toolbar" />
-						</RelativeLayout>
+								android:layout_height="@dimen/tab_height" />
+							
+							<View
+								android:layout_width="match_parent"
+								android:layout_height="4dp"
+								android:background="@drawable/toolbar_dropshadow" />
+						</LinearLayout>
 					</RelativeLayout>
 				</com.github.ksoichiro.android.observablescrollview.TouchInterceptionFrameLayout>
 			</FrameLayout>

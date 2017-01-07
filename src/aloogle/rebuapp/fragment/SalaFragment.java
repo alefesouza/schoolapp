@@ -106,7 +106,7 @@ public class SalaFragment extends Fragment implements AbsListView.OnScrollListen
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, 	Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		view = inflater.inflate(R.layout.fragment_main, container, false);
 
@@ -140,7 +140,7 @@ public class SalaFragment extends Fragment implements AbsListView.OnScrollListen
 
 		mSwipeLayout = (SwipeRefreshLayout)view.findViewById(R.id.swipe_container);
 		mSwipeLayout.setOnRefreshListener(this);
-		mSwipeLayout.setColorSchemeResources(R.color.primary_color, 		R.color.primary_color_dark, R.color.primary_color, 		R.color.primary_color_dark);
+		mSwipeLayout.setColorSchemeResources(R.color.primary_color, R.color.primary_color_dark, R.color.primary_color, R.color.primary_color_dark);
 
 		if (Build.VERSION.SDK_INT >= 21) {
 			progressBar = (ProgressBar)view.findViewById(R.id.progressBar1);
@@ -291,7 +291,11 @@ public class SalaFragment extends Fragment implements AbsListView.OnScrollListen
 			header.setOnClickListener(new OnClickListener() {
 				public void onClick(View v) {
 					try {
-						if (!json.getString("grupo").equals("")) {
+						if (sala.equals("none")) {
+							Intent settings = new Intent(getActivity(), aloogle.rebuapp.activity.FragmentActivity.class);
+							settings.putExtra("fragment", 0);
+							startActivity(settings);
+						} else if (!json.getString("grupo").equals("")) {
 							try {
 								Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("fb://group/" + json.getString("grupo")));
 								startActivity(intent);
@@ -423,7 +427,7 @@ public class SalaFragment extends Fragment implements AbsListView.OnScrollListen
 	public void onScrollStateChanged(AbsListView view, int scrollState) {}
 
 	@Override
-	public void onScroll(AbsListView view, int firstVisibleItem, 	int visibleItemCount, int totalItemCount) {
+	public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
 		if (list.getChildCount() > 0 && list.getChildAt(0).getTop() == 0 && list.getFirstVisiblePosition() == 0) {
 			mSwipeLayout.setEnabled(true);
 		} else {

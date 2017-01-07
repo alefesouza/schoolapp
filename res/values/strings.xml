@@ -27,6 +27,7 @@ limitations under the License.
 
     <string name="refresh">Atualizar</string>
     <string name="solicitation">Solicitar edição</string>
+    <string name="receivenotification">Receber notificações</string>
 
     <string name="dialogcard">Olá! Toque em um card para abri-lo em tela cheia, onde você pode copiar, pesquisar e compartilhar seu texto. Em algumas salas ao tocar no nome abre o grupo da mesma no Facebook.</string>
     <string name="dialogreading">Toque em um card para pesquisar o livro no Google, onde você pode ver informações como capa e resenhas.</string>
@@ -35,6 +36,7 @@ limitations under the License.
     <string name="dialogsolicitation">Você pode pedir uma conta para o Ediney na sala da coordenação, após isso vá nas configurações e marque \"Habilitar painel\".</string>
     <string name="dialogannotation">As anotações ficam armazenadas no seu dispositivo e só você pode acessa-las, toque em \"Adicionar anotação\" para começar.</string>
     <string name="dialogcartaz">Toque em um card para abrir o cartaz em tela cheia.</string>
+    <string name="dialogcantina">Deseja receber notificações de novidades e promoções da cantina?</string>
 	
     <string name="settings">Configurações</string>
     <string name="shareapp">Compartilhar app</string>

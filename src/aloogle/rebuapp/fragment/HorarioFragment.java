@@ -73,7 +73,7 @@ public class HorarioFragment extends Fragment {
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, 	Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		view = inflater.inflate(R.layout.horario_main, container, false);
 
 		preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());

@@ -52,6 +52,8 @@ import com.github.ksoichiro.android.observablescrollview.ObservableListView;
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks;
 import com.melnykov.fab.FloatingActionButton;
 import com.nhaarman.listviewanimations.appearance.simple.SwingBottomInAnimationAdapter;
+
+import aloogle.rebuapp.activity.FragmentActivity;
 import aloogle.rebuapp.activity.MainActivity;
 import aloogle.rebuapp.activity.ReadingActivity;
 import aloogle.rebuapp.adapter.CardAdapterReading;
@@ -64,7 +66,6 @@ import android.support.v4.widget.CursorAdapter;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.database.MatrixCursor;
 import android.provider.BaseColumns;
-import aloogle.rebuapp.activity.*;
 
 @SuppressLint("InflateParams")
 public class ReadingFragment extends Fragment implements AbsListView.OnScrollListener, SwipeRefreshLayout.OnRefreshListener {
@@ -112,7 +113,7 @@ public class ReadingFragment extends Fragment implements AbsListView.OnScrollLis
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, 	Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		view = inflater.inflate(R.layout.fragment_main, container, false);
 
@@ -123,16 +124,28 @@ public class ReadingFragment extends Fragment implements AbsListView.OnScrollLis
 		fromnonet = false;
 		relative = (RelativeLayout)view.findViewById(R.id.fragment);
 
-		if (Build.VERSION.SDK_INT > 10) {
-			list.setScrollViewCallbacks((ObservableScrollViewCallbacks)getActivity());
-			list.setTouchInterceptionViewGroup((ViewGroup)getActivity().findViewById(R.id.container));
-		}
+		if (!getActivity().getIntent().hasExtra("widgetpos")) {
+			if (Build.VERSION.SDK_INT > 10) {
+				list.setScrollViewCallbacks((ObservableScrollViewCallbacks)getActivity());
+				list.setTouchInterceptionViewGroup((ViewGroup)getActivity().findViewById(R.id.container));
+			}
 
-		if (!MainActivity.home) {
-			MainActivity.titulo = "Biblioteca";
-			((ActionBarActivity)getActivity()).getSupportActionBar().setTitle(MainActivity.titulo);
-			MainActivity.mDrawerList.setItemChecked(7, true);
-			MainActivity.pos = 7;
+			if (!MainActivity.home) {
+				MainActivity.titulo = "Biblioteca";
+				((ActionBarActivity)getActivity()).getSupportActionBar().setTitle(MainActivity.titulo);
+				MainActivity.mDrawerList.setItemChecked(6, true);
+				MainActivity.pos = 6;
+			}
+
+			FloatingActionButton fabpanel = (FloatingActionButton)getActivity().findViewById(R.id.fabpanel);
+			fabpanel.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					Other.openPanel(getActivity());
+				}
+			});
+		} else {
+			FragmentActivity.ActionBarColor(((ActionBarActivity)getActivity()), "Biblioteca");
 		}
 
 		LayoutInflater inflatere = getActivity().getLayoutInflater();
@@ -153,7 +166,7 @@ public class ReadingFragment extends Fragment implements AbsListView.OnScrollLis
 
 		mSwipeLayout = (SwipeRefreshLayout)view.findViewById(R.id.swipe_container);
 		mSwipeLayout.setOnRefreshListener(this);
-		mSwipeLayout.setColorSchemeResources(R.color.primary_color, 		R.color.primary_color_dark, R.color.primary_color, 		R.color.primary_color_dark);
+		mSwipeLayout.setColorSchemeResources(R.color.primary_color, R.color.primary_color_dark, R.color.primary_color, R.color.primary_color_dark);
 
 		if (Build.VERSION.SDK_INT >= 21) {
 			progressBar = (ProgressBar)view.findViewById(R.id.progressBar1);
@@ -169,14 +182,6 @@ public class ReadingFragment extends Fragment implements AbsListView.OnScrollLis
 			progressBarCompat.setVisibility(View.VISIBLE);
 		}
 
-		FloatingActionButton fabpanel = (FloatingActionButton)getActivity().findViewById(R.id.fabpanel);
-		fabpanel.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Other.openPanel(getActivity());
-			}
-		});
-
 		if (Build.VERSION.SDK_INT > 10) {
 			final String[]from = new String[]{
 				"categoryName"
@@ -184,7 +189,7 @@ public class ReadingFragment extends Fragment implements AbsListView.OnScrollLis
 			final int[]to = new int[]{
 				R.id.text1
 			};
-			mAdapter = new SimpleCursorAdapter(getActivity(), 				R.layout.simple_list_item_1, 				null, 				from, 				to, 				CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
+			mAdapter = new SimpleCursorAdapter(getActivity(), R.layout.simple_list_item_1, null, from, to, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
 		}
 
 		if (Other.isConnected(getActivity())) {
@@ -210,12 +215,14 @@ public class ReadingFragment extends Fragment implements AbsListView.OnScrollLis
 	private class JSONParse extends AsyncTask < String, String, JSONObject > {
 		@Override
 		protected void onPreExecute() {
-			new Handler().postDelayed(new Runnable() {
-				@Override
-				public void run() {
-					MainActivity.setRefreshActionButtonState(true, getActivity());
-				}
-			}, 100);
+			if (!getActivity().getIntent().hasExtra("widgetpos")) {
+				new Handler().postDelayed(new Runnable() {
+					@Override
+					public void run() {
+						MainActivity.setRefreshActionButtonState(true, getActivity());
+					}
+				}, 100);
+			}
 			super.onPreExecute();
 		}
 
@@ -234,7 +241,9 @@ public class ReadingFragment extends Fragment implements AbsListView.OnScrollLis
 				progressBarCompat.setVisibility(View.GONE);
 			}
 			mSwipeLayout.setRefreshing(false);
-			MainActivity.setRefreshActionButtonState(false, getActivity());
+			if (!getActivity().getIntent().hasExtra("widgetpos")) {
+				MainActivity.setRefreshActionButtonState(false, getActivity());
+			}
 			if (fromnonet) {
 				relative.removeView(wnet);
 				fromnonet = false;
@@ -301,8 +310,12 @@ public class ReadingFragment extends Fragment implements AbsListView.OnScrollLis
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		inflater = getActivity().getMenuInflater();
-		inflater.inflate(R.menu.biblioteca_menu, menu);
+		if (menu.findItem(R.id.menu_search) == null) {
+			inflater = getActivity().getMenuInflater();
+			inflater.inflate(R.menu.biblioteca_menu, menu);
+		} else {
+			menu.findItem(R.id.menu_notification).setVisible(true);
+		}
 
 		MenuItem searchItem = menu.findItem(R.id.menu_search);
 		SearchView searchView = (SearchView)MenuItemCompat.getActionView(searchItem);
@@ -381,7 +394,6 @@ public class ReadingFragment extends Fragment implements AbsListView.OnScrollLis
 				}
 			});
 		}
-
 		super.onCreateOptionsMenu(menu, inflater);
 	}
 
@@ -409,7 +421,7 @@ public class ReadingFragment extends Fragment implements AbsListView.OnScrollLis
 	public void onScrollStateChanged(AbsListView view, int scrollState) {}
 
 	@Override
-	public void onScroll(AbsListView view, int firstVisibleItem, 	int visibleItemCount, int totalItemCount) {
+	public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
 		if (list.getChildCount() > 0 && list.getChildAt(0).getTop() == 0 && list.getFirstVisiblePosition() == 0) {
 			mSwipeLayout.setEnabled(true);
 		} else {
@@ -470,12 +482,12 @@ public class ReadingFragment extends Fragment implements AbsListView.OnScrollLis
 
 	private void populateAdapter() {
 		final MatrixCursor c = new MatrixCursor(new String[]{
-				BaseColumns._ID, "categoryName"
+				BaseColumns._ID, 			"categoryName"
 			});
 		for (int i = 0; i < suggestionarray.size(); i++) {
 			if (!suggestionarray.get(i).toString().equals("")) {
 				c.addRow(new Object[]{
-					i, suggestionarray.get(i).toString()
+					i, 				suggestionarray.get(i).toString()
 				});
 			}
 		}

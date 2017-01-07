@@ -32,6 +32,11 @@ limitations under the License.
 			android:elevation="@dimen/toolbar_elevation"
 			app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
 			app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+	<FrameLayout
+			android:id="@+id/content_frame"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:background="#eeeeee">
 	<RelativeLayout
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
@@ -102,5 +107,10 @@ limitations under the License.
 		android:layout_centerHorizontal="true"
 		android:text="@string/createshortcut" />
 	</RelativeLayout>
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="4dp"
+		android:background="@drawable/toolbar_dropshadow" />
+</FrameLayout>
 	</LinearLayout>
 </FrameLayout>

@@ -21,7 +21,7 @@ limitations under the License.
 	android:id="@+id/frame"
 	android:fitsSystemWindows="true" >
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -30,7 +30,6 @@ limitations under the License.
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-			android:elevation="@dimen/toolbar_elevation"
 			app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
 			app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
@@ -38,7 +37,14 @@ limitations under the License.
         android:id="@+id/content_frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+		android:layout_below="@+id/toolbar"
 		android:background="#eeeeee">
     </FrameLayout>
-    </LinearLayout>
+    
+		<View
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:background="@drawable/toolbar_dropshadow"
+			android:layout_below="@+id/toolbar" />
+    </RelativeLayout>
 </FrameLayout>

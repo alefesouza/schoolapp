@@ -48,7 +48,7 @@ public class NotificationReceiver extends BroadcastReceiver {
 				try {
 					JSONObject json = new JSONObject(intent.getExtras().getString("com.parse.Data"));
 
-					if (json.getString("to").matches(sala + "|" + clube + "|" + eletiva + "|todos") || (json.getString("to").equals("responsaveis") && preferences.getBoolean("isRespon", false))) {
+					if (json.getString("to").matches(sala + "|" + clube + "|" + eletiva + "|todos") || (json.getString("to").equals("responsaveis") && preferences.getBoolean("isRespon", false)) || (json.getString("to").equals("cantina") && preferences.getBoolean("notifCantina", false))) {
 						editor.putString("receivedId", json.getString("id"));
 						editor.commit();
 						editor.putString("receivedTo", json.getString("to"));
@@ -80,7 +80,7 @@ public class NotificationReceiver extends BroadcastReceiver {
 				cancelintent.setAction("notification_cancelled");
 				PendingIntent cancel = PendingIntent.getBroadcast(context, 0, cancelintent, PendingIntent.FLAG_CANCEL_CURRENT);
 
-				if ((preferences.getString("receivedTo", "").matches(sala + "|" + clube + "|" + eletiva + "|todos")) || (preferences.getString("receivedTo", "").equals("responsaveis") && preferences.getBoolean("isRespon", false))) {
+				if ((preferences.getString("receivedTo", "").matches(sala + "|" + clube + "|" + eletiva + "|todos")) || (preferences.getString("receivedTo", "").equals("responsaveis") && preferences.getBoolean("isRespon", false)) || (preferences.getString("receivedTo", "").equals("cantina") && preferences.getBoolean("notifCantina", false))) {
 					if (Arrays.asList(lastparts).contains(preferences.getString("receivedId", ""))) {}
 					else {
 						if (preferences.getInt("count", 0) == 1) {

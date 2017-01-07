@@ -31,8 +31,7 @@ limitations under the License.
 			android:background="@drawable/card"
 			android:orientation="vertical"
 			android:paddingLeft="@dimen/card_padding2"
-			android:paddingRight="@dimen/card_padding2"
-			android:paddingBottom="@dimen/card_padding2" >
+			android:paddingRight="@dimen/card_padding2" >
 
 			<aloogle.rebuapp.other.CustomTextView
 				android:id="@+id/titulo"

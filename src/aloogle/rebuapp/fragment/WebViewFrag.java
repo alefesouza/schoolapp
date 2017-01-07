@@ -104,7 +104,7 @@ public class WebViewFrag extends Fragment implements ObservableScrollViewCallbac
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, 	Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
 		iconcolor = preferences.getString("prefIconColor", "branco");
@@ -214,8 +214,13 @@ public class WebViewFrag extends Fragment implements ObservableScrollViewCallbac
 			@Override public void onClick(View v) {
 				if (webView.getUrl().contains("facebook")) {
 					try {
-						Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("fb://page/415176435213595"));
-						startActivity(intent);
+						if (getActivity().getIntent().hasExtra("cantina")) {
+							Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("fb://page/388344088010898"));
+							startActivity(intent);
+						} else {
+							Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("fb://page/415176435213595"));
+							startActivity(intent);
+						}
 					} catch (Exception e) {
 						Intent intent = new Intent(Intent.ACTION_VIEW);
 						intent.setData(Uri.parse(webView.getUrl()));

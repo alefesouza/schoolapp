@@ -58,8 +58,7 @@ public class AddAnnotationFragment extends Fragment {
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-		Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, 	Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
 		editor = preferences.edit();
@@ -101,11 +100,11 @@ public class AddAnnotationFragment extends Fragment {
 
 		add.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				if(titulo.getText().toString().equals("")) {
+				if (titulo.getText().toString().equals("")) {
 					Toast toast = Toast.makeText(getActivity(), "Digite um título", Toast.LENGTH_SHORT);
 					toast.show();
 				} else {
-					if(descricao.getText().toString().equals("")) {
+					if (descricao.getText().toString().equals("")) {
 						Toast toast = Toast.makeText(getActivity(), "Digite uma descrição", Toast.LENGTH_SHORT);
 						toast.show();
 					} else {

@@ -17,6 +17,7 @@
 package aloogle.rebuapp.activity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -86,6 +87,9 @@ public class FragmentActivity extends ActionBarActivity {
 		case 6:
 			ft.replace(R.id.content_frame, staticfragment);
 			break;
+		case 7:
+			ft.replace(R.id.content_frame, Other.getFragment(getIntent().getIntExtra("widgetpos", 1)));
+			break;
 		}
 		ft.commit();
 	}
@@ -100,6 +104,10 @@ public class FragmentActivity extends ActionBarActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case android.R.id.home:
+			if (getIntent().getBooleanExtra("isRoot", false)) {
+				Intent intent = new Intent(FragmentActivity.this, MainActivity.class);
+				startActivity(intent);
+			}
 			FragmentActivity.this.finish();
 			return true;
 		default:
