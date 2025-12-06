@@ -1,6 +1,6 @@
 ## ## Screenshots
 
-The screenshots are from the Google Play, App Store and Windows Store listing in 2015.
+The screenshots are from the Google Play listing in 2015.
 
 ### Android
 
