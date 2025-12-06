@@ -24,6 +24,8 @@ Since I had never studied Java or object-oriented programming at the time, I did
 
 This is the code for version 2.1.7 released on April 7, 2015.
 
+There's also a Chrome extension with some of the app features [here](https://github.com/alefesouza/schoolapp-chrome).
+
 You can access the PHP back-end code [by clicking here](https://github.com/alefesouza/schoolapp-backend). Since at the time I didn't have experience developing applications for other platforms, the back-end also includes a web version of the application made in Material Design with Polymer, so that users of iOS or Windows Phone could access it normally.
 
 ##### Portuguese
@@ -37,6 +39,8 @@ Esse aplicativo estava em licença GNU GPLv3 até a versão 1.5, até que decidi
 Como eu nunca tinha cursado Java ou orientação a objetos na época não espere ver muitas boas práticas, eu só me inspirava na estrutura código de outros programadores que via pelo GitHub.
 
 Esse é o código da versão 2.1.7 lançada em 07/04/2015
+
+Também tem uma extensão para Chrome com algumas funcionalidades do app [aqui](https://github.com/alefesouza/schoolapp-chrome).
 
 Você pode acessar o código do back-end em PHP [clicando aqui](https://github.com/alefesouza/schoolapp-backend), como na época eu não tinha conhecimento no desenvolvimento de aplicativos para outras plataformas, no back-end também há uma versão web do aplicativo feita em Material Design com Polymer, para quem usasse iOS ou Windows Phone pudesse acessar normalmente.
 
