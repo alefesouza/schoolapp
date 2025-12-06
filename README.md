@@ -1,6 +1,33 @@
 RebuApp
 =======
 
+##### English
+
+RebuApp was an Android application designed to display the schedule and agenda for all classrooms, announcements from all clubs, and elective courses at my former school, E. E. Profº Willian Rodrigues Rebuá, in Carapicuíba, São Paulo.
+
+Screenshots
+-----
+
+| Phone | Tablet 7" |
+|-|-|
+| <img src="./Screenshots/phone/1.webp"> | <img src="./Screenshots/tablet/1.webp"> |
+| <img src="./Screenshots/phone/2.webp"> | <img src="./Screenshots/tablet/2.webp"> |
+| <img src="./Screenshots/phone/3.webp"> | <img src="./Screenshots/tablet/3.webp"> |
+
+More screenshots [at this link](./Screenshots/).
+
+You can download it from the [Google Play Store](http://play.google.com/store/apps/details?id=aloogle.rebuapp).
+
+This application was licensed under the GNU GPLv3 license until version 1.5, until I decided to publish backups of the more recent versions under the Apache License 2.0. I think at the time (2015) I had put a lot of effort into this application and didn't want to leave the more recent versions open source, since it was a more native application, and not just a set of WebViews like the previous versions.
+
+Since I had never studied Java or object-oriented programming at the time, I didn't expect to see many best practices; I only drew inspiration from the code structure of other programmers I saw on GitHub.
+
+This is the code for version 2.1.7 released on April 7, 2015.
+
+You can access the PHP back-end code [by clicking here](https://github.com/alefesouza/schoolapp-backend). Since at the time I didn't have experience developing applications for other platforms, the back-end also includes a web version of the application made in Material Design with Polymer, so that users of iOS or Windows Phone could access it normally.
+
+##### Portuguese
+
 RebuApp foi um aplicativo para Android que visava ter o horário e agenda de todas as salas, recados de todos os clubes e eletivas de uma antiga escola minha, a E. E. Profº Willian Rodrigues Rebuá, em Carapicuíba, São Paulo.
 
 Você pode baixa-lo na [Google Play Store](http://play.google.com/store/apps/details?id=aloogle.rebuapp).
