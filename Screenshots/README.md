@@ -14,3 +14,5 @@ Written in Java.
 | <img src="./phone/4.webp"> | <img src="./tablet/4.webp"> |
 | <img src="./phone/5.webp"> | <img src="./tablet/5.webp"> |
 | <img src="./phone/6.webp"> |
+| <img src="./phone/7.webp"> |
+| <img src="./phone/8.webp"> |
