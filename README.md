@@ -1,7 +1,7 @@
 RebuApp
 =======
 
-RebuApp was an Android application designed to display the schedule and agenda for all classrooms, announcements from all clubs and elective courses at my former school, E. E. Profº Willian Rodrigues Rebuá, in Carapicuíba, São Paulo. The app also has the school library book search and an integrated dictionary, and announcements with prices from the school canteen. 
+RebuApp was an Android application designed to display the schedule and agenda for all classrooms, announcements from all clubs and elective courses at my former school, E. E. Profº Willian Rodrigues Rebuá, in Carapicuíba, São Paulo. The app also has the school library book search and an integrated dictionary, and announcements with prices from the school canteen, annotations and push notifications. 
 
 Screenshots
 -----
@@ -28,7 +28,7 @@ You can access the PHP back-end code [by clicking here](https://github.com/alefe
 
 ##### Portuguese
 
-RebuApp foi um aplicativo para Android que visava ter o horário e agenda de todas as salas, recados de todos os clubes e eletivas de uma antiga escola minha, a E. E. Profº Willian Rodrigues Rebuá, em Carapicuíba, São Paulo. O aplicativo também possui busca de livros da biblioteca da escola, um dicionário integrado e recados com preços da cantina.
+RebuApp foi um aplicativo para Android que visava ter o horário e agenda de todas as salas, recados de todos os clubes e eletivas de uma antiga escola minha, a E. E. Profº Willian Rodrigues Rebuá, em Carapicuíba, São Paulo. O aplicativo também possui busca de livros da biblioteca da escola, um dicionário integrado e recados com preços da cantina, anotações e notificações push.
 
 Você pode baixa-lo na [Google Play Store](http://play.google.com/store/apps/details?id=aloogle.rebuapp).
 
