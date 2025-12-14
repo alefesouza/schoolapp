@@ -1,20 +1,22 @@
 RebuApp
 =======
 
-RebuApp was an Android application designed to display the schedule and agenda for all classrooms, announcements from all clubs and elective courses at my former school, E. E. Profº Willian Rodrigues Rebuá, in Carapicuíba, São Paulo. The app also has the [school library book search](./Screenshots/phone/6.webp) and an [integrated dictionary](./Screenshots/phone/7.webp), and announcements with prices from the school canteen, [annotations](./Screenshots/phone/8.webp) and push notifications. 
+RebuApp was an Android application designed to display the schedule and agenda for all classrooms, announcements from all clubs and elective courses at my former school, E. E. Profº Willian Rodrigues Rebuá, in Carapicuíba, São Paulo. The app also has the [school library book search](./Screenshots/phone/6.jpg) and an [integrated dictionary](./Screenshots/phone/7.jpg), and announcements with prices from the school canteen, [annotations](./Screenshots/phone/8.jpg) and push notifications. 
 
 Screenshots
 -----
 
 | Phone | Tablet 7" |
 |-|-|
-| <img src="./Screenshots/phone/1.webp"> | <img src="./Screenshots/tablet/1.webp"> |
-| <img src="./Screenshots/phone/2.webp"> | <img src="./Screenshots/tablet/2.webp"> |
-| <img src="./Screenshots/phone/3.webp"> | <img src="./Screenshots/tablet/3.webp"> |
+| <img src="./Screenshots/phone/1.jpg"> | <img src="./Screenshots/tablet/1.jpg"> |
+| <img src="./Screenshots/phone/2.jpg"> | <img src="./Screenshots/tablet/2.jpg"> |
+| <img src="./Screenshots/phone/3.jpg"> | <img src="./Screenshots/tablet/3.jpg"> |
 
 More screenshots [at this link](./Screenshots/).
 
-You can download it from the [Google Play Store](http://play.google.com/store/apps/details?id=aloogle.rebuapp).
+There's also a Chrome extension with some of the app features [in this repository](https://github.com/alefesouza/schoolapp-chrome).
+
+You can access the PHP back-end code repository [by clicking here](https://github.com/alefesouza/schoolapp-backend). Since at the time I didn't have experience developing applications for other platforms, the back-end also includes a web version of the application made in Material Design with Polymer, with that users of iOS or Windows Phone could access it normally, it was a PWA written in 2016, when almost no one was talking about PWAs.
 
 This application was licensed under the GNU GPLv3 license until version 1.5, until I decided to publish backups of the more recent versions under the Apache License 2.0. I think at the time (2015) I had put a lot of effort into this application and didn't want to leave the more recent versions open source, since it was a more native application, and not just a set of WebViews like the previous versions.
 
@@ -22,13 +24,9 @@ Since I had never studied Java or object-oriented programming at the time, I did
 
 This is the code for version 2.1.7 released on April 7, 2015.
 
-There's also a Chrome extension with some of the app features [here](https://github.com/alefesouza/schoolapp-chrome).
-
-You can access the PHP back-end code [by clicking here](https://github.com/alefesouza/schoolapp-backend). Since at the time I didn't have experience developing applications for other platforms, the back-end also includes a web version of the application made in Material Design with Polymer, so that users of iOS or Windows Phone could access it normally.
-
 ##### Portuguese
 
-RebuApp foi um aplicativo para Android que visava ter o horário e agenda de todas as salas, recados de todos os clubes e eletivas de uma antiga escola minha, a E. E. Profº Willian Rodrigues Rebuá, em Carapicuíba, São Paulo. O aplicativo também possui [busca de livros da biblioteca](./Screenshots/phone/6.webp) da escola, um [dicionário integrado](./Screenshots/phone/7.webp) e recados com preços da cantina, [anotações](./Screenshots/phone/8.webp) e notificações push.
+RebuApp foi um aplicativo para Android que visava ter o horário e agenda de todas as salas, recados de todos os clubes e eletivas de uma antiga escola minha, a E. E. Profº Willian Rodrigues Rebuá, em Carapicuíba, São Paulo. O aplicativo também possui [busca de livros da biblioteca](./Screenshots/phone/6.jpg) da escola, um [dicionário integrado](./Screenshots/phone/7.jpg) e recados com preços da cantina, [anotações](./Screenshots/phone/8.jpg) e notificações push.
 
 Você pode baixa-lo na [Google Play Store](http://play.google.com/store/apps/details?id=aloogle.rebuapp).
 
