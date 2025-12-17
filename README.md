@@ -1,7 +1,9 @@
 RebuApp
 =======
 
-RebuApp was an Android application designed to display the schedule and agenda for all classrooms, announcements from all clubs and elective courses at my former school, E. E. Profº Willian Rodrigues Rebuá, in Carapicuíba, São Paulo. The app also has the [school library book search](./Screenshots/phone/6.jpg) and an [integrated dictionary](./Screenshots/phone/7.jpg), and announcements with prices from the school canteen, [annotations](./Screenshots/phone/8.jpg) and push notifications. 
+RebuApp was an Android application, web app and Chrome extension designed to display the schedule and agenda for all classrooms, announcements from all clubs and elective courses at my former school, E. E. Profº Willian Rodrigues Rebuá, in Carapicuíba, São Paulo. The app also has [school library book search](./Screenshots/phone/6.jpg), an [integrated dictionary](./Screenshots/phone/7.jpg), announcements from the school, prices from the school canteen, [annotations](./Screenshots/phone/8.jpg) and [push notifications](./Screenshots/phone/3.jpg). 
+
+The apps were developed between 2014 and 2015, when I was 17–18 years old, during my last year of high school and the year after.
 
 Screenshots
 -----
@@ -14,13 +16,36 @@ Screenshots
 
 More screenshots [at this link](./Screenshots/).
 
-There's also a Chrome extension with some of the app features [in this repository](https://github.com/alefesouza/schoolapp-chrome).
+There's also a Chrome extension with most of the app features, including push notifications, [in this repository](https://github.com/alefesouza/schoolapp-chrome).
 
-You can access the PHP back-end code repository [by clicking here](https://github.com/alefesouza/schoolapp-backend). Since at the time I didn't have experience developing applications for other platforms, the back-end also includes a web version of the application made in Material Design with Polymer, with that users of iOS or Windows Phone could access it normally, it was a PWA written in 2016, when almost no one was talking about PWAs.
+<table>
+    <tr>
+        <th colspan="3">Chrome Extensions Screenshots</th>
+    </tr>
+    <tr>
+        <td>
+            <img src="https://raw.githubusercontent.com/alefesouza/schoolapp-chrome/master/Screenshots/1.png" width="500">
+        </td>
+        <td>
+            <img src="https://raw.githubusercontent.com/alefesouza/schoolapp-chrome/master/Screenshots/2.png" width="500">
+        </td>
+        <td>
+            <img src="https://raw.githubusercontent.com/alefesouza/schoolapp-chrome/master/Screenshots/3.png" width="500">
+        </td>
+    </tr>
+</table>
 
-This application was licensed under the GNU GPLv3 license until version 1.5, until I decided to publish backups of the more recent versions under the Apache License 2.0. I think at the time (2015) I had put a lot of effort into this application and didn't want to leave the more recent versions open source, since it was a more native application, and not just a set of WebViews like the previous versions.
+You can access the PHP back-end code repository [by clicking here](https://github.com/alefesouza/schoolapp-backend). Since at the time I didn't have experience developing applications for other platforms, the back-end also includes a web app version made in Material Design with Polymer, with that users of iOS or Windows Phone could access it normally, the web app tries to integrate as much as possible with each operating system. For example, if you pin a tile to Windows, the tile will display the latest events and notifications. You can see all the integrations by [clicking here](https://github.com/alefesouza/schoolapp-backend/blob/master/Screenshots/Evolution/README.md#facilidades), it was a PWA written in 2015, when almost no one was talking about PWAs.
 
-Since I had never studied Java or object-oriented programming at the time, I didn't expect to see many best practices; I only drew inspiration from the code structure of other programmers I saw on GitHub.
+| Windows | Win Phone | iOS | Firefox OS |
+|-|-|-|-|
+| <img src="https://raw.githubusercontent.com/alefesouza/schoolapp-backend/master/Screenshots/IMG-20150222-WA0006.jpg"> | <img src="https://raw.githubusercontent.com/alefesouza/schoolapp-backend/master/webapp/rebuapp/imagens/facilidades/wp/img1.png"> | <img src="https://raw.githubusercontent.com/alefesouza/schoolapp-backend/master/Screenshots/IMG_20150220_212831.jpg"> | <img src="https://raw.githubusercontent.com/alefesouza/schoolapp-backend/master/Screenshots/2.png"> |
+| <img src="https://raw.githubusercontent.com/alefesouza/schoolapp-backend/master/Screenshots/IMG-20150222-WA0005.jpg"> | <img src="https://raw.githubusercontent.com/alefesouza/schoolapp-backend/master/webapp/rebuapp/imagens/facilidades/wp/img3.jpg"> | <img src="https://raw.githubusercontent.com/alefesouza/schoolapp-backend/master/Screenshots/IMG_20150220_212838.jpg"> | <img src="https://raw.githubusercontent.com/alefesouza/schoolapp-backend/master/Screenshots/1.png"> |
+| <img src="https://raw.githubusercontent.com/alefesouza/schoolapp-backend/master/webapp/rebuapp/imagens/facilidades/w8/img11.jpg"> | <img src="https://raw.githubusercontent.com/alefesouza/schoolapp-backend/master/webapp/rebuapp/imagens/facilidades/wp/img4.jpg"> | <img src="https://raw.githubusercontent.com/alefesouza/schoolapp-backend/master/Screenshots/IMG_20150220_212732.jpg"> | <img src="https://raw.githubusercontent.com/alefesouza/schoolapp-backend/master/Screenshots/4.png"> |
+
+This application was licensed under the GNU GPLv3 license until version 1.5, until I decided to publish backups of the more recent versions under the Apache License 2.0. I think at the time (2015) I had put a lot of effort into this application and didn't want to leave the more recent versions open source because I thought I could monetize it, since it was a more native application, and not just a set of WebViews like the previous versions.
+
+Since I was just starting to learn Java and object-oriented programming at the time, don't expect to see many best practices, I only drew inspiration from the code structure of other programmers I saw on GitHub.
 
 This is the code for version 2.1.7 released on April 7, 2015.
 
@@ -32,7 +57,7 @@ Você pode baixa-lo na [Google Play Store](http://play.google.com/store/apps/det
 
 Esse aplicativo estava em licença GNU GPLv3 até a versão 1.5, até que decidi publicar os backups das versões mais recente sob licença Apache License 2.0, acho que na época (2015) eu tinha me esforçado muito nesse aplicativo e não queria deixar as versões mais recentes em código aberto, já que ele era um aplicativo mais nativo, e não só um conjunto de WebView como nas versões anteriores.
 
-Como eu nunca tinha cursado Java ou orientação a objetos na época não espere ver muitas boas práticas, eu só me inspirava na estrutura código de outros programadores que via pelo GitHub.
+Como eu nunca tinha cursado Java ou orientação a objetos na época, não espere ver muitas boas práticas, eu só me inspirava na estrutura código de outros programadores que via pelo GitHub.
 
 Esse é o código da versão 2.1.7 lançada em 07/04/2015
 
@@ -56,5 +81,3 @@ Licença
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
     See the License for the specific language governing permissions and
     limitations under the License.
-
-Esse aplicativo na versão da Google Play Store contém anúncios, então se você estiver pensando em fazer uma versão modificada (sei lá, ele tem um ótimo código para servir de base para aplicativos de outras escolas...) dele também contendo anúncios ou qualquer outra forma de lucro, por favor, peça minha permissão entrando em contato comigo.
